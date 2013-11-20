@@ -3,7 +3,7 @@ layout: post
 title: 精选85条Linux系统管理员知识点
 description: ""
 category: "Linux System"
-tags: [System Manage]
+tags: [System Manage, Linux]
 ---
 {% include JB/setup %}
 

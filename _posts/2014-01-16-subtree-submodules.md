@@ -94,4 +94,4 @@ subtree pull 变成：
 
 6.--squash参数
 
-关于squash参数,可以查看[Git subtree 要不要使用 –squash 参数](http://www.fwolf.com/blog/category/blog)
+关于squash参数,可以查看[Git subtree 要不要使用 –squash 参数](http://www.fwolf.com/blog/post/246)
