@@ -60,7 +60,7 @@ Git Submodules使用完整教程:http://www.kafeitu.me/git/2012/03/27/git-submod
 
 git subtree add --preifx=子目录名称 仓库地址 分支 --squash
 
---squash 代表将子repo的所有commit都挤成一个commit
+--squash 代表将子仓库的所有commit都挤成一个commit
     
     $ git subtree add --prefix=vim git@github.com:Junevimer/vim.cfg.git master --squash
     
