@@ -3,7 +3,7 @@ layout: post
 title: Ubuntu12.04下Vim配置之不折腾版
 description: ""
 category: Vim
-tags: [vim]
+tags: [vim, ubuntu]
 ---
 {% include JB/setup %}
 
