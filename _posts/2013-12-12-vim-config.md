@@ -17,7 +17,7 @@ tags: [vim]
 
 ##Vim的安装
 
-由于插件[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过`sudo apt-get install vim`自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点[这里](https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source)
+由于插件[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过`sudo apt-get install vim`自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点[这里](https://junewater.github.com/2013/12/17/vim-setup.html)
 
 当然，如果你不需要YCM插件支持。可以使用系统默认安装的Vim版本.
 
