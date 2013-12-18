@@ -17,7 +17,7 @@ tags: [vim]
 
 ##Vim的安装
 
-由于插件[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过`sudo apt-get install vim`自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点[这里](https://junewater.github.com/2013/12/17/vim-setup.html)
+由于插件[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过`sudo apt-get install vim`自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点[这里](https://junevimer.github.com/2013/12/17/vim-setup.html)
 
 当然，如果你不需要YCM插件支持。可以使用系统默认安装的Vim版本.
 
@@ -144,12 +144,12 @@ PS：安装好Vim7.4之后，在INSERT模式下，退格键(backspace)不能删�
 * 功能：自动补全
 * 操作：自动补全时按向下方向键或CTRL+N键选择要补全的内容
 * 说明：最后一条映射key_list_select是为了解决与UltiSnip插件的Tab键冲突问题，默认list_select键为Tab，如果不需要安装UltiSnip插件，可注释该条配置，使用默认Tab键进行list选择
-* 安装：Bundle 'Valloric/YouCompleteMe'，下载号插件以后，还需要进行编译，操作比较复杂，具体查看[这里](http://junewater.github.io/vim/2013/12/11/youcompleteme.html)
+* 安装：Bundle 'Valloric/YouCompleteMe'，下载号插件以后，还需要进行编译，操作比较复杂，具体查看[这里](http://junevimer.github.io/vim/2013/12/11/youcompleteme.html)
 
 ###c.vim
 * 功能：高亮C/C++类与函数名
 * 说明：这个是我从网上找的高亮脚本，稍微修改了下，使高亮颜色与desert配色方案搭配，不需要的可以无视哈，或下载插件后自己修改颜色
-* 安装：Bundle 'JuneWater/c.vim'
+* 安装：Bundle 'junevimer/c.vim'
 
 ###lua.vim
 * 功能：提供lua脚本编辑增强功能

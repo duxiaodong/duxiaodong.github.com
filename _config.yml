@@ -16,7 +16,7 @@ favicon: /images/june.png
 author :
   name : June
   email : junevimer@gmail.com
-  github : junewater
+  github : junevimer
   twitter : junevimer
 
 # The production_url is only used when full-domain names are needed
@@ -28,6 +28,7 @@ author :
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
 production_url : www.junevimer.com
+# production_url : localhost
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
