@@ -2,7 +2,7 @@
 layout: post
 title: Lua元表与元方法
 description: ""
-category: Lua
+category: "Scripting language"
 tags: [lua]
 ---
 {% include JB/setup %}
