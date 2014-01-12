@@ -34,18 +34,18 @@
   </div>
 
   <div class="span4 sidebar">
-    <h4 class="date">发布日期：<span>{{ page.date | date_to_long_string }}</span></h4>
+    <h4 class="date">Published：<span>{{ page.date | date_to_long_string }}</span></h4>
 
   {% unless latest_post.tags == empty %}
-    <h4>归档</h4>
-    <ul class="categories_box">
+    <h4>Category</h4>
+    <ul class="tag_box">
     {% assign categories_list = page.categories %}
     {% include JB/categories_list %}
     </ul>
   {% endunless %}  
   
   {% unless page.tags == empty %}
-    <h4>标签</h4>
+    <h4>Tags</h4>
     <ul class="tag_box">
     {% assign tags_list = page.tags %}
     {% include JB/tags_list %}
