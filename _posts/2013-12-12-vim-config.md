@@ -17,7 +17,7 @@ tags: [vim, ubuntu, Linux]
 
 ##Vim的安装
 
-由于插件[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过`sudo apt-get install vim`自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点[这里](https://junevimer.github.com/2013/12/17/vim-setup.html)
+由于插件[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过`sudo apt-get install vim`自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点[这里](/2013/12/17/vim-setup.html)
 
 当然，如果你不需要YCM插件支持。可以使用系统默认安装的Vim版本.
 
@@ -145,7 +145,7 @@ bundle分为三类：
 ### YouCompleteMe
 * 功能：自动补全
 * 操作：自动补全时按向下方向键或CTRL+N选择要补全的内容
-* 安装：Bundle 'Valloric/YouCompleteMe'，下载完插件以后，还需要进行编译，操作比较复杂，具体查看[这里](http://junevimer.github.io/vim/2013/12/11/youcompleteme.html)
+* 安装：Bundle 'Valloric/YouCompleteMe'，下载完插件以后，还需要进行编译，操作比较复杂，具体查看[这里](/2013/12/11/youcompleteme.html)
 
 ###syntastic
 * 功能：静态语法以及风格检查

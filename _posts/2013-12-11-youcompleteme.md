@@ -73,9 +73,9 @@ tags: [vim, YCM]
 
 说完了那么多好处,就要说到安装了.不同于以往其他vim插件,YCM是一款编译型的插件.在下载完后,需要手动编译后才能使用.对应其他的插件来说,仅仅就是把.vim的文件丢到相应文件夹下就可以.而这也加大了使用YCM的难度.
 
-* 最新版的Vim(7.3.584+),编译时添加+python标志(已经安装的可以通过vim --version查看,查看[从源码安装Vim7.4](http://www.junevimer.com/2013/12/17/vim-setup.html))
+* 最新版的Vim(7.3.584+),编译时添加+python标志(已经安装的可以通过vim --version查看,查看[从源码安装Vim7.4](/2013/12/17/vim-setup.html))
 * cmake(mac可以通过[homebrew](http://brew.sh/)安装,brew install cmake,ubuntu可以通过sudo apt-get install cmake)
-* 安装[vundle](https://github.com/gmarik/Vundle.vim#about)插件,用于安装管理vim的插件,不会安装和使用vundle的可以查看[Ubuntu12.04下Vim配置之不折腾版](http://www.junevimer.com/2013/12/12/vim-config.html)
+* 安装[vundle](https://github.com/gmarik/Vundle.vim#about)插件,用于安装管理vim的插件,不会安装和使用vundle的可以查看[Ubuntu12.04下Vim配置之不折腾版](/2013/12/12/vim-config.html)
 
 ###mac下快速安装
 
