@@ -75,7 +75,7 @@ tags: [vim, YCM]
 
 * 最新版的Vim(7.3.584+),编译时添加+python标志(已经安装的可以通过vim --version查看,查看[从源码安装Vim7.4](http://www.junevimer.com/2013/12/17/vim-setup.html))
 * cmake(mac可以通过[homebrew](http://brew.sh/)安装,brew install cmake,ubuntu可以通过sudo apt-get install cmake)
-* 安装[vundle](https://github.com/gmarik/Vundle.vim#about)插件,用于安装管理vim的插件
+* 安装[vundle](https://github.com/gmarik/Vundle.vim#about)插件,用于安装管理vim的插件,不会安装和使用vundle的可以查看[Ubuntu12.04下Vim配置之不折腾版](http://www.junevimer.com/2013/12/12/vim-config.html)
 
 ###mac下快速安装
 

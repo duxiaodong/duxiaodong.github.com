@@ -9,7 +9,7 @@ tags: [vim]
 
 ##写在前面
 
-用vim大概也有六个月了吧，用原生的大概1个月，后面各种折腾，这是第2次折腾以后的最终版本了，写篇博客记录下。
+用vim大概也有六个月了吧，用原生的大概一个月，后面各种折腾，这是第3次折腾以后的最终版本了，写篇博客记录下。
 
 ##Vim基本用法
 
@@ -31,89 +31,75 @@ PS：安装好Vim7.4之后，在INSERT模式下，退格键(backspace)不能删�
 
 ##Vim配置步骤
 
-###用Vundle管理插件
- 
-如果不使用vundle的话（当然啦，还有其他的插件管理工具，比如pathogen），进行插件的安装，配置和管理相对会比较麻烦，曾经没使用vundle的时候我经常遇到无法安装插件以及
-卸载插件非常繁琐的问题。但使用vundle之后，你只要在文件中添加一行你的插件名再安装就OK了.这里简单说一下Vundle的使用。
+1.用Vundle管理插件
 
-* Vundle Github 地址:https://github.com/gmarik/vundle
+相比sublime text2等现代编辑器，Vim缺乏默认的插件管理器，所有插件的文件都散布在~/.vim下的几个文件夹中，配置vim的过程, 就是在网上不停的搜插件，拷贝到~/.vim下，发现更新，要重新下载重新拷贝，想要删除某个不需要插件，更是要小心翼翼的不要删错。配置出顺手的Vim, 需要极大的耐心和运气。
 
-##Vundle安装
+当然vim社区的活力是不容怀疑的，没有枪没有炮大神们自己造。以前使用过tpope的[pathogen](https://github.com/tpope/vim-pathogen)，使用git submodule和pathogen, 管理插件已经大大简化。而今天介绍的vundle, 更是把git操作整合进去，用户需要做的只是去Github上找到自己想要的插件的名字，安装，更新和卸载都可有vundle来完成了。虽然去发现一个好的插件仍然是一个上下求索的过程，但是用户已经可以从安装配置的繁琐过程解脱了。
 
-###创建~/.vim和文件.vimrc
+Vundle的具体介绍查看[vim.org](http://www.vim.org/scripts/script.php?script_id=3458),或者[github repo](https://github.com/gmarik/Vundle.vim)
 
-进入你的home目录创建.vim文件夹和.vimrc文件
+2.Vundle安装和配置
 
-###获取vundle
+下载vundle
 
-		$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-		
-###编辑如下内容到.vimrc文件
+         $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
-		" "开头的为注释,仅为说明
+在.vimrc 中添加bundle的配置
+
 		set nocompatible               " be iMproved
 		filetype off                   " required!
 		
 		set rtp+=~/.vim/bundle/vundle/
 		call vundle#rc()
 		
-		" let Vundle manage Vundle
-		" required! 
+		" let Vundle manage Vundle,required! 
 		Bundle 'gmarik/vundle'
 		
 		" My Bundles here:
-		" 需要安装的插件都写在这下面
-
-		" original repos on github
-		" 插件来自github,写在下方，只要作者名/项目名就可以了
-		" Bundle 'tpope/vim-fugitive'
-		" Bundle 'Lokaltog/vim-easymotion'
-		" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-		" Bundle 'tpope/vim-rails.git'
-
-		" vim-scripts repos
-		" 插件来自vim-scripts，直接写插件名就可以了
-		" Bundle 'L9'
-		" Bundle 'FuzzyFinder'
-
-		" non github repos
-		" 非github上的插件。如下：
-		" Bundle 'git://git.wincent.com/command-t.git'
-
-		" git repos on your local machine (ie. when working on your own plugin)
-		" Bundle 'file:///Users/gmarik/path/to/plugin'
-		
+        Bundle 'a.vim'
+        Bundle 'Mark'
+        Bundle 'The-NERD-tree'
+        Bundle 'The-NERD-Commenter'
+        Bundle 'Junevimer/c.vim'
+        Bundle 'UltiSnips'
+        Bundle 'Tagbar'
+        Bundle 'Tabular'
+        Bundle 'Valloric/YouCompleteMe'
+        Bundle 'scrooloose/syntastic'
+        Bundle 'plasticboy/vim-markdown'
+        Bundle 'kien/ctrlp.vim'
+        Bundle 'ack.vim'
+        Bundle 'Lokaltog/vim-powerline'
+        
 		filetype plugin indent on     " required!
 
-		" Brief help
-		" Vundle的一些指令说明	
-		" :BundleList          - list configured bundles
-		" :BundleInstall(!)    - install(update) bundles
-		" :BundleSearch(!) foo - search(or refresh cache first) for foo
-		" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-		"
-		" see :h vundle for more details or wiki for FAQ
-		" NOTE: comments after Bundle command are not allowed..
+bundle分为三类：
 
-###安装你的插件
+* 在Github vim-scripts 用户下的repos,只需要写出repos名称,如a.vim
+* 在Github其他用户下的repos, 需要写出“用户名/repos名”,如Junevimer/c.vim
+* 不在Github上的插件，需要写出git全路径
 
-* 将要安装的插件加入.vimrc文件
-* 保存.vimrc文件退出当前的vim
-* 重新打开Vim,输入命令`:BundleInstall`,然后vim就会自动安装你的插件了
+###安装插件
 
-###如何删除插件
+打开一个vim, 运行:`BundleInstall`
 
-* 编辑.vimrc文件删除你要移除的插件行（注释或删除）
-* 保存.vimrc文件并退出Vim
-* 重新打开Vim,输入命令`:BundleClean`
+或者在命令行运行:`vim +BundleInstall +qall`
 
-##插件及插件配置说明：
+安装完成后插件就能用了
 
-1. 插件配置中，许多都设置了按键映射，不喜欢的可以不用配置按键映射
-2. 本文推荐的部分脚本仅适用于C/C++开发，如用其他编程语言开发的，可再找其他合适的脚本
-3. 有些脚本需要先安装ctags才能支持，ctags和cscope的安装配置网上一大堆，这里就不说了，推荐一个个人认为比较好的吧！[手把手教你把Vim改装成一个IDE变成环境](http://blog.csdn.net/wooin/article/details/1858917)
-4. 没有操作说明的即为安装好插件即可以使用,没有配置说明的表示不需要配置也可以使用
-4. 由于整理的匆忙，所列插件并没有按序排列
+其它常用命令：
+
+* 更新插件:`BundleUpdate`
+* 清除不再使用的插件:`BundleClean`
+* 列出所有插件:`BundleList`
+* 查找插件:`BundleSearch`
+
+##插件说明：
+
+1. 本文推荐的部分脚本仅适用于C/C++开发，如用其他编程语言开发的，可再找其他合适的脚本
+2. 一般插件都通过vundle来安装,特殊插件会说明
+3. 插件配置就不放上来了,有兴趣的可以查看[我的vim配置](https://github.com/Junevimer/vim.cfg/blob/master/vimrc)
 
 ###a.vim
 * 功能：快速切换.cpp(.c)文件和.h文件
@@ -122,48 +108,23 @@ PS：安装好Vim7.4之后，在INSERT模式下，退格键(backspace)不能删�
 
 ###Mark
 * 功能：高亮多个关键字
-* 操作：mm高亮/取消高亮当前光标下的关键字，ma取消所有高亮关键字
+* 操作：<leader>m 高亮/取消高亮当前光标下的关键字，<leader>a 取消所有高亮关键字
 * 安装：Bundle 'Mark'
 
-###Tagbar
-* 功能: 标签导航
-* 操作：一般模式下输入tg打开或关闭Tagbar
-* 安装：Bundle 'Tagbar'
-		
 ### The-NERD-tree
 * 功能：开启目录树导航
-* 操作：一般模式下输入tr打开或关闭The-NERD-Tree
+* 操作：命令行模式下输入:NERDTreeToggle打开或关闭目录导航
 * 安装：Bundle 'The-NERD-tree'
 
 ###The-NERD-Commenter
 * 功能：块注释
-* 操作：一般模式下输入cc注释或取消注释当前行，或输入9cc注释当前行开始接下来的9行
+* 操作：一般模式下输入<leader>c<space>注释或取消注释当前行，或输入n<leader>c<space>注释当前行开始接下来的n行
 * 安装：Bundle 'The-NERD-Commenter'
-
-### YouCompleteMe
-* 功能：自动补全
-* 操作：自动补全时按向下方向键或CTRL+N键选择要补全的内容
-* 说明：最后一条映射key_list_select是为了解决与UltiSnip插件的Tab键冲突问题，默认list_select键为Tab，如果不需要安装UltiSnip插件，可注释该条配置，使用默认Tab键进行list选择
-* 安装：Bundle 'Valloric/YouCompleteMe'，下载号插件以后，还需要进行编译，操作比较复杂，具体查看[这里](http://junevimer.github.io/vim/2013/12/11/youcompleteme.html)
 
 ###c.vim
 * 功能：高亮C/C++类与函数名
 * 说明：这个是我从网上找的高亮脚本，稍微修改了下，使高亮颜色与desert配色方案搭配，不需要的可以无视哈，或下载插件后自己修改颜色
 * 安装：Bundle 'junevimer/c.vim'
-
-###lua.vim
-* 功能：提供lua脚本编辑增强功能
-* 安装：Bundle 'lua.vim'
-
-###Tabular
-* 功能：对齐文本
-* 操作：在vim命令行模式下输入 :Tab /要根据其对齐的字符，如:Tab /"
-* 安装：Bundle 'Tabular'
-
-###mru.vim
-* 功能：列出最近打开文件列表
-* 操作：在vim命令行模式下输入:MRU
-* 安装：Bundle 'vim-scripts/mru.vim'
 
 ###UltiSnips
 * 功能：快速插入自定义号的代码片段(强烈推荐)
@@ -171,29 +132,24 @@ PS：安装好Vim7.4之后，在INSERT模式下，退格键(backspace)不能删�
 * 说明：如果安装YouCompleteMe而没有将YCM默认Tab键配置过，可能会导致Ultisnips的Tab键冲突，无法使用
 * 安装：Bundle 'UltiSnips'
 
-###xml
-* 功能：书写xml文件时自动补全标签
-* 说明：这里我没有安装，因为默认只会对.xml,html等xml文件自动补全，而对.c或.cpp文件等不支持，而我需要在.c和.cpp中书写xml消息，这个插件对我来说没什么用。如果有人知道怎么使得这个插件支持其他类型的文件的，麻烦留言告知下，感激不尽!
-* 安装：Bundle 'xml.vim'
+###Tagbar
+* 功能: 标签导航
+* 操作：命令行模式下输入:TagbarToggle打开或关闭Tagbar
+* 安装：Bundle 'Tagbar'
 
-###taglist
-* 列出源文件中的tag并跳转
-* 操作：一般模式下输入tl打开或关闭taglist窗口
-* 说明：taglist依赖于ctags，所以要先安装ctags，否则taglist装了也没法用
-* 安装：Bundle 'taglist.vim'
+###Tabular
+* 功能：对齐文本
+* 操作：在vim命令行模式下输入 :Tab /要根据其对齐的字符，如:Tab /"
+* 安装：Bundle 'Tabular'
+
+### YouCompleteMe
+* 功能：自动补全
+* 操作：自动补全时按向下方向键或CTRL+N选择要补全的内容
+* 安装：Bundle 'Valloric/YouCompleteMe'，下载完插件以后，还需要进行编译，操作比较复杂，具体查看[这里](http://junevimer.github.io/vim/2013/12/11/youcompleteme.html)
 
 ###syntastic
 * 功能：静态语法以及风格检查
 * 安装：Bundle 'scrooloose/syntastic'
-
-###vim-misc
-* 功能：lua.vim需要
-* 安装：Bundle 'xolox/vim-misc'
-
-###delemitMate
-* 功能：输入引号，括号时，自动补全
-* 操作：输入(时，自动补全为()并且光标停在括号中，其他类似
-* 安装：Bundle 'Raimondi/delimitMate'
 
 ###vim-markdown
 * 功能：提供markdown文件语法支持
@@ -208,3 +164,8 @@ PS：安装好Vim7.4之后，在INSERT模式下，退格键(backspace)不能删�
 * 功能：搜索当前文件夹下文件中的关键字，自动忽略.svn和.git中的内容
 * 操作：一般模式下按F2自动搜索当前光标下关键字，命令行模式下输入:Ack 关键字，当然有多种模式可以选择，具体查看help
 * 安装：Bundle 'ack.vim'
+
+###vim-powerline
+* 功能：加强美化的vim状态栏
+* 安装：Bundle 'Lokaltog/vim-powerline'
+* 说明：如果powerline状态栏显示乱码,则git clone https://github.com/eugeneching/consolas-powerline-vim 到~/.fonts目录下,目录不存在就创建一个
