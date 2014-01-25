@@ -2,7 +2,7 @@
 layout: post
 title: Git使用经验:Submodules,Subtree
 description: ""
-category: "tools"
+category: "Tools"
 tags: [git, submodule, subtree]
 ---
 {% include JB/setup %}
