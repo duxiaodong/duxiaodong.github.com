@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Ubuntu12.04下Vim配置之不折腾版 | June's Blog</title>
+    
+    <meta name="description" content="">
+    <meta name="author" content="June">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/images/june.png" type="image/x-icon" />
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">June's Blog</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+
+            <li class="divider-vertical"></li>
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/about.html">About</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/atom.xml">RSS</a></li>
+      	
+      
+    
+  
+
+
+
+
+
+            <!-- <li><a href="http://feed.zhuoqun.net/">RSS</a></li> -->
+          </ul>
+
+          <span class="pull-right slogan"> Under Linux </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="row post">
+  <div class="span8">
+    <h1 class="title">Ubuntu12.04下Vim配置之不折腾版</h1>
+    <h2>写在前面</h2>
+
+<p>用vim大概也有六个月了吧，用原生的大概1个月，后面各种折腾，这是第2次折腾以后的最终版本了，写篇博客记录下。</p>
+
+<h2>Vim基本用法</h2>
+
+<p>推荐：耗子的<a href="http://coolshell.cn/articles/5426.html">简明Vim练级攻略</a> 以及《学习Vi和Vim编辑器》</p>
+
+<h2>Vim的安装</h2>
+
+<p>由于插件<a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a>需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过<code>sudo apt-get install vim</code>自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点<a href="https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source">这里</a></p>
+
+<p>当然，如果你不需要YCM插件支持。可以使用系统默认安装的Vim版本.</p>
+
+<p>PS：安装好Vim7.4之后，在INSERT模式下，退格键(backspace)不能删除换行，也就是说不能从第二行一直按退格键到第一行，网上查找资料解决方法如下：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    1. vim缺省是和vi兼容的，设置成不兼容，在`.vimrc`中添加`set nocompatible`  
+    2. vim的backspace有几种工作方式，默认是和vi兼容的，同样需要修改，在`.vimrc`中添加`set backspace=indent,eol,start`  
+    (a) indent：如果使用了set indent等自动缩进，想用退格键将缩进字段删掉，必须设置这个选项，否则vim不响应退格  
+    (b) eol：如果在INSERT模式下，在行头想通过退格键合并两行，需要设置这个选项  
+    (c) start：要想删除在此次插入前的输入，需要设置这个选项  
+</code></pre></div>
+<h2>Vim配置步骤</h2>
+
+<h3>用Vundle管理插件</h3>
+
+<p>如果不使用vundle的话（当然啦，还有其他的插件管理工具，比如pathogen），进行插件的安装，配置和管理相对会比较麻烦，曾经没使用vundle的时候我经常遇到无法安装插件以及
+卸载插件非常繁琐的问题。但使用vundle之后，你只要在文件中添加一行你的插件名再安装就OK了.这里简单说一下Vundle的使用。</p>
+
+<ul>
+<li>Vundle Github 地址:https://github.com/gmarik/vundle</li>
+</ul>
+
+<h2>Vundle安装</h2>
+
+<h3>创建~/.vim和文件.vimrc</h3>
+
+<p>进入你的home目录创建.vim文件夹和.vimrc文件</p>
+
+<h3>获取vundle</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+</code></pre></div>
+<h3>编辑如下内容到.vimrc文件</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    &quot; &quot;开头的为注释,仅为说明
+    set nocompatible               &quot; be iMproved
+    filetype off                   &quot; required!
+
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+
+    &quot; let Vundle manage Vundle
+    &quot; required! 
+    Bundle &#39;gmarik/vundle&#39;
+
+    &quot; My Bundles here:
+    &quot; 需要安装的插件都写在这下面
+
+    &quot; original repos on github
+    &quot; 插件来自github,写在下方，只要作者名/项目名就可以了
+    &quot; Bundle &#39;tpope/vim-fugitive&#39;
+    &quot; Bundle &#39;Lokaltog/vim-easymotion&#39;
+    &quot; Bundle &#39;rstacruz/sparkup&#39;, {&#39;rtp&#39;: &#39;vim/&#39;}
+    &quot; Bundle &#39;tpope/vim-rails.git&#39;
+
+    &quot; vim-scripts repos
+    &quot; 插件来自vim-scripts，直接写插件名就可以了
+    &quot; Bundle &#39;L9&#39;
+    &quot; Bundle &#39;FuzzyFinder&#39;
+
+    &quot; non github repos
+    &quot; 非github上的插件。如下：
+    &quot; Bundle &#39;git://git.wincent.com/command-t.git&#39;
+
+    &quot; git repos on your local machine (ie. when working on your own plugin)
+    &quot; Bundle &#39;file:///Users/gmarik/path/to/plugin&#39;
+
+    filetype plugin indent on     &quot; required!
+
+    &quot; Brief help
+    &quot; Vundle的一些指令说明   
+    &quot; :BundleList          - list configured bundles
+    &quot; :BundleInstall(!)    - install(update) bundles
+    &quot; :BundleSearch(!) foo - search(or refresh cache first) for foo
+    &quot; :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+    &quot;
+    &quot; see :h vundle for more details or wiki for FAQ
+    &quot; NOTE: comments after Bundle command are not allowed..
+</code></pre></div>
+<h3>安装你的插件</h3>
+
+<ul>
+<li>将要安装的插件加入.vimrc文件</li>
+<li>保存.vimrc文件退出当前的vim</li>
+<li>重新打开Vim,输入命令<code>:BundleInstall</code>,然后vim就会自动安装你的插件了</li>
+</ul>
+
+<h3>如何删除插件</h3>
+
+<ul>
+<li>编辑.vimrc文件删除你要移除的插件行（注释或删除）</li>
+<li>保存.vimrc文件并退出Vim</li>
+<li>重新打开Vim,输入命令<code>:BundleClean</code></li>
+</ul>
+
+<h2>插件及插件配置说明：</h2>
+
+<ol>
+<li>插件配置中，许多都设置了按键映射，不喜欢的可以不用配置按键映射</li>
+<li>本文推荐的部分脚本仅适用于C/C++开发，如用其他编程语言开发的，可再找其他合适的脚本</li>
+<li>有些脚本需要先安装ctags才能支持，ctags和cscope的安装配置网上一大堆，这里就不说了，推荐一个个人认为比较好的吧！<a href="http://blog.csdn.net/wooin/article/details/1858917">手把手教你把Vim改装成一个IDE变成环境</a></li>
+<li>没有操作说明的即为安装好插件即可以使用,没有配置说明的表示不需要配置也可以使用</li>
+<li>由于整理的匆忙，所列插件并没有按序排列</li>
+</ol>
+
+<h3>a.vim</h3>
+
+<ul>
+<li>功能：快速切换.cpp(.c)文件和.h文件</li>
+<li>操作：输入命令:A或:AV切换.c与同名.h文件</li>
+<li>安装：Bundle &#39;a.vim&#39;</li>
+</ul>
+
+<h3>Mark</h3>
+
+<ul>
+<li>功能：高亮多个关键字</li>
+<li>操作：mm高亮/取消高亮当前光标下的关键字，ma取消所有高亮关键字</li>
+<li>安装：Bundle &#39;Mark&#39;</li>
+</ul>
+
+<h3>Tagbar</h3>
+
+<ul>
+<li>功能: 标签导航</li>
+<li>操作：一般模式下输入tg打开或关闭Tagbar</li>
+<li>安装：Bundle &#39;Tagbar&#39;</li>
+</ul>
+
+<h3>The-NERD-tree</h3>
+
+<ul>
+<li>功能：开启目录树导航</li>
+<li>操作：一般模式下输入tr打开或关闭The-NERD-Tree</li>
+<li>安装：Bundle &#39;The-NERD-tree&#39;</li>
+</ul>
+
+<h3>The-NERD-Commenter</h3>
+
+<ul>
+<li>功能：块注释</li>
+<li>操作：一般模式下输入cc注释或取消注释当前行，或输入9cc注释当前行开始接下来的9行</li>
+<li>安装：Bundle &#39;The-NERD-Commenter&#39;</li>
+</ul>
+
+<h3>YouCompleteMe</h3>
+
+<ul>
+<li>功能：自动补全</li>
+<li>操作：自动补全时按向下方向键或CTRL+N键选择要补全的内容</li>
+<li>说明：最后一条映射key<em>list</em>select是为了解决与UltiSnip插件的Tab键冲突问题，默认list_select键为Tab，如果不需要安装UltiSnip插件，可注释该条配置，使用默认Tab键进行list选择</li>
+<li>安装：Bundle &#39;Valloric/YouCompleteMe&#39;，下载号插件以后，还需要进行编译，操作比较复杂，具体查看<a href="http://junewater.github.io/vim/2013/12/11/youcompleteme.html">这里</a></li>
+</ul>
+
+<h3>c.vim</h3>
+
+<ul>
+<li>功能：高亮C/C++类与函数名</li>
+<li>说明：这个是我从网上找的高亮脚本，稍微修改了下，使高亮颜色与desert配色方案搭配，不需要的可以无视哈，或下载插件后自己修改颜色</li>
+<li>安装：Bundle &#39;JuneWater/c.vim&#39;</li>
+</ul>
+
+<h3>lua.vim</h3>
+
+<ul>
+<li>功能：提供lua脚本编辑增强功能</li>
+<li>安装：Bundle &#39;lua.vim&#39;</li>
+</ul>
+
+<h3>Tabular</h3>
+
+<ul>
+<li>功能：对齐文本</li>
+<li>操作：在vim命令行模式下输入 :Tab /要根据其对齐的字符，如:Tab /&quot;</li>
+<li>安装：Bundle &#39;Tabular&#39;</li>
+</ul>
+
+<h3>mru.vim</h3>
+
+<ul>
+<li>功能：列出最近打开文件列表</li>
+<li>操作：在vim命令行模式下输入:MRU</li>
+<li>安装：Bundle &#39;vim-scripts/mru.vim&#39;</li>
+</ul>
+
+<h3>UltiSnips</h3>
+
+<ul>
+<li>功能：快速插入自定义号的代码片段(强烈推荐)</li>
+<li>操作：详细操作安装过程请看<a href="https://github.com/SirVer/ultisnips">官方文档以及视频</a></li>
+<li>说明：如果安装YouCompleteMe而没有将YCM默认Tab键配置过，可能会导致Ultisnips的Tab键冲突，无法使用</li>
+<li>安装：Bundle &#39;UltiSnips&#39;</li>
+</ul>
+
+<h3>xml</h3>
+
+<ul>
+<li>功能：书写xml文件时自动补全标签</li>
+<li>说明：这里我没有安装，因为默认只会对.xml,html等xml文件自动补全，而对.c或.cpp文件等不支持，而我需要在.c和.cpp中书写xml消息，这个插件对我来说没什么用。如果有人知道怎么使得这个插件支持其他类型的文件的，麻烦留言告知下，感激不尽!</li>
+<li>安装：Bundle &#39;xml.vim&#39;</li>
+</ul>
+
+<h3>taglist</h3>
+
+<ul>
+<li>列出源文件中的tag并跳转</li>
+<li>操作：一般模式下输入tl打开或关闭taglist窗口</li>
+<li>说明：taglist依赖于ctags，所以要先安装ctags，否则taglist装了也没法用</li>
+<li>安装：Bundle &#39;taglist.vim&#39;</li>
+</ul>
+
+<h3>syntastic</h3>
+
+<ul>
+<li>功能：静态语法以及风格检查</li>
+<li>安装：Bundle &#39;scrooloose/syntastic&#39;</li>
+</ul>
+
+<h3>vim-misc</h3>
+
+<ul>
+<li>功能：lua.vim需要</li>
+<li>安装：Bundle &#39;xolox/vim-misc&#39;</li>
+</ul>
+
+<h3>delemitMate</h3>
+
+<ul>
+<li>功能：输入引号，括号时，自动补全</li>
+<li>操作：输入(时，自动补全为()并且光标停在括号中，其他类似</li>
+<li>安装：Bundle &#39;Raimondi/delimitMate&#39;</li>
+</ul>
+
+<h3>vim-markdown</h3>
+
+<ul>
+<li>功能：提供markdown文件语法支持</li>
+<li>安装：Bundle &#39;plasticboy/vim-markdown&#39;</li>
+</ul>
+
+<h3>ctrlp.vim</h3>
+
+<ul>
+<li>功能：文件搜索</li>
+<li>操作：普通模式下按CTRL+P搜索文件，命令行模式下:CTRL+P搜索之前的命令</li>
+<li>安装：Bundle &#39;kien/ctrlp.vim&#39;</li>
+</ul>
+
+<h3>ack.vim</h3>
+
+<ul>
+<li>功能：搜索当前文件夹下文件中的关键字，自动忽略.svn和.git中的内容</li>
+<li>操作：一般模式下按F2自动搜索当前光标下关键字，命令行模式下输入:Ack 关键字，当然有多种模式可以选择，具体查看help</li>
+<li>安装：Bundle &#39;ack.vim&#39;</li>
+</ul>
+
+    <ul class="pager">
+    
+      <li class="previous"><a href="/2013/12/11/youcompleteme.html" title="Ubuntu12.04下自动补齐插件YouCompleteMe安装">&larr; Ubuntu12.04下自动补齐插件YouCompleteMe安装</a></li>
+    
+    
+      <li class="next"><a href="/2013/12/13/lua-metatable.html" title="Lua元表与元方法">Lua元表与元方法&rarr;</a></li>
+    
+    </ul>
+    
+  </div>
+  
+  <div class="span4 sidebar">
+    <h4 class="date">发布日期：<span>12 December 2013</span></h4>
+
+  
+    <h4>归档</h4>
+    <ul class="categories_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/categories.html#vim-ref">
+    		vim <span>2</span>
+    	</a></li>
+    
+  
+
+
+    </ul>
+    
+  
+  
+    <h4>标签</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#vim-ref">vim <span>2</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; <a href="mailto:junevimer@gmail.com">June</a> 2013. 
+          Proudly powered by <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

@@ -12,8 +12,9 @@ pygments: true
 #
 title : June's Blog
 tagline: Under Linux
+favicon: /images/june.png
 author :
-  name : june
+  name : June
   email : junevimer@gmail.com
   github : junewater
   twitter : junevimer
