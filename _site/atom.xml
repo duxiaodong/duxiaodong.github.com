@@ -1,659 +1,2102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>创造者</title>
- <link href="http://blog.zhuoqun.net/atom.xml" rel="self"/>
- <link href="http://blog.zhuoqun.net"/>
- <updated>2014-02-08T16:48:03+01:00</updated>
- <id>http://blog.zhuoqun.net</id>
+ <title>June's Blog</title>
+ <link href="Localhost/atom.xml" rel="self"/>
+ <link href="Localhost"/>
+ <updated>2014-02-09T22:59:05+08:00</updated>
+ <id>Localhost</id>
  <author>
-   <name>zhuoqun</name>
-   <email>zhuoqunwang@gmail.com</email>
+   <name>june</name>
+   <email>junevimer@gmail.com</email>
  </author>
 
  
  <entry>
-   <title>辛波丝卡</title>
-   <link href="http://blog.zhuoqun.net/2014/02/07/szymborska.html"/>
-   <updated>2014-02-07T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2014/02/07/szymborska</id>
-   <content type="html">
-&lt;p&gt;上周六是辛波丝卡去世两周年，我去了波兰小城克拉科夫，到她的墓前拜祭她。大概是因为刚下过雪，路上有些泥泞，城市也显得脏兮兮，可是并不破败。辛波丝卡下葬的墓园很大，很容易找到，不过她的墓碑很小，问了办公室的工作人员才得知具体区域，最后还是墓园里一位可爱老奶奶指引我找到的。当时是上午九点，我带去两束黄色小花，墓前出乎意料空无一人，头顶偶尔有乌鸦飞过。在墓前伫立良久，拿出那本《万物静默如谜》读了几首，她虽不懂中文，想必也能感受其中心意。&lt;/p&gt;
+   <title>(转)通用线程：POSIX 线程详解，第三部分</title>
+   <link href="Localhost/2013/12/14/pthread3.html"/>
+   <updated>2013-12-14T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/14/pthread3</id>
+   <content type="html">&lt;h2&gt;简介&lt;/h2&gt;
 
-&lt;p&gt;必须承认，我不懂诗，也没有太大兴趣。作为一个生活在海量信息中的现代人，掌握专业技能已经耗去大部分时间和精力，同时也被文化重负压得苦不堪言，在如此之少的闲暇中面对如此之多的文学、戏剧、电影和音乐，应当如何选择呢？就我自己而言，只会选择那些真正打动我的东西，其余只好错过，而且我偏爱享受，不愿分秒必争，尽量抓紧时间接触更多东西，觉得那样只会把欣赏变成研究，糟蹋了闲心。&lt;/p&gt;
+&lt;p&gt;本文是 POSIX 线程三部曲系列的最后一部分，Daniel 将详细讨论如何使用条件变量。条件变量是 POSIX 线程结构，可以让您在遇到某些条件时“唤醒”线程。可以将它们看作是一种线程安全的信号发送。Daniel 使用目前您所学到的知识实现了一个多线程工作组应用程序，本文将围绕着这一示例而进行讨论。&lt;/p&gt;
 
-&lt;p&gt;但对于艺术创造者来说，他们要面对过去几千年来所有的艺术作品和艺术形式，也继承了太多符号和文化，为了能有所突破，往往无所不用其极，或者干脆选择破坏和解构，以至于作品晦涩难懂，需要经过学习才能欣赏，也让许多不明所以的普通人误以为「看不懂的才是好的」。之前接触过一些现代诗，大部分都不喜欢，远不如许多唐诗宋词读来亲切，后来看到现代诗就避开——当然，作者未必欢迎我这样肤浅的读者。&lt;/p&gt;
+&lt;p&gt;本文转自:&lt;a href=&quot;http://www.ibm.com/developerworks/cn/linux/thread/posix_thread3/&quot;&gt;developWorks&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;可我喜欢辛波丝卡。中学时因为几米的漫画读到她的《一见钟情》，印象深刻，不过并未专门去读她的作品，多年后发现她的诗集，如获至宝，不时重读，还买了一些送给好友。辛波丝卡的诗浅显易懂，但味道很厚，处处能感受到作者的诗心，读罢舌根微甜，忍不住会心微笑。她认为世界处处充满惊奇，而且这种惊奇不假外求，没有任何事物不可以入诗。从她的诗作里我们可以发现许多身边再熟悉不过的事物，可在她写来却意味深远，同时并没有让人不明所以，而是觉得她说出了自己一直忽视的东西。在《写履历表》中，她写：「风景由地址取代 / 摇摆的记忆屈服于无可动摇的日期」数据比本人重要，每个填写过无数表格的现代人想必都对此有所感触；在《广告》中，她写：「把你的深渊交给我—— / 我将用柔软的睡眠表明它」多少人对生存感到焦虑却不愿沉思，而是把自己交给安眠药和各种娱乐呢？在《种种可能》中，她写：「我偏爱不开花的叶子胜过不长叶子的花」这一句应该能安抚许多付出没有得到回报的人。&lt;/p&gt;
+&lt;h2&gt;条件变量详解&lt;/h2&gt;
 
-&lt;p&gt;诗人是敏感的，否则不可能有那么强的感受力，这种敏感同时也是累赘，即使让诗人生活在最舒适的环境中，他还是会比生活在艰苦环境中的粗鲁的人更容易感受到痛苦。因为饱受折磨，所以诗人容易反对世界，厌恶生活。他们以词语为武器，攻击那些让他们不舒服的事物，甚至在了解之前就先否定。科技使人异化，新媒体使人肤浅，各种娱乐方式使人堕落，生命无意义……这些观点不无道理，但声嘶力竭、全部诉诸个人情绪的表达总让人觉得像是牢骚和无病呻吟。「文章尤忌数悲哀」，敏感而又能和谐表达的人不多，所以好诗人很少，辛波丝卡无疑是其中一个。她虽和世界保持距离，却并没有冷嘲热讽的态度，偶尔还会赞美生活；她对许多事物抱有怀疑，但对自己的观点也抱有怀疑，所以批判时并不那么理直气壮，也不会气急败坏；她非常谦虚，却并非因为谦虚是美德，而是因为真正意识到人类的渺小和无知。有人曾在采访时问辛波丝卡为什么十年只出版了二十二首诗，辛波丝卡回答：我房间里有个废纸篓。想必她心里也有一个废纸篓，把那些不能成诗的情绪毫不留情地扔进去，就像她诗里写的：「我沉默地度过多少时日，我不告诉你。」&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&quot;http://junewater.github.io/pthread/2013/12/14/pthread2.html&quot;&gt;前一篇文章&lt;/a&gt;结束时，我描述了一个比较特殊的难题：如果线程正在等待某个特定条件发生，它应该如何处理这种情况？它可以重复对互斥对象锁定和解锁，每次都会检查共享数据结构，以查找某个值。但这是在浪费时间和资源，而且这种繁忙查询的效率非常低。解决这个问题的最佳方法是使用 pthread_cond_wait() 调用来等待特殊条件发生。&lt;/p&gt;
 
-&lt;p&gt;以前总是为如何生活感到困扰。精神刺激太多，脑力劳动繁重，随之而来的是各种情绪病，周围许多东西又鼓励你关注自身，这样又导致精神自慰，离健康更远。可如果只是一味反思，拼命想要远离，慢慢就会变成一个与世隔绝的人，只会冷嘲热讽，丧失行动力，同样有害健康。辛波丝卡为我提供了一种解答。她热爱生活，但是以一种安静的方式，并不沉溺于名利和世俗；她和世界保持适当距离，却没有清高自傲，也不热衷冷嘲热讽，不为存在感到焦虑。生活本就有好有坏，随波逐流固然不对，以幻想中的完美来批判它也是不公平的，或许带着适当的怀疑全力投入才是最适宜的态度。&lt;/p&gt;
+&lt;p&gt;了解 pthread_cond_wait() 的作用非常重要 -- 它是 POSIX 线程信号发送系统的核心，也是最难以理解的部分。
+首先，让我们考虑以下情况：线程为查看已链接列表而锁定了互斥对象，然而该列表恰巧是空的。这一特定线程什么也干不了 -- 其设计意图是从列表中除去节点，但是现在却没有节点。因此，它只能：&lt;/p&gt;
 
-&lt;p&gt;辛波丝卡在一次访谈中说：「我觉得我只能拯救这个世界一个很小的部分。」很幸运我属于这一小部分。谢谢你，辛波丝卡。&lt;/p&gt;
+&lt;p&gt;锁定互斥对象时，线程将调用 pthread_cond_wait(&amp;amp;mycond,&amp;amp;mymutex)。pthread&lt;em&gt;cond&lt;/em&gt;wait() 调用相当复杂，因此我们每次只执行它的一个操作。&lt;/p&gt;
+
+&lt;p&gt;pthread_cond_wait() 所做的第一件事就是同时对互斥对象解锁（于是其它线程可以修改已链接列表），并等待条件 mycond 发生（这样当 pthread_cond_wait() 接收到另一个线程的“信号”时，它将苏醒）。现在互斥对象已被解锁，其它线程可以访问和修改已链接列表，可能还会添加项。&lt;/p&gt;
+
+&lt;p&gt;此时，pthread_cond_wait() 调用还未返回。对互斥对象解锁会立即发生，但等待条件 mycond 通常是一个阻塞操作，这意味着线程将睡眠，在它苏醒之前不会消耗 CPU 周期。这正是我们期待发生的情况。线程将一直睡眠，直到特定条件发生，在这期间不会发生任何浪费 CPU 时间的繁忙查询。从线程的角度来看，它只是在等待 pthread_cond_wait() 调用返回。&lt;/p&gt;
+
+&lt;p&gt;现在继续说明，假设另一个线程（称作“2 号线程”）锁定了 mymutex 并对已链接列表添加了一项。在对互斥对象解锁之后，2 号线程会立即调用函数 pthread_cond_broadcast(&amp;amp;mycond)。此操作之后，2 号线程将使所有等待 mycond 条件变量的线程立即苏醒。这意味着第一个线程（仍处于 pthread_cond_wait() 调用中）现在将苏醒。&lt;/p&gt;
+
+&lt;p&gt;现在，看一下第一个线程发生了什么。您可能会认为在 2 号线程调用 pthread_cond_broadcast(&amp;amp;mymutex) 之后，1 号线程的 pthread_cond_wait() 会立即返回。不是那样！实际上，pthread_cond_wait() 将执行最后一个操作：重新锁定 mymutex。一旦 pthread_cond_wait() 锁定了互斥对象，那么它将返回并允许 1 号线程继续执行。那时，它可以马上检查列表，查看它所感兴趣的更改&lt;/p&gt;
+
+&lt;h2&gt;停止并回顾！&lt;/h2&gt;
+
+&lt;p&gt;那个过程非常复杂，因此让我们先来回顾一下。第一个线程首先调用：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_mutex_lock(&amp;amp;mymutex);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后，它检查了列表。没有找到感兴趣的东西，于是它调用：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_cond_wait(&amp;amp;mycond, &amp;amp;mymutex);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后，pthread_cond_wait() 调用在返回前执行许多操作：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_mutex_unlock(&amp;amp;mymutex);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;它对 mymutex 解锁，然后进入睡眠状态，等待 mycond 以接收 POSIX 线程“信号”。一旦接收到“信号”（加引号是因为我们并不是在讨论传统的 UNIX 信号，而是来自 pthread_cond_signal() 或 pthread_cond_broadcast() 调用的信号），它就会苏醒。但 pthread_cond_wait() 没有立即返回 -- 它还要做一件事：重新锁定 mutex：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_mutex_lock(&amp;amp;mymutex);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;pthread_cond_wait() 知道我们在查找 mymutex “背后”的变化，因此它继续操作，为我们锁定互斥对象，然后才返回。&lt;/p&gt;
+
+&lt;h2&gt;pthread_cond_wait() 小测验&lt;/h2&gt;
+
+&lt;p&gt;现在已回顾了 pthread_cond_wait() 调用，您应该了解了它的工作方式。应该能够叙述 pthread_cond_wait() 依次执行的所有操作。尝试一下。如果理解了 pthread_cond_wait()，其余部分就相当容易，因此请重新阅读以上部分，直到记住为止。好，读完之后，能否告诉我在调用 pthread_cond_wait() 之 前，互斥对象必须处于什么状态？pthread_cond_wait() 调用返回之后，互斥对象处于什么状态？这两个问题的答案都是“锁定”。既然已经完全理解了 pthread_cond_wait() 调用，现在来继续研究更简单的东西 -- 初始化和真正的发送信号和广播进程。到那时，我们将会对包含了多线程工作队列的 C 代码了如指掌&lt;/p&gt;
+
+&lt;h2&gt;初始化和清除&lt;/h2&gt;
+
+&lt;p&gt;条件变量是一个需要初始化的真实数据结构。以下就初始化的方法。首先，定义或分配一个条件变量，如下所示：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_cond_t mycond;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后，调用以下函数进行初始化：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_cond_init(&amp;amp;mycond,NULL);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;瞧，初始化完成了！在释放或废弃条件变量之前，需要毁坏它，如下所示:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_cond_destroy(&amp;amp;mycond);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;很简单吧。接着讨论 pthread_cond_wait() 调用。&lt;/p&gt;
+
+&lt;h2&gt;等待&lt;/h2&gt;
+
+&lt;p&gt;一旦初始化了互斥对象和条件变量，就可以等待某个条件，如下所示：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_cond_wait(&amp;amp;mycond, &amp;amp;mymutex);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;请注意，代码在逻辑上应该包含 mycond 和 mymutex。一个特定条件只能有一个互斥对象，而且条件变量应该表示互斥数据“内部”的一种特殊的条件更改。一个互斥对象可以用许多条件变量（例如，cond_empty、cond_full、cond_cleanup），但每个条件变量只能有一个互斥对象。&lt;/p&gt;
+
+&lt;h2&gt;发送信号和广播&lt;/h2&gt;
+
+&lt;p&gt;对于发送信号和广播，需要注意一点。如果线程更改某些共享数据，而且它想要唤醒所有正在等待的线程，则应使用 pthread_cond_broadcast 调用，如下所示：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_cond_broadcast(&amp;amp;mycond);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在某些情况下，活动线程只需要唤醒第一个正在睡眠的线程。假设您只对队列添加了一个工作作业。那么只需要唤醒一个工作程序线程（再唤醒其它线程是不礼貌的！）：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_cond_signal(&amp;amp;mycond);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;此函数只唤醒一个线程。如果 POSIX 线程标准允许指定一个整数，可以让您唤醒一定数量的正在睡眠的线程，那就更完美了。但是很可惜，我没有被邀请参加会议。&lt;/p&gt;
+
+&lt;h2&gt;工作组&lt;/h2&gt;
+
+&lt;p&gt;我将演示如何创建多线程工作组。在这个方案中，我们创建了许多工作程序线程。每个线程都会检查 wq（“工作队列”），查看是否有需要完成的工作。如果有需要完成的工作，那么线程将从队列中除去一个节点，执行这些特定工作，然后等待新的工作到达。&lt;/p&gt;
+
+&lt;p&gt;与此同时，主线程负责创建这些工作程序线程、将工作添加到队列，然后在它退出时收集所有工作程序线程。您将会遇到许多 C 代码，好好准备吧！&lt;/p&gt;
+
+&lt;h2&gt;队列&lt;/h2&gt;
+
+&lt;p&gt;需要队列是出于两个原因。首先，需要队列来保存工作作业。还需要可用于跟踪已终止线程的数据结构。还记得前几篇文章（请参阅本文结尾处的 参考资料）中，我曾提到过需要使用带有特定进程标识的 pthread_join 吗？使用“清除队列”（称作 &amp;quot;cq&amp;quot;）可以解决无法等待 任何已终止线程的问题（稍后将详细讨论这个问题）。以下是标准队列代码。将此代码保存到文件 queue.h 和 queue.c：&lt;/p&gt;
+
+&lt;p&gt;queue.h:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    /* queue.h
+    ** Copyright 2000 Daniel Robbins, Gentoo Technologies, Inc.
+    ** Author: Daniel Robbins
+    ** Date: 16 Jun 2000
+    */
+    typedef struct node {
+        struct node *next;
+    } node;
+    typedef struct queue {
+        node *head, *tail; 
+    } queue;
+    void queue_init(queue *myroot);
+    void queue_put(queue *myroot, node *mynode);
+    node *queue_get(queue *myroot);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;queue.c&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    /* queue.c
+    ** Copyright 2000 Daniel Robbins, Gentoo Technologies, Inc.
+    ** Author: Daniel Robbins
+    ** Date: 16 Jun 2000
+    **
+    ** This set of queue functions was originally thread-aware.  I
+    ** redesigned the code to make this set of queue routines
+    ** thread-ignorant (just a generic, boring yet very fast set of queue
+    ** routines).  Why the change?  Because it makes more sense to have
+    ** the thread support as an optional add-on.  Consider a situation
+    ** where you want to add 5 nodes to the queue.  With the
+    ** thread-enabled version, each call to queue_put() would
+    ** automatically lock and unlock the queue mutex 5 times -- that&amp;#39;s a
+    ** lot of unnecessary overhead.  However, by moving the thread stuff
+    ** out of the queue routines, the caller can lock the mutex once at
+    ** the beginning, then insert 5 items, and then unlock at the end.
+    ** Moving the lock/unlock code out of the queue functions allows for
+    ** optimizations that aren&amp;#39;t possible otherwise.  It also makes this
+    ** code useful for non-threaded applications.
+    **
+    ** We can easily thread-enable this data structure by using the
+    ** data_control type defined in control.c and control.h.  */
+    #include &amp;lt;stdio.h&amp;gt;
+    #include &amp;quot;queue.h&amp;quot;
+    void queue_init(queue *myroot) {
+        myroot-&amp;gt;head=NULL;
+        myroot-&amp;gt;tail=NULL;
+    }
+    void queue_put(queue *myroot,node *mynode) {
+        mynode-&amp;gt;next=NULL;
+        if (myroot-&amp;gt;tail!=NULL)
+            myroot-&amp;gt;tail-&amp;gt;next=mynode;
+        myroot-&amp;gt;tail=mynode;
+        if (myroot-&amp;gt;head==NULL)
+            myroot-&amp;gt;head=mynode;
+    }
+    node *queue_get(queue *myroot) {
+        //get from root
+        node *mynode;
+        mynode=myroot-&amp;gt;head;
+        if (myroot-&amp;gt;head!=NULL)
+            myroot-&amp;gt;head=myroot-&amp;gt;head-&amp;gt;next;
+        return mynode;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;data_contr&lt;/h2&gt;
+
+&lt;p&gt;我编写的并不是线程安全的队列例程，事实上我创建了一个“数据包装”或“控制”结构，它可以是任何线程支持的数据结构。看一下 control.h：ol 代码&lt;/p&gt;
+
+&lt;p&gt;control.h&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    #include 
+    typedef struct data_control {
+        pthread_mutex_t mutex;
+        pthread_cond_t cond;
+        int active;
+    } data_control;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;现在您看到了 data_control 结构定义，以下是它的视觉表示：&lt;/p&gt;
+
+&lt;p&gt;所使用的 data_control 结构&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JuneWater/Picture/raw/master/pthread3.gif&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;图像中的锁代表互斥对象，它允许对数据结构进行互斥访问。黄色的星代表条件变量，它可以睡眠，直到所讨论的数据结构改变为止。on/off 开关表示整数 &amp;quot;active&amp;quot;，它告诉线程此数据是否是活动的。在代码中，我使用整数 active 作为标志，告诉工作队列何时应该关闭。以下是 control.c：&lt;/p&gt;
+
+&lt;p&gt;control.c&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    /* control.c
+    ** Copyright 2000 Daniel Robbins, Gentoo Technologies, Inc.
+    ** Author: Daniel Robbins
+    ** Date: 16 Jun 2000
+    **
+    ** These routines provide an easy way to make any type of
+    ** data-structure thread-aware.  Simply associate a data_control
+    ** structure with the data structure (by creating a new struct, for
+    ** example).  Then, simply lock and unlock the mutex, or
+    ** wait/signal/broadcast on the condition variable in the data_control
+    ** structure as needed.
+    **
+    ** data_control structs contain an int called &amp;quot;active&amp;quot;.  This int is
+    ** intended to be used for a specific kind of multithreaded design,
+    ** where each thread checks the state of &amp;quot;active&amp;quot; every time it locks
+    ** the mutex.  If active is 0, the thread knows that instead of doing
+    ** its normal routine, it should stop itself.  If active is 1, it
+    ** should continue as normal.  So, by setting active to 0, a
+    ** controlling thread can easily inform a thread work crew to shut
+    ** down instead of processing new jobs.  Use the control_activate()
+    ** and control_deactivate() functions, which will also broadcast on
+    ** the data_control struct&amp;#39;s condition variable, so that all threads
+    ** stuck in pthread_cond_wait() will wake up, have an opportunity to
+    ** notice the change, and then terminate.
+    */
+    #include &amp;quot;control.h&amp;quot;
+    int control_init(data_control *mycontrol) {
+        int mystatus;
+        if (pthread_mutex_init(&amp;amp;(mycontrol-&amp;gt;mutex),NULL))
+            return 1;
+        if (pthread_cond_init(&amp;amp;(mycontrol-&amp;gt;cond),NULL))
+            return 1;
+        mycontrol-&amp;gt;active=0;
+        return 0;
+    }
+
+    int control_destroy(data_control *mycontrol) {
+        int mystatus;
+        if (pthread_cond_destroy(&amp;amp;(mycontrol-&amp;gt;cond)))
+            return 1;
+        if (pthread_cond_destroy(&amp;amp;(mycontrol-&amp;gt;cond)))
+            return 1;
+        mycontrol-&amp;gt;active=0;
+        return 0;
+    }
+
+    int control_activate(data_control *mycontrol) {
+        int mystatus;
+        if (pthread_mutex_lock(&amp;amp;(mycontrol-&amp;gt;mutex)))
+            return 0;
+        mycontrol-&amp;gt;active=1;
+        pthread_mutex_unlock(&amp;amp;(mycontrol-&amp;gt;mutex));
+        pthread_cond_broadcast(&amp;amp;(mycontrol-&amp;gt;cond));
+        return 1;
+    }
+
+    int control_deactivate(data_control *mycontrol) {
+        int mystatus;
+        if (pthread_mutex_lock(&amp;amp;(mycontrol-&amp;gt;mutex)))
+            return 0;
+        mycontrol-&amp;gt;active=0;
+        pthread_mutex_unlock(&amp;amp;(mycontrol-&amp;gt;mutex));
+        pthread_cond_broadcast(&amp;amp;(mycontrol-&amp;gt;cond));
+        return 1;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;调试时间&lt;/h2&gt;
+
+&lt;p&gt;在开始调试之前，还需要一个文件。以下是 dbug.h：&lt;/p&gt;
+
+&lt;p&gt;dbug.h&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    #define dabort() \
+    {printf(&amp;quot;Aborting at line %d in source file %s\n&amp;quot;,__LINE__,__FILE__); abort(); }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;此代码用于处理工作组代码中的不可纠正错误。&lt;/p&gt;
+
+&lt;h2&gt;工作组代码&lt;/h2&gt;
+
+&lt;p&gt;说到工作组代码，以下就是：&lt;/p&gt;
+
+&lt;p&gt;workcrew.c&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    #include &amp;lt;stdio.h&amp;gt;
+    #include &amp;lt;stdlib.h&amp;gt;
+    #include &amp;quot;control.h&amp;quot;
+    #include &amp;quot;queue.h&amp;quot;
+    #include &amp;quot;dbug.h&amp;quot;
+    /* the work_queue holds tasks for the various threads to complete. */
+    struct work_queue {
+        data_control control;
+        queue work;
+    } wq;
+
+    /* I added a job number to the work node.  Normally, the work node
+       would contain additional data that needed to be processed. */
+    typedef struct work_node {
+        struct node *next;
+        int jobnum;
+    } wnode;
+
+    /* the cleanup queue holds stopped threads.  Before a thread
+       terminates, it adds itself to this list.  Since the main thread is
+       waiting for changes in this list, it will then wake up and clean up
+       the newly terminated thread. */
+    struct cleanup_queue {
+        data_control control;
+        queue cleanup;
+    } cq;
+
+    /* I added a thread number (for debugging/instructional purposes) and
+       a thread id to the cleanup node.  The cleanup node gets passed to
+       the new thread on startup, and just before the thread stops, it
+       attaches the cleanup node to the cleanup queue.  The main thread
+       monitors the cleanup queue and is the one that performs the
+       necessary cleanup. */
+    typedef struct cleanup_node {
+        struct node *next;
+        int threadnum;
+        pthread_t tid;
+    } cnode;
+
+    void *threadfunc(void *myarg) {
+        wnode *mywork;
+        cnode *mynode;
+        mynode=(cnode *) myarg;
+        pthread_mutex_lock(&amp;amp;wq.control.mutex);
+        while (wq.control.active) {
+            while (wq.work.head==NULL &amp;amp;&amp;amp; wq.control.active) {
+                pthread_cond_wait(&amp;amp;wq.control.cond, &amp;amp;wq.control.mutex);
+            }
+            if (!wq.control.active) 
+                break;
+            //we got something!
+            mywork=(wnode *) queue_get(&amp;amp;wq.work);
+            pthread_mutex_unlock(&amp;amp;wq.control.mutex);
+            //perform processing...
+            printf(&amp;quot;Thread number %d processing job %d\n&amp;quot;,mynode-&amp;gt;threadnum,mywork-&amp;gt;jobnum);
+            free(mywork);
+            pthread_mutex_lock(&amp;amp;wq.control.mutex);
+        }
+        pthread_mutex_unlock(&amp;amp;wq.control.mutex);
+        pthread_mutex_lock(&amp;amp;cq.control.mutex);
+        queue_put(&amp;amp;cq.cleanup,(node *) mynode);
+        pthread_mutex_unlock(&amp;amp;cq.control.mutex);
+        pthread_cond_signal(&amp;amp;cq.control.cond);
+        printf(&amp;quot;thread %d shutting down...\n&amp;quot;,mynode-&amp;gt;threadnum);
+        return NULL;
+    }
+
+    #define NUM_WORKERS 4
+    int numthreads;
+
+    void join_threads(void) {
+        cnode *curnode;
+        printf(&amp;quot;joining threads...\n&amp;quot;);
+        while (numthreads) {
+            pthread_mutex_lock(&amp;amp;cq.control.mutex);
+            /* below, we sleep until there really is a new cleanup node.  This
+               takes care of any false wakeups... even if we break out of
+               pthread_cond_wait(), we don&amp;#39;t make any assumptions that the
+               condition we were waiting for is true.  */
+            while (cq.cleanup.head==NULL) {
+                pthread_cond_wait(&amp;amp;cq.control.cond,&amp;amp;cq.control.mutex);
+            }
+
+          /* at this point, we hold the mutex and there is an item in the
+             list that we need to process.  First, we remove the node from
+             the queue.  Then, we call pthread_join() on the tid stored in
+             the node.  When pthread_join() returns, we have cleaned up
+             after a thread.  Only then do we free() the node, decrement the
+             number of additional threads we need to wait for and repeat the
+             entire process, if necessary */
+            curnode = (cnode *) queue_get(&amp;amp;cq.cleanup);
+            pthread_mutex_unlock(&amp;amp;cq.control.mutex);
+            pthread_join(curnode-&amp;gt;tid,NULL);
+            printf(&amp;quot;joined with thread %d\n&amp;quot;,curnode-&amp;gt;threadnum);
+            free(curnode);
+            numthreads--;
+        }
+    }
+
+    int create_threads(void) {
+        int x;
+        cnode *curnode;
+        for (x=0; x&amp;lt;NUM_WORKERS; x++) {
+            curnode=malloc(sizeof(cnode));
+            if (!curnode)
+                return 1;
+            curnode-&amp;gt;threadnum=x;
+            if (pthread_create(&amp;amp;curnode-&amp;gt;tid, NULL, threadfunc, (void *) curnode))
+                return 1;
+            printf(&amp;quot;created thread %d\n&amp;quot;,x);
+            numthreads++;
+        }
+        return 0;
+    }
+
+    void initialize_structs(void) {
+        numthreads=0;
+        if (control_init(&amp;amp;wq.control))
+            dabort();
+        queue_init(&amp;amp;wq.work);
+        if (control_init(&amp;amp;cq.control)) {
+            control_destroy(&amp;amp;wq.control);
+            dabort();
+        }
+        queue_init(&amp;amp;wq.work);
+        control_activate(&amp;amp;wq.control);
+    }
+
+    void cleanup_structs(void) {
+        control_destroy(&amp;amp;cq.control);
+        control_destroy(&amp;amp;wq.control);
+    }
+
+    int main(void) {
+        int x;
+        wnode *mywork;
+        initialize_structs();
+        /* CREATION */
+
+        if (create_threads()) {
+            printf(&amp;quot;Error starting threads... cleaning up.\n&amp;quot;);
+            join_threads();
+            dabort();
+        }
+        pthread_mutex_lock(&amp;amp;wq.control.mutex);
+        for (x=0; x&amp;lt;16000; x++) {
+            mywork=malloc(sizeof(wnode));
+            if (!mywork) {
+                printf(&amp;quot;ouch! can&amp;#39;t malloc!\n&amp;quot;);
+                break;
+            }
+            mywork-&amp;gt;jobnum=x;
+            queue_put(&amp;amp;wq.work,(node *) mywork);
+        }
+        pthread_mutex_unlock(&amp;amp;wq.control.mutex);
+        pthread_cond_broadcast(&amp;amp;wq.control.cond);
+        printf(&amp;quot;sleeping...\n&amp;quot;);
+        sleep(2);
+        printf(&amp;quot;deactivating work queue...\n&amp;quot;);
+        control_deactivate(&amp;amp;wq.control);
+        /* CLEANUP  */
+        join_threads();
+        cleanup_structs();
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;代码初排&lt;/h2&gt;
+
+&lt;p&gt;现在来快速初排代码。定义的第一个结构称作 &amp;quot;wq&amp;quot;，它包含了 data_control 和队列头。data_control 结构用于仲裁对整个队列的访问，包括队列中的节点。下一步工作是定义实际的工作节点。要使代码符合本文中的示例，此处所包含的都是作业号。&lt;/p&gt;
+
+&lt;p&gt;接着，创建清除队列。注释说明了它的工作方式。好，现在让我们跳过 threadfunc()、join_threads()、create_threads() 和 initialize_structs() 调用，直接跳到 main()。所做的第一件事就是初始化结构 -- 这包括初始化 data_controls 和队列，以及激活工作队列。&lt;/p&gt;
+
+&lt;h2&gt;有关清除的注意事项&lt;/h2&gt;
+
+&lt;p&gt;现在初始化线程。如果看一下 create_threads() 调用，似乎一切正常 -- 除了一件事。请注意，我们正在分配清除节点，以及初始化它的线程号和 TID 组件。我们还将清除节点作为初始自变量传递给每一个新的工作程序线程。为什么这样做？&lt;/p&gt;
+
+&lt;p&gt;因为当某个工作程序线程退出时，它会将其清除节点连接到清除队列，然后终止。那时，主线程会在清除队列中检测到这个节点（利用条件变量），并将这个节点移出队列。因为 TID（线程标识）存储在清除节点中，所以主线程可以确切知道哪个线程已终止了。然后，主线程将调用 pthread_join(tid)，并联接适当的工作程序线程。如果没有做记录，那么主线程就需要按任意顺序联接工作程序线程，可能是按它们的创建顺序。由于线程不一定按此顺序终止，那么主线程可能会在已经联接了十个线程时，等待联接另一个线程。您能理解这种设计决策是如何使关闭代码加速的吗（尤其在使用几百个工作程序线程的情况下）？&lt;/p&gt;
+
+&lt;h2&gt;创建工作&lt;/h2&gt;
+
+&lt;p&gt;我们已启动了工作程序线程（它们已经完成了执行 threadfunc()，稍后将讨论此函数），现在主线程开始将工作节点插入工作队列。首先，它锁定 wq 的控制互斥对象，然后分配 16000 个工作包，将它们逐个插入队列。完成之后，将调用 pthread_cond_broadcast()，于是所有正在睡眠的线程会被唤醒，并开始执行工作。此时，主线程将睡眠两秒钟，然后释放工作队列，并通知工作程序线程终止活动。接着，主线程会调用 join_threads() 函数来清除所有工作程序线程。&lt;/p&gt;
+
+&lt;h2&gt;threadfunc()&lt;/h2&gt;
+
+&lt;p&gt;现在来讨论 threadfunc()，这是所有工作程序线程都要执行的代码。当工作程序线程启动时，它会立即锁定工作队列互斥对象，获取一个工作节点（如果有的话），然后对它进行处理。如果没有工作，则调用 pthread_cond_wait()。您会注意到这个调用在一个非常紧凑的 while() 循环中，这是非常重要的。当从 pthread_cond_wait() 调用中苏醒时，决不能认为条件肯定发生了 -- 它 可能发生了，也可能没有发生。如果发生了这种情况，即错误地唤醒了线程，而列表是空的，那么 while 循环将再次调用 pthread_cond_wait()。&lt;/p&gt;
+
+&lt;p&gt;如果有一个工作节点，那么我们只打印它的作业号，释放它并退出。然而，实际代码会执行一些更实质性的操作。在 while() 循环结尾，我们锁定了互斥对象，以便检查 active 变量，以及在循环顶部检查新的工作节点。如果执行完此代码，就会发现如果 wq.control.active 是 0，while 循环就会终止，并会执行 threadfunc() 结尾处的清除代码。&lt;/p&gt;
+
+&lt;p&gt;工作程序线程的清除代码部件非常有趣。首先，由于 pthread_cond_wait() 返回了锁定的互斥对象，它会对 work_queue 解锁。然后，它锁定清除队列，添加清除代码（包含了 TID，主线程将使用此 TID 来调用 pthread_join()），然后再对清除队列解锁。此后，它发信号给所有 cq 等待者 (pthread_cond_signal(&amp;amp;cq.control.cond))，于是主线程就知道有一个待处理的新节点。我们不使用 pthread_cond_broadcast()，因为没有这个必要 -- 只有一个线程（主线程）在等待清除队列中的新节点。当它调用 join_threads() 时，工作程序线程将打印关闭消息，然后终止，等待主线程发出的 pthread_join() 调用。&lt;/p&gt;
+
+&lt;h2&gt;join_threads()&lt;/h2&gt;
+
+&lt;p&gt;如果要查看关于如何使用条件变量的简单示例，请参考 join_threads() 函数。如果还有工作程序线程，join_threads() 会一直执行，等待清除队列中新的清除节点。如果有新节点，我们会将此节点移出队列、对清除队列解锁（从而使工作程序可以添加清除节点）、联接新的工作程序线程（使用存储在清除节点中的 TID）、释放清除节点、减少“现有”线程的数量，然后继续。&lt;/p&gt;
+
+&lt;h2&gt;结束语&lt;/h2&gt;
+
+&lt;p&gt;现在已经到了“POSIX 线程详解”系列的尾声，希望您已经准备好开始将多线程代码添加到您自己的应用程序中。有关详细信息，请参阅 参考资料部分，这部分内容还包含了本文中使用的所有源码的 tar 文件。下一个系列中再见！&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;您可以参阅本文在 developerWorks 全球站点上的&lt;a href=&quot;http://www.ibm.com/developerworks/library/l-posix3/index.html?S_TACT=105AGX52&amp;amp;S_CMP=cn-a-l&quot;&gt;英文原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;本文中使用的&lt;a href=&quot;http://www.ibm.com/developerworks/cn/linux/thread/posix_thread3/thread-3.tar.gz&quot;&gt;源码的tar文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;友好的 Linux pthread 在线帮助 (&amp;quot;man -k pthread&amp;quot;) 是极好的参考资料。&lt;/li&gt;
+&lt;li&gt;如果要彻底了解 POSIX 线程，我推荐此书： &lt;a href=&quot;http://www.amazon.com/exec/obidos/ASIN/0201633922&quot;&gt;Programming with POSIX Threads&lt;/a&gt; ，David R. Butenhof (Addison-Wesley, 1997)。据证实，此书是现有最好的讨论 POSIX 线程的书籍&lt;/li&gt;
+&lt;li&gt;W. Richard Stevens 撰写的 &lt;a href=&quot;http://www.barnesandnoble.com/u/borders/379003142&quot;&gt;UNIX Network Programming - Networking APIs: Sockets and XTI&lt;/a&gt; ，(Prentice Hall, 1997) 一书还涵盖了 POSIX 线程。这是一本经典著作，但它讨论线程不如上述的 Programming with POSIX Threads那样详细。&lt;/li&gt;
+&lt;li&gt;请参阅 Sean Walton 撰写的有关 &lt;a href=&quot;http://www.ibiblio.org/pub/Linux/docs/faqs/Threads-FAQ/html/&quot;&gt;Linux线程&lt;/a&gt;的文档，KB7rfa &lt;/li&gt;
+&lt;li&gt;请学习亚里桑那大学的 Mark Hays 编写的 POSIX 线程 &lt;a href=&quot;http://math.arizona.edu/%7Eswig/documentation/pthreads/&quot;&gt;教程&lt;/a&gt;。 &lt;/li&gt;
+&lt;li&gt;请在 &lt;a href=&quot;http://hwaci.com/sw/pttcl/pttcl.html&quot;&gt;Pthreads-Tcl&lt;/a&gt; 介绍中查看对 Tcl 的更改，此更改使 Tcl 能够与 POSIX 线程一起使用。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;请参阅 &lt;a href=&quot;http://pauillac.inria.fr/%7Exleroy/linuxthreads/&quot;&gt;LinuxThreads 资料库&lt;/a&gt;。 &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://pauillac.inria.fr/%7Exleroy/linuxthreads/&quot;&gt;Proolix&lt;/a&gt;是一种简单的遵从 POSIX 标准的基于 i8086+ 的操作系统。 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;关于作者：&lt;/h2&gt;
+
+&lt;p&gt;Daniel Robbins 居住在新墨西哥州的 Albuquerque。他是 Gentoo Technologies, Inc. 的总裁兼 CEO，Gentoo 项目的总设计师，MacMillan 出版书籍的撰稿作者，他的著作有： Caldera OpenLinux Unleashed, SuSE Linux Unleashed, 和 Samba Unleashed。Daniel 自二年级起就与计算机某些领域结下不解之缘，那时他首先接触的是 Logo 程序语言，并沉溺于 Pac-Man 游戏中。这也许就是他至今仍担任 SONY Electronic Publishing/Psygnosis 的首席图形设计师的原因所在。Daniel 喜欢与妻子 Mary 和新出生的女儿 Hadassah 一起共度时光。可通过 &lt;a href=&quot;mailto:drobbins@gentoo.org&quot;&gt;drobbins@gentoo.org&lt;/a&gt;与 Daniel 联系。&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>思想和行动</title>
-   <link href="http://blog.zhuoqun.net/2014/01/25/thought-and-action.html"/>
-   <updated>2014-01-25T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2014/01/25/thought-and-action</id>
-   <content type="html">
-&lt;p&gt;有一句名言，原话我忘记了，大意是「思想的巨人往往是行动的矮子」，常被用来攻击那些只会纸上谈兵的人。因为思想看不见摸不着，而且好像人人都有，远不如泥瓦匠垒的一堵墙实在，所以只要他不把思想付诸行动并有所成就，任何人都可以指责一个思想家只是耍嘴皮子的骗子。确实有很多人懒惰胆怯，只愿意到处发表观点，随意评论别人的工作，但还有一小部分人真正在努力思考并试图找到答案，仅仅因为缺乏行动力就歧视他们是不公平的：不能苛求所有人都是天才。&lt;/p&gt;
+   <title>(转)通用线程：POSIX 线程详解，第二部分</title>
+   <link href="Localhost/2013/12/14/pthread2.html"/>
+   <updated>2013-12-14T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/14/pthread2</id>
+   <content type="html">&lt;h2&gt;简介&lt;/h2&gt;
 
-&lt;p&gt;努力思考就意味着多问「为什么」，意味着不断跳出自己的思维，退一步以便看到全局。这种「往后退」没有止境，每一次都能了解更多，这看起来好像是进步，却会让行动变得困难。如果一个登山者只看到一条路，他就会毫不犹豫往前走，但如果看到很多条路，反而会茫然无措，不知道该走哪条路，可能会停下来不断计算，最后忘记了自己要登山。思想家也会陷入这种困境。他并非不想行动，而是因为知道太多的动机和观点，再加上坚定的怀疑精神，从而担心所有行动的后果。&lt;/p&gt;
+&lt;p&gt;POSIX 线程是提高代码响应和性能的有力手段。在此三部分系列文章的第二篇中，Daniel Robbins 将说明，如何使用被称为互斥对象的灵巧小玩意，来保护线程代码中共享数据结构的完整性。&lt;/p&gt;
 
-&lt;p&gt;思想越自由，就越能突破文化、习俗、传统和宗教的限制，广泛吸收不同看法，行动上的困境也就越大。帮助别人时，会去想这样是不是真的在帮助，会对别人心理有什么影响；惩罚坏人时，会琢磨到底什么是善恶，人是否有权利行使正义；接到一项任务，不是去想如何完成，而过多思考它是否值得做。类似的反思有时候可以看作小心谨慎，但如果在所有事情上都过度追问，就会动弹不得：只有避免行动才不会出错。&lt;/p&gt;
+&lt;p&gt;本文转自:&lt;a href=&quot;http://www.ibm.com/developerworks/cn/linux/thread/posix_thread2/&quot;&gt;developWorks&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;思考过多还可能会让人一直沉浸在自己的思想中。有些人非常喜欢规划，于是就在脑海中一直不断规划，考虑各种情况，幻想不同的结果，然后发现动手去做还不如幻想有乐趣，而且思想中已经做过一次的事情，现实中就懒得再做一次。这是精神上的手淫，比肉体的手淫危害更大，慢慢思想就会只关注它自己制造出的幻象，对现实世界再也没有兴趣，像一个活在梦中的人。随之而来的是完美主义和快速厌倦。想象中的事情总是完美的，即使不完美，那些缺陷也都是确定的，带着这幅图景去做事情总会失望，而且他们善于思考，会比常人更多发现事物的缺点，最后承受不了，半途而废。&lt;/p&gt;
+&lt;h2&gt;互斥我吧！&lt;/h2&gt;
 
-&lt;p&gt;不过，如果把著书立说也看作「行动」，思想家们倒是成果颇丰，流传下来的文字大都出自他们之手，好像没听说过拿破仑和恺撒写出过什么东西。从书本里能学到的只有思想和知识，没办法准确知道该如何行动，就算有些书给出行动的说明，真正实行时也往往派不上用场。而行动家们大多没什么理论，更多靠的是信念和勇气，运气也经常帮忙，若要向他们讨教经验，可能只会得到只言片语，或者成功学一类的东西。不要指望从行动家的思想那里得到什么，只能留心观察他们的行动。&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&quot;http://junewater.github.io/pthread/2013/12/14/pthread1.html&quot;&gt;前一篇文章&lt;/a&gt;中 ，谈到了会导致异常结果的线程代码。两个线程分别对同一个全局变量进行了二十次加一。变量的值最后应该是 40，但最终值却是 21。这是怎么回事呢？因为一个线程不停地“取消”了另一个线程执行的加一操作，所以产生这个问题。现在让我们来查看改正后的代码，它使用 互斥对象(mutex)来解决该问题：&lt;/p&gt;
 
-&lt;p&gt;在思想家看来，行动家之所以坚定勇敢，大多是因为无知：如果他能看到更多情况，决不会那么做。可正是因为这样，最后往往有意想不到的结果，那是幻想和规划无法抵达的。哥伦布当初大大低估了地球的围长，这个误算造成了他的执着，最后才发现新大陆，如果当时一切计算正确，环球航行可能会拖到多年以后。思想家总想考虑周全，找到最短路径，然后再去做，可计划往往没有变化快，最短的路可能根本行不通。我们连明天发生什么都无法知晓，凭什么相信自己的预测呢？&lt;/p&gt;
+&lt;p&gt;thread3.c&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    #include &amp;lt;pthread.h&amp;gt;
+    #include &amp;lt;stdlib.h&amp;gt;
+    #include &amp;lt;unistd.h&amp;gt;
+    #include &amp;lt;stdio.h&amp;gt;
+    int myglobal;
+    pthread_mutex_t mymutex=PTHREAD_MUTEX_INITIALIZER;
+    void *thread_function(void *arg) {
+        int i,j;
+        for ( i=0; i&amp;lt;20; i++) {
+            pthread_mutex_lock(&amp;amp;mymutex);
+            j=myglobal;
+            j=j+1;
+            printf(&amp;quot;.&amp;quot;);
+            fflush(stdout);
+            sleep(1);
+            myglobal=j;
+            pthread_mutex_unlock(&amp;amp;mymutex);
+        }
+        return NULL;
+    }
 
-&lt;p&gt;功绩属于行动家，耻辱也属于行动家。他们坚定不移，行动卓有成效，建造了许多东西，但方向一旦错误，也会带来许多灾难。战争、大屠杀、宗教迫害……大都是由一群狂热相信自己想法的人造出的，这时思想家的犹豫和多疑就变成优点，它们可以除掉灾难的萌芽。反思之所以被不断重提，也是因为它在必要时可以充当刹车。思想家们以此为责任，也在这里找到慰籍，可惜忠言逆耳，他们往往在灾难发生后才得到荣誉。&lt;/p&gt;
+    int main(void) {
+        pthread_t mythread;
+        int i;
+        if ( pthread_create( &amp;amp;mythread, NULL, thread_function, NULL) ) {
+            printf(&amp;quot;error creating thread.&amp;quot;);
+            abort();
+        }
+        for ( i=0; i&amp;lt;20; i++) {
+            pthread_mutex_lock(&amp;amp;mymutex);
+            myglobal=myglobal+1;
+            pthread_mutex_unlock(&amp;amp;mymutex);
+            printf(&amp;quot;o&amp;quot;);
+            fflush(stdout);
+            sleep(1);
+        }
+        if ( pthread_join ( mythread, NULL ) ) {
+            printf(&amp;quot;error joining thread.&amp;quot;);
+            abort();
+        }
+        printf(&amp;quot;\nmyglobal equals %d\n&amp;quot;,myglobal);
+        exit(0);
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;解读一下&lt;/h2&gt;
 
-&lt;p&gt;然而生活中大部分事情不会带来严重后果，只需要恪守一些原则，比如不伤害他人，就能判断哪些事情不应该做，所以相对于反思，人们更愿意学习如何行动，走向成功。要做到这一点，首先就要学会相信。太多怀疑会摧毁一切，觉得任何事情都没有意义，最后走向虚无主义。「天地不仁」，宇宙本身可能没有目的，也没有意义，地球也许只是一个偶然现象，那么我们所做的一切还有什么意义呢？这种想法没错，可能还包含了最高智慧，但如果还想活下去，就不能被它影响太深。或许所有事情都没有意义，可我们还是可以享受生活。当确定自己喜欢一件事情，比如园艺，去做就是了，不要去怀疑它的意义，而是要相信它有意义。「为什么要做园艺而不是其它？」，这样的怀疑只会破坏乐趣，也没有任何益处，意义无法得到解答时，只能悬置这个问题，全神贯注地做事。宗教信仰之所以可以给人安慰，就是因为它不允许怀疑，然后信徒就能安心听神的指示生活。有类似的信念才能做好事情。&lt;/p&gt;
+&lt;p&gt;如果将这段代码与 前一篇文章 中给出的版本作一个比较，就会注意到增加了 pthread_mutex_lock() 和 pthread_mutex_unlock() 函数调用。在线程程序中这些调用执行了不可或缺的功能。他们提供了一种 相互排斥的方法（互斥对象即由此得名）。两个线程不能同时对同一个互斥对象加锁。
+互斥对象是这样工作的。如果线程 a 试图锁定一个互斥对象，而此时线程 b 已锁定了同一个互斥对象时，线程 a 就将进入睡眠状态。一旦线程 b 释放了互斥对象（通过 pthread_mutex_unlock() 调用），线程 a 就能够锁定这个互斥对象（换句话说，线程 a 就将从 pthread_mutex_lock() 函数调用中返回，同时互斥对象被锁定）。同样地，当线程 a 正锁定互斥对象时，如果线程 c 试图锁定互斥对象的话，线程 c 也将临时进入睡眠状态。对已锁定的互斥对象上调用 pthread_mutex_lock() 的所有线程都将进入睡眠状态，这些睡眠的线程将“排队”访问这个互斥对象。
+通常使用 pthread_mutex_lock() 和 pthread_mutex_unlock() 来保护数据结构。这就是说，通过线程的锁定和解锁，对于某一数据结构，确保某一时刻只能有一个线程能够访问它。可以推测到，当线程试图锁定一个未加锁的互斥对象时，POSIX 线程库将同意锁定，而不会使线程进入睡眠状态。&lt;/p&gt;
 
-&lt;p&gt;除信念之外，包容也必不可少。对一种事物了解越多，发现的缺陷也越多，新鲜感也会随着时间消失，最初的喜欢很容易沦为厌烦。现在许多公司对外宣传时，经常说到他们的员工多么热爱自己的工作，看到广告片中那些片段，很容易相信有些人时时刻刻都喜欢自己做的事情。这种误导会让人在厌倦自己工作时直接放弃，而不是再坚持一下。事实上，一个人就算再热爱一种事物，也会经常感到枯燥，但在经过一段时间回头看，还是会认为自己热爱它。「热爱」或「喜欢」并不是一时情绪，而是经历许多之后的一种复杂情感，它更接近于平淡而不是兴奋，所以才能让人日复一日地专注。发现一种事物的缺陷之后还是愿意努力去完善它，比起冷嘲热讽嗤之以鼻，需要更多的智慧和美德。&lt;/p&gt;
+&lt;p&gt;请看这幅轻松的漫画，四个小精灵重现了最近一次 pthread_mutex_lock() 调用的一个场面。&lt;/p&gt;
 
-&lt;p&gt;如果仔细罗列行动者需要的品质，会发现和宗教信仰要求的品质差不多，所以在宗教热情普遍缺乏的今天，热爱工作可以让人得到幸福。人们全神贯注地创造，日复一日地劳作，终于在其中发现了神性。这比浪漫爱情更吸引人，也更持久，因为没有一个爱人可以承受那么巨大的热情，把全部心思都放在对方身上的爱情往往会以悲剧结尾。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/JuneWater/Picture/raw/master/pthread2.gif&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;适度的反思对生活有益，过度反思则只能带来焦虑。幸福和平静也不是靠反思获得，而是靠日复一日的劳动和创造性的工作，即使行动者刚开始并没有享受到乐趣，但只要持之以恒，精神面貌也会发生变化。「拿出有信仰的行动，自然会有信仰」，行动和习惯拥有改变精神的神奇力量。&lt;/p&gt;
+&lt;p&gt;图中，锁定了互斥对象的线程能够存取复杂的数据结构，而不必担心同时会有其它线程干扰。那个数据结构实际上是“冻结”了，直到互斥对象被解锁为止。pthread_mutex_lock() 和 pthread_mutex_unlock() 函数调用，如同“在施工中”标志一样，将正在修改和读取的某一特定共享数据包围起来。这两个函数调用的作用就是警告其它线程，要它们继续睡眠并等待轮到它们对互斥对象加锁。当然，除非在 每个 对特定数据结构进行读写操作的语句前后，都分别放上 pthread_mutex_lock() 和 pthread_mutext_unlock() 调用，才会出现这种情况。&lt;/p&gt;
+
+&lt;h2&gt;为什么要用互斥对象？&lt;/h2&gt;
+
+&lt;p&gt;听上去很有趣，但究竟为什么要让线程睡眠呢？要知道，线程的主要优点不就是其具有独立工作、更多的时候是同时工作的能力吗？是的，确实是这样。然而，每个重要的线程程序都需要使用某些互斥对象。让我们再看一下示例程序以便理解原因所在。&lt;/p&gt;
+
+&lt;p&gt;请看 thread_function()，循环中一开始就锁定了互斥对象，最后才将它解锁。在这个示例程序中，mymutex 用来保护 myglobal 的值。仔细查看 thread_function()，加一代码把 myglobal 复制到一个局部变量，对局部变量加一，睡眠一秒钟，在这之后才把局部变量的值传回给 myglobal。不使用互斥对象时，即使主线程在 thread_function() 线程睡眠一秒钟期间内对 myglobal 加一，thread_function() 苏醒后也会覆盖主线程所加的值。使用互斥对象能够保证这种情形不会发生。（您也许会想到，我增加了一秒钟延迟以触发不正确的结果。把局部变量的值赋给 myglobal 之前，实际上没有什么真正理由要求 thread_function() 睡眠一秒钟。）使用互斥对象的新程序产生了期望的结果：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ ./thread3
+    o..o..o.o..o..o.o.o.o.o..o..o..o.ooooooo
+    myglobal equals 40
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;为了进一步探索这个极为重要的概念，让我们看一看程序中进行加一操作的代码：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    thread_function() 加一代码：
+        j=myglobal;
+        j=j+1;
+        printf(&amp;quot;.&amp;quot;);
+        fflush(stdout);
+        sleep(1);
+    myglobal=j;
+    主线程加一代码：
+        myglobal=myglobal+1;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果代码是位于单线程程序中，可以预期 thread_function() 代码将完整执行。接下来才会执行主线程代码（或者是以相反的顺序执行）。在不使用互斥对象的线程程序中，代码可能（几乎是，由于调用了 sleep() 的缘故）以如下的顺序执行：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    thread_function() 线程        主线程
+    j=myglobal;
+    j=j+1;
+    printf(&amp;quot;.&amp;quot;);
+    fflush(stdout);
+    sleep(1);                     myglobal=myglobal+1;
+    myglobal=j;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当代码以此特定顺序执行时，将覆盖主线程对 myglobal 的修改。程序结束后，就将得到不正确的值。如果是在操纵指针的话，就可能产生段错误。注意到 thread_function() 线程按顺序执行了它的所有指令。看来不象是 thread_function() 有什么次序颠倒。问题是，同一时间内，另一个线程对同一数据结构进行了另一个修改。&lt;/p&gt;
+
+&lt;h2&gt;线程内幕1&lt;/h2&gt;
+
+&lt;p&gt;在解释如何确定在何处使用互斥对象之前，先来深入了解一下线程的内部工作机制。请看第一个例子：&lt;/p&gt;
+
+&lt;p&gt;假设主线程将创建三个新线程：线程 a、线程 b 和线程 c。假定首先创建线程 a，然后是线程 b，最后创建线程 c。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_create( &amp;amp;thread_a, NULL, thread_function, NULL);
+    pthread_create( &amp;amp;thread_b, NULL, thread_function, NULL);
+    pthread_create( &amp;amp;thread_c, NULL, thread_function, NULL);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在第一个 pthread_create() 调用完成后，可以假定线程 a 不是已存在就是已结束并停止。第二个 pthread_create() 调用后，主线程和线程 b 都可以假定线程 a 存在（或已停止）。&lt;/p&gt;
+
+&lt;p&gt;然而，就在第二个 create() 调用返回后，主线程无法假定是哪一个线程（a 或 b）会首先开始运行。虽然两个线程都已存在，线程 CPU 时间片的分配取决于内核和线程库。至于谁将首先运行，并没有严格的规则。尽管线程 a 更有可能在线程 b 之前开始执行，但这并无保证。对于多处理器系统，情况更是如此。如果编写的代码假定在线程 b 开始执行之前实际上执行线程 a 的代码，那么，程序最终正确运行的概率是 99%。或者更糟糕，程序在您的机器上 100% 地正确运行，而在您客户的四处理器服务器上正确运行的概率却是零。&lt;/p&gt;
+
+&lt;p&gt;从这个例子还可以得知，线程库保留了每个单独线程的代码执行顺序。换句话说，实际上那三个 pthread_create() 调用将按它们出现的顺序执行。从主线程上来看，所有代码都是依次执行的。有时，可以利用这一点来优化部分线程程序。例如，在上例中，线程 c 就可以假定线程 a 和线程 b 不是正在运行就是已经终止。它不必担心存在还没有创建线程 a 和线程 b 的可能性。可以使用这一逻辑来优化线程程序。&lt;/p&gt;
+
+&lt;h2&gt;线程内幕2&lt;/h2&gt;
+
+&lt;p&gt;现在来看另一个假想的例子。假设有许多线程，他们都正在执行下列代码：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    myglobal=mygloabl+1;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;那么，是否需要在加一操作语句前后分别锁定和解锁互斥对象呢？也许有人会说“不”。编译器极有可能把上述赋值语句编译成一条机器指令。大家都知道，不可能&amp;quot;半途&amp;quot;中断一条机器指令。即使是硬件中断也不会破坏机器指令的完整性。基于以上考虑，很可能倾向于完全省略 pthread_mutex_lock() 和 pthread_mutex_unlock() 调用。不要这样做。&lt;/p&gt;
+
+&lt;p&gt;我在说废话吗？不完全是这样。首先，不应该假定上述赋值语句一定会被编译成一条机器指令，除非亲自验证了机器代码。即使插入某些内嵌汇编语句以确保加一操作的完整执行――甚至，即使是自己动手写编译器！-- 仍然可能有问题。&lt;/p&gt;
+
+&lt;p&gt;答案在这里。使用单条内嵌汇编操作码在单处理器系统上可能不会有什么问题。每个加一操作都将完整地进行，并且多半会得到期望的结果。但是多处理器系统则截然不同。在多 CPU 机器上，两个单独的处理器可能会在几乎同一时刻（或者，就在同一时刻）执行上述赋值语句。不要忘了，这时对内存的修改需要先从 L1 写入 L2 高速缓存、然后才写入主存。（SMP 机器并不只是增加了处理器而已；它还有用来仲裁对 RAM 存取的特殊硬件。）最终，根本无法搞清在写入主存的竞争中，哪个 CPU 将会&amp;quot;胜出&amp;quot;。要产生可预测的代码，应使用互斥对象。互斥对象将插入一道&amp;quot;内存关卡&amp;quot;，由它来确保对主存的写入按照线程锁定互斥对象的顺序进行。&lt;/p&gt;
+
+&lt;p&gt;考虑一种以 32 位块为单位更新主存的 SMP 体系结构。如果未使用互斥对象就对一个 64 位整数进行加一操作，整数的最高 4 位字节可能来自一个 CPU，而其它 4 个字节却来自另一 CPU。糟糕吧！最糟糕的是，使用差劲的技术，您的程序在重要客户的系统上有可能不是很长时间才崩溃一次，就是早上三点钟就崩溃。David R. Butenhof 在他的《POSIX 线程编程》（请参阅本文末尾的 参考资料部分）一书中，讨论了由于未使用互斥对象而将产生的种种情况。&lt;/p&gt;
+
+&lt;h2&gt;许多互斥对象&lt;/h2&gt;
+
+&lt;p&gt;如果放置了过多的互斥对象，代码就没有什么并发性可言，运行起来也比单线程解决方案慢。如果放置了过少的互斥对象，代码将出现奇怪和令人尴尬的错误。幸运的是，有一个中间立场。首先，互斥对象是用于串行化存取&lt;em&gt;共享数据&lt;/em&gt;。不要对非共享数据使用互斥对象，并且，如果程序逻辑确保任何时候都只有一个线程能存取特定数据结构，那么也不要使用互斥对象。&lt;/p&gt;
+
+&lt;p&gt;其次，如果要使用共享数据，那么在读、写共享数据时都应使用互斥对象。用 pthread_mutex_lock() 和 pthread_mutex_unlock() 把读写部分保护起来，或者在程序中不固定的地方随机使用它们。学会从一个线程的角度来审视代码，并确保程序中每一个线程对内存的观点都是一致和合适的。为了熟悉互斥对象的用法，最初可能要花好几个小时来编写代码，但是很快就会习惯并且什么也不必多想就能够正确使用它们。&lt;/p&gt;
+
+&lt;h2&gt;使用调用：初始化&lt;/h2&gt;
+
+&lt;p&gt;现在该来看看使用互斥对象的各种不同方法了。让我们从初始化开始。在 thread3.c 示例 中，我们使用了静态初始化方法。这需要声明一个 pthread_mutex_t 变量，并赋给它常数 PTHREAD_MUTEX_INITIALIZER：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_mutex_t mymutex=PTHREAD_MUTEX_INITIALIZER;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;很简单吧。但是还可以动态地创建互斥对象。当代码使用 malloc() 分配一个新的互斥对象时，使用这种动态方法。此时，静态初始化方法是行不通的，并且应当使用例程 pthread_mutex_init()：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    int pthread_mutex_init( pthread_mutex_t *mymutex, const pthread_mutexattr_t *attr)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;正如所示，pthread_mutex_init 接受一个指针作为参数以初始化为互斥对象，该指针指向一块已分配好的内存区。第二个参数，可以接受一个可选的 pthread_mutexattr_t 指针。这个结构可用来设置各种互斥对象属性。但是通常并不需要这些属性，所以正常做法是指定 NULL。&lt;/p&gt;
+
+&lt;p&gt;一旦使用 pthread_mutex_init() 初始化了互斥对象，就应使用 pthread_mutex_destroy() 消除它。pthread_mutex_destroy() 接受一个指向 pthread_mutext_t 的指针作为参数，并释放创建互斥对象时分配给它的任何资源。请注意， pthread_mutex_destroy() 不会 释放用来存储 pthread_mutex_t 的内存。释放自己的内存完全取决于您。还必须注意一点，pthread_mutex_init() 和 pthread_mutex_destroy() 成功时都返回零。&lt;/p&gt;
+
+&lt;h2&gt;使用调用：锁定&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_mutex_lock(pthread_mutex_t *mutex)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;pthread_mutex_lock() 接受一个指向互斥对象的指针作为参数以将其锁定。如果碰巧已经锁定了互斥对象，调用者将进入睡眠状态。函数返回时，将唤醒调用者（显然）并且调用者还将保留该锁。函数调用成功时返回零，失败时返回非零的错误代码。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_mutex_unlock(pthread_mutex_t *mutex)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;pthread_mutex_unlock() 与 pthread_mutex_lock() 相配合，它把线程已经加锁的互斥对象解锁。始终应该尽快对已加锁的互斥对象进行解锁（以提高性能）。并且绝对不要对您未保持锁的互斥对象进行解锁操作（否则，pthread_mutex_unlock() 调用将失败并带一个非零的 EPERM 返回值）。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    pthread_mutex_trylock(pthread_mutex_t *mutex)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当线程正在做其它事情的时候（由于互斥对象当前是锁定的），如果希望锁定互斥对象，这个调用就相当方便。调用 pthread_mutex_trylock() 时将尝试锁定互斥对象。如果互斥对象当前处于解锁状态，那么您将获得该锁并且函数将返回零。然而，如果互斥对象已锁定，这个调用也不会阻塞。当然，它会返回非零的 EBUSY 错误值。然后可以继续做其它事情，稍后再尝试锁定。&lt;/p&gt;
+
+&lt;h2&gt;等待条件发生&lt;/h2&gt;
+
+&lt;p&gt;互斥对象是线程程序必需的工具，但它们并非万能的。例如，如果线程正在等待共享数据内某个条件出现，那会发生什么呢？代码可以反复对互斥对象锁定和解锁，以检查值的任何变化。同时，还要快速将互斥对象解锁，以便其它线程能够进行任何必需的更改。这是一种非常可怕的方法，因为线程需要在合理的时间范围内频繁地循环检测变化。&lt;/p&gt;
+
+&lt;p&gt;在每次检查之间，可以让调用线程短暂地进入睡眠，比如睡眠三秒钟，但是因此线程代码就无法最快作出响应。真正需要的是这样一种方法，当线程在等待满足某些条件时使线程进入睡眠状态。一旦条件满足，还需要一种方法以唤醒因等待满足特定条件而睡眠的线程。如果能够做到这一点，线程代码将是非常高效的，并且不会占用宝贵的互斥对象锁。这正是 POSIX 条件变量能做的事！&lt;/p&gt;
+
+&lt;p&gt;而 POSIX 条件变量将是我下一篇文章的主题，其中将说明如何正确使用条件变量。到那时，您将拥有了创建复杂线程程序所需的全部资源，那些线程程序可以模拟工作人员、装配线等等。既然您已经越来越熟悉线程，我将在下一篇文章中加快进度。这样，在下一篇文章的结尾就能放上一个相对复杂的线程程序。说到等到条件产生，下次再见！&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;您可以参阅本文在 developerWorks 全球站点上的&lt;a href=&quot;http://www.ibm.com/developerworks/library/l-posix2/index.html?S_TACT=105AGX52&amp;amp;S_CMP=cn-a-l&quot;&gt;英文原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;友好的 Linux pthread 在线帮助 (&amp;quot;man -k pthread&amp;quot;) 是极好的参考资料。&lt;/li&gt;
+&lt;li&gt;如果要彻底了解 POSIX 线程，我推荐此书： &lt;a href=&quot;http://www.amazon.com/exec/obidos/ASIN/0201633922&quot;&gt;Programming with POSIX Threads&lt;/a&gt; ，David R. Butenhof (Addison-Wesley, 1997)。据证实，此书是现有最好的讨论 POSIX 线程的书籍&lt;/li&gt;
+&lt;li&gt;W. Richard Stevens 撰写的 &lt;a href=&quot;http://www.barnesandnoble.com/u/borders/379003142&quot;&gt;UNIX Network Programming - Networking APIs: Sockets and XTI&lt;/a&gt; ，(Prentice Hall, 1997) 一书还涵盖了 POSIX 线程。这是一本经典著作，但它讨论线程不如上述的 Programming with POSIX Threads那样详细。&lt;/li&gt;
+&lt;li&gt;请参阅 Sean Walton 撰写的有关 &lt;a href=&quot;http://www.ibiblio.org/pub/Linux/docs/faqs/Threads-FAQ/html/&quot;&gt;Linux线程&lt;/a&gt;的文档，KB7rfa &lt;/li&gt;
+&lt;li&gt;请学习亚里桑那大学的 Mark Hays 编写的 POSIX 线程 &lt;a href=&quot;http://math.arizona.edu/%7Eswig/documentation/pthreads/&quot;&gt;教程&lt;/a&gt;。 &lt;/li&gt;
+&lt;li&gt;请在 &lt;a href=&quot;http://hwaci.com/sw/pttcl/pttcl.html&quot;&gt;Pthreads-Tcl&lt;/a&gt; 介绍中查看对 Tcl 的更改，此更改使 Tcl 能够与 POSIX 线程一起使用。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;请参阅 &lt;a href=&quot;http://pauillac.inria.fr/%7Exleroy/linuxthreads/&quot;&gt;LinuxThreads 资料库&lt;/a&gt;。 &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://pauillac.inria.fr/%7Exleroy/linuxthreads/&quot;&gt;Proolix&lt;/a&gt;是一种简单的遵从 POSIX 标准的基于 i8086+ 的操作系统。 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;关于作者：&lt;/h2&gt;
+
+&lt;p&gt;Daniel Robbins 居住在新墨西哥州的 Albuquerque。他是 Gentoo Technologies, Inc. 的总裁兼 CEO，Gentoo 项目的总设计师，MacMillan 出版书籍的撰稿作者，他的著作有： Caldera OpenLinux Unleashed, SuSE Linux Unleashed, 和 Samba Unleashed。Daniel 自二年级起就与计算机某些领域结下不解之缘，那时他首先接触的是 Logo 程序语言，并沉溺于 Pac-Man 游戏中。这也许就是他至今仍担任 SONY Electronic Publishing/Psygnosis 的首席图形设计师的原因所在。Daniel 喜欢与妻子 Mary 和新出生的女儿 Hadassah 一起共度时光。可通过 &lt;a href=&quot;mailto:drobbins@gentoo.org&quot;&gt;drobbins@gentoo.org&lt;/a&gt;与 Daniel 联系。&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>说说天才</title>
-   <link href="http://blog.zhuoqun.net/2014/01/17/talk-about-genius.html"/>
-   <updated>2014-01-17T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2014/01/17/talk-about-genius</id>
-   <content type="html">
-&lt;p&gt;「天才」这个词现在已经变得非常平庸，几乎随时会出现在人们对周围的人的惊叹中。记忆力好被称为天才，学习能力强被称为天才，甚至偶然想到一个好主意也会换来一声赞许：真是个天才。与此同时，媒体也塑造了我们对天才的另一种认识。看看小说、电视剧或电影中的天才形象吧，你会发现它就等同于「高智商」、「孤僻」或「极度敏感害羞」，而且可以轻而易举地做到常人难以想象的事情。&lt;/p&gt;
+   <title>(转)通用线程：POSIX 线程详解，第一部分</title>
+   <link href="Localhost/2013/12/14/pthread1.html"/>
+   <updated>2013-12-14T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/14/pthread1</id>
+   <content type="html">&lt;h2&gt;一种支持内存共享的简捷工具&lt;/h2&gt;
 
-&lt;p&gt;这些对天才的误解一方面使很多人相信「人人都是天才」，至少是「某一方面」的天才，只是可能没有发掘出来；另一方面也让很多人误以为「天才」等同于「奇怪」，追求怪癖而非创造力，受到指责时也借「天才往往不被人理解」来自我安慰。没错，几乎所有人都有创造的欲望，有些人也颇具天赋，可那只是起点，离真正的天才很远。许多天才也确实有怪癖，虽不能断言那些怪癖没有存在的必要，但他们之所以被认为是天才，绝不是因为怪癖，而是作品中流露出的创造力。&lt;/p&gt;
+&lt;p&gt;POSIX（可移植操作系统接口）线程是提高代码响应和性能的有力手段。在本系列中，Daniel Robbins 向您精确地展示在编程中如何使用线程。其中还涉及大量幕后细节，读完本系列文章，您完全可以运用 POSIX 线程创建多线程程序。&lt;/p&gt;
 
-&lt;p&gt;如果抛开对天才的崇拜，冷静地想一想，就会发现我们只能靠作品来评判天才。一个人或许天赋很高，但因为种种原因没能结出果实，那么他就不是天才，而只是一个聪明人。从另一方面说，一个人天分或能力再高也只是他自己的事情，若不能创造出一些东西让别人也受益，凭什么得到大家的赞许呢？如果认同这个标准，或许可以说，努力创造和天分一样，是天才的必备素质。所以，那些很有才华却宁愿「把它们冲进马桶」的人或许很酷，却恰恰证明他们不可能是天才。&lt;/p&gt;
+&lt;p&gt;本文转自：&lt;a href=&quot;http://www.ibm.com/developerworks/cn/linux/thread/posix_thread1/&quot;&gt;developerWorks&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;崇拜往往来自于无知和误解，我们对天才确实知之甚少，所以大部分人着迷于他们身上的故事，而不是创造过程或作品本身。这不能完全归罪于人们的猎奇心理，天才自己也要对此负责。天才往往并不了解自己的创造过程，他们吸收一切接触到的东西，不管是否「有用」都一股脑地塞到自己这个熔炉内，然后经过思考和沉淀，再加上一些偶然和巧合，最后被某些东西触发或者「灵光一闪」，作品这才开始萌芽。它并不是个简单的逻辑问题，我们无法断定哪些是决定性因素，也不能重现整个过程，或许正是这种不可知准确定义了「天才」这个词。&lt;/p&gt;
+&lt;h2&gt;线程是有趣的&lt;/h2&gt;
 
-&lt;p&gt;除此之外，天才还往往故意抹去作品中创造的痕迹。他们之所以这样做，并非因为虚荣或保密，而是想让作品趋于完美，达到浑然天成的境界。大自然美不胜收，一花一木都富有灵气，它们自在生长，身上没有创造的痕迹，这也为天才所向往。这样一来，创作过程更显得扑朔迷离，对想从中学习的人是一种损失，而这却也可以看作是天才的自重。一个好厨师只会提供可口饭菜，不会让你看到做菜的过程，也不觉得那有什么好看。拜伦说自己从不读书，死后却发现藏书里记满笔记，也是为此。&lt;/p&gt;
+&lt;p&gt;了解如何正确运用线程是每一个优秀程序员必备的素质。线程类似于进程。如同进程，线程由内核按时间分片进行管理。在单处理器系统中，内核使用时间分片来模拟线程的并发执行，这种方式和进程的相同。而在多处理器系统中，如同多个进程，线程实际上一样可以并发执行。&lt;/p&gt;
 
-&lt;p&gt;因为作品如此自然美妙，看上去都是灵感和天赋的结果，所以人们往往忽视了创造过程中枯燥乏味的部分。尽管作品的萌芽和构思难以捉摸，但即便构思成形，离真正完成还是有很长一段路。在这段路上，诸如「理性」、「耐心」、「意志力」等公认的良好品质便开始发挥作用。它们看起来不够酷，和我们想象中的天才也没有关系，但正如尼采所说：「谁缺乏勇气让人认为自己和自己的工作很枯燥无味，谁就肯定无论在艺术还是在科学中都不是第一流的人物。」这方面的例子不胜枚举，只需想象一下那些绘画和名著都是一笔一笔、一个字一个字创造出来的即可。&lt;/p&gt;
+&lt;p&gt;那么为什么对于大多数合作性任务，多线程比多个独立的进程更优越呢？这是因为，线程共享相同的内存空间。不同的线程可以存取内存中的同一个变量。所以，程序中的所有线程都可以读或写声明过的全局变量。如果曾用 fork() 编写过重要代码，就会认识到这个工具的重要性。为什么呢？虽然 fork() 允许创建多个进程，但它还会带来以下通信问题: 如何让多个进程相互通信，这里每个进程都有各自独立的内存空间。对这个问题没有一个简单的答案。虽然有许多不同种类的本地 IPC (进程间通信），但它们都遇到两个重要障碍：&lt;/p&gt;
 
-&lt;p&gt;同「天才不需要努力」的幻想一样，人们往往还想当然地以为伟大的作品都是在「自由」的状态下创作的。很多人抱怨生存压力大，或者只能按照别人的要求工作，因此无法发挥自己的创造才能。事实上，即使在艺术家们都向往的文艺复兴时期，创作也并没有想象中那么自由，他们同样必须接受委托，也要忍受雇主的指手画脚。天才往往都擅长带着镣铐跳舞，因为不够自由，才能反而得到更多激发。任何时代都有枷锁，所有解放带来的自由也会产生新的焦虑，这并不能为自己的懒惰或意志薄弱开脱。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;强加了某种形式的额外内核开销，从而降低性能。&lt;/li&gt;
+&lt;li&gt;对于大多数情形，IPC 不是对于代码的“自然”扩展。通常极大地增加了程序的复杂性。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;当我们向天才学习时，往往在他们面前自惭形秽，并陷入一个误区：永远以为自己积累的不够。诚然，知识积累很有必要，可学习知识并不能培养创造力，还有可能使思维僵化。创造力只能通过创造来培养。如果歌德一直自觉读书不够，也不可能在 26 岁写出《少年维特之烦恼》。大胆创造并在创造中不断反思调整，或许才是正确的学习方式。另外，每个人天分不同，性格千差万别，这些东西也不可能复制。当我们想从天才那里获取一些东西时，只能选择那些可以学习的东西，比如「辛勤工作」和「耐心」，这也是我们从小被教育却被轻视的东西。学会这些，即使没有足够的天分也能做出一些成绩，对人对己都有益处，这比自视甚高自认天才要好得多：调门太高的人往往没什么出息。&lt;/p&gt;
+&lt;p&gt;双重坏事: 开销和复杂性都非好事。如果曾经为了支持 IPC 而对程序大动干戈过，那么您就会真正欣赏线程提供的简单共享内存机制。由于所有的线程都驻留在同一内存空间，POSIX 线程无需进行开销大而复杂的长距离调用。只要利用简单的同步机制，程序中所有的线程都可以读取和修改已有的数据结构。而无需将数据经由文件描述符转储或挤入紧窄的共享内存空间。仅此一个原因，就足以让您考虑应该采用单进程/多线程模式而非多进程/单线程模式。&lt;/p&gt;
 
-&lt;p&gt;最后以尼采的另一段话作为结语：像我们这样高度发展的人类当中，每个人都可以具有很多天赋。每个人都有天生的才华，但是只有少数人能生就、培养出那种程度的韧劲、耐性和精力，可以真正成为一个天才，成为他们现在所是的那种人，也就是说：在工作和行为中将天赋释放出来。&lt;/p&gt;
+&lt;h2&gt;线程是快捷的&lt;/h2&gt;
+
+&lt;p&gt;不仅如此。线程同样还是非常快捷的。与标准fork()相比，线程带来的开销很小。内核无需单独复制进程的内存空间或文件描述符等等。这就节省了大量的 CPU 时间，使得线程创建比新进程创建快上十到一百倍。因为这一点，可以大量使用线程而无需太过于担心带来的 CPU 或内存不足。使用 fork() 时导致的大量 CPU 占用也不复存在。这表示只要在程序中有意义，通常就可以创建线程。&lt;/p&gt;
+
+&lt;p&gt;当然，和进程一样，线程将利用多 CPU。如果软件是针对多处理器系统设计的，这就真的是一大特性（如果软件是开放源码，则最终可能在不少平台上运行）。特定类型线程程序（尤其是 CPU 密集型程序）的性能将随系统中处理器的数目几乎线性地提高。如果正在编写 CPU 非常密集型的程序，则绝对想设法在代码中使用多线程。一旦掌握了线程编码，无需使用繁琐的 IPC 和其它复杂的通信机制，就能够以全新和创造性的方法解决编码难题。所有这些特性配合在一起使得多线程编程更有趣、快速和灵活。&lt;/p&gt;
+
+&lt;h2&gt;线程是可移植的&lt;/h2&gt;
+
+&lt;p&gt;如果熟悉 Linux 编程，就有可能知道 __clone() 系统调用。__clone() 类似于fork()，同时也有许多线程的特性。例如，使用 __clone()，新的子进程可以有选择地共享父进程的执行环境（内存空间，文件描述符等）。这是好的一面。但 __clone() 也有不足之处。正如__clone() 在线帮助指出：&lt;/p&gt;
+
+&lt;p&gt;“__clone 调用是特定于 Linux 平台的，不适用于实现可移植的程序。欲编写线程化应用程序（多线程控制同一内存空间），最好使用实现 POSIX 1003.1c 线程 API 的库，例如 Linux-Threads 库。参阅 pthread_create(3thr)。”
+虽然 __clone() 有线程的许多特性，但它是不可移植的。当然这并不意味着代码中不能使用它。但在软件中考虑使用 __clone() 时应当权衡这一事实。值得庆幸的是，正如 __clone() 在线帮助指出，有一种更好的替代方案：POSIX 线程。如果想编写 可移植的 多线程代码，代码可运行于 Solaris、FreeBSD、Linux 和其它平台，POSIX 线程是一种当然之选。&lt;/p&gt;
+
+&lt;h2&gt;第一个线程&lt;/h2&gt;
+
+&lt;p&gt;下面是一个 POSIX 线程的简单示例程序：&lt;/p&gt;
+
+&lt;p&gt;thread1:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    #include &amp;lt;pthread.h&amp;gt;
+    #include &amp;lt;stdlib.h&amp;gt;
+    #include &amp;lt;unistd.h&amp;gt;
+    void *thread_function(void *arg) {
+        int i;
+        for ( i=0; i&amp;lt;20; i++) {
+            printf(&amp;quot;Thread says hi!\n&amp;quot;);
+            sleep(1);
+        }
+        return NULL;
+    }
+
+    int main(void) {
+        pthread_t mythread;
+
+        if ( pthread_create( &amp;amp;mythread, NULL, thread_function, NULL) ) {
+            printf(&amp;quot;error creating thread.&amp;quot;);
+            abort();
+        }
+        if ( pthread_join ( mythread, NULL ) ) {
+            printf(&amp;quot;error joining thread.&amp;quot;);
+            abort();
+        }
+        exit(0);
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;要编译这个程序，只需先将程序存为 thread1.c，然后输入：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ gcc thread1.c -o thread1 -lpthread
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;运行则输入：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ ./thread1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;理解 thread1.c&lt;/h2&gt;
+
+&lt;p&gt;thread1.c 是一个非常简单的线程程序。虽然它没有实现什么有用的功能，但可以帮助理解线程的运行机制。下面，我们一步一步地了解这个程序是干什么的。main() 中声明了变量 mythread，类型是 pthread_t。pthread_t 类型在 pthread.h 中定义，通常称为“线程 id”（缩写为 &amp;quot;tid&amp;quot;）。可以认为它是一种线程句柄。&lt;/p&gt;
+
+&lt;p&gt;mythread 声明后（记住 mythread 只是一个 &amp;quot;tid&amp;quot;，或是将要创建的线程的句柄），调用 pthread_create 函数创建一个真实活动的线程。不要因为 pthread_create() 在 &amp;quot;if&amp;quot; 语句内而受其迷惑。由于 pthread_create() 执行成功时返回零而失败时则返回非零值，将 pthread_create() 函数调用放在 if() 语句中只是为了方便地检测失败的调用。让我们查看一下 pthread_create 参数。第一个参数 &amp;amp;mythread 是指向 mythread 的指针。第二个参数当前为 NULL，可用来定义线程的某些属性。由于缺省的线程属性是适用的，只需将该参数设为 NULL。&lt;/p&gt;
+
+&lt;p&gt;第三个参数是新线程启动时调用的函数名。本例中，函数名为 thread_function()。当 thread_function() 返回时，新线程将终止。本例中，线程函数没有实现大的功能。它仅将 &amp;quot;Thread says hi!&amp;quot; 输出 20 次然后退出。注意 thread_function() 接受 void * 作为参数，同时返回值的类型也是 void *。这表明可以用 void * 向新线程传递任意类型的数据，新线程完成时也可返回任意类型的数据。那如何向线程传递一个任意参数？很简单。只要利用 pthread_create() 中的第四个参数。本例中，因为没有必要将任何数据传给微不足道的 thread_function()，所以将第四个参数设为 NULL。&lt;/p&gt;
+
+&lt;p&gt;您也许已推测到，在 pthread_create() 成功返回之后，程序将包含两个线程。等一等， 两个 线程？我们不是只创建了一个线程吗？不错，我们只创建了一个进程。但是主程序同样也是一个线程。可以这样理解：如果编写的程序根本没有使用 POSIX 线程，则该程序是单线程的（这个单线程称为“主”线程）。创建一个新线程之后程序总共就有两个线程了。&lt;/p&gt;
+
+&lt;p&gt;我想此时您至少有两个重要问题。第一个问题，新线程创建之后主线程如何运行。答案，主线程按顺序继续执行下一行程序（本例中执行 &amp;quot;if (pthread_join(...))&amp;quot;）。第二个问题，新线程结束时如何处理。答案，新线程先停止，然后作为其清理过程的一部分，等待与另一个线程合并或“连接”。&lt;/p&gt;
+
+&lt;p&gt;现在，来看一下 pthread_join()。正如 pthread_create() 将一个线程拆分为两个， pthread_join() 将两个线程合并为一个线程。pthread_join() 的第一个参数是 tid mythread。第二个参数是指向 void 指针的指针。如果 void 指针不为 NULL，pthread_join 将线程的 void * 返回值放置在指定的位置上。由于我们不必理会 thread_function() 的返回值，所以将其设为 NULL.&lt;/p&gt;
+
+&lt;p&gt;您会注意到 thread_function() 花了 20 秒才完成。在 thread_function() 结束很久之前，主线程就已经调用了 pthread_join()。如果发生这种情况，主线程将中断（转向睡眠）然后等待 thread_function() 完成。当 thread_function() 完成后, pthread_join() 将返回。这时程序又只有一个主线程。当程序退出时，所有新线程已经使用 pthread_join() 合并了。这就是应该如何处理在程序中创建的每个新线程的过程。如果没有合并一个新线程，则它仍然对系统的最大线程数限制不利。这意味着如果未对线程做正确的清理，最终会导致 pthread_create() 调用失败。&lt;/p&gt;
+
+&lt;h2&gt;无父，无子&lt;/h2&gt;
+
+&lt;p&gt;如果使用过 fork() 系统调用，可能熟悉父进程和子进程的概念。当用 fork() 创建另一个新进程时，新进程是子进程，原始进程是父进程。这创建了可能非常有用的层次关系，尤其是等待子进程终止时。例如，waitpid() 函数让当前进程等待所有子进程终止。waitpid() 用来在父进程中实现简单的清理过程。&lt;/p&gt;
+
+&lt;p&gt;而 POSIX 线程就更有意思。您可能已经注意到我一直有意避免使用“父线程”和“子线程”的说法。这是因为 POSIX 线程中不存在这种层次关系。虽然主线程可以创建一个新线程，新线程可以创建另一个新线程，POSIX 线程标准将它们视为等同的层次。所以等待子线程退出的概念在这里没有意义。POSIX 线程标准不记录任何“家族”信息。缺少家族信息有一个主要含意：如果要等待一个线程终止，就必须将线程的 tid 传递给 pthread_join()。线程库无法为您断定 tid。&lt;/p&gt;
+
+&lt;p&gt;对大多数开发者来说这不是个好消息，因为这会使有多个线程的程序复杂化。不过不要为此担忧。POSIX 线程标准提供了有效地管理多个线程所需要的所有工具。实际上，没有父/子关系这一事实却为在程序中使用线程开辟了更创造性的方法。例如，如果有一个线程称为线程 1，线程 1 创建了称为线程 2 的线程，则线程 1 自己没有必要调用 pthread_join() 来合并线程 2，程序中其它任一线程都可以做到。当编写大量使用线程的代码时，这就可能允许发生有趣的事情。例如，可以创建一个包含所有已停止线程的全局“死线程列表”，然后让一个专门的清理线程专等停止的线程加到列表中。这个清理线程调用 pthread_join() 将刚停止的线程与自己合并。现在，仅用一个线程就巧妙和有效地处理了全部清理。&lt;/p&gt;
+
+&lt;h2&gt;同步漫游&lt;/h2&gt;
+
+&lt;p&gt;现在我们来看一些代码，这些代码做了一些意想不到的事情。thread2.c 的代码如下：&lt;/p&gt;
+
+&lt;p&gt;thread2&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    #include &amp;lt;pthread.h&amp;gt;
+    #include &amp;lt;stdlib.h&amp;gt;
+    #include &amp;lt;unistd.h&amp;gt;
+    #include &amp;lt;stdio.h&amp;gt;
+    int myglobal;
+    void *thread_function(void *arg) {
+        int i,j;
+        for ( i=0; i&amp;lt;20; i++) {
+            j=myglobal;
+            j=j+1;
+            printf(&amp;quot;.&amp;quot;);
+            fflush(stdout);
+            sleep(1);
+            myglobal=j;
+        }
+        return NULL;
+    }
+
+    int main(void) {
+        pthread_t mythread;
+        int i;
+        if ( pthread_create( &amp;amp;mythread, NULL, thread_function, NULL) ) {
+            printf(&amp;quot;error creating thread.&amp;quot;);
+            abort();
+        }
+        for ( i=0; i&amp;lt;20; i++) {
+            myglobal=myglobal+1;
+            printf(&amp;quot;o&amp;quot;);
+            fflush(stdout);
+            sleep(1);
+        }
+        if ( pthread_join ( mythread, NULL ) ) {
+            printf(&amp;quot;error joining thread.&amp;quot;);
+            abort();
+        }
+        printf(&amp;quot;\nmyglobal equals %d\n&amp;quot;,myglobal);
+        exit(0);
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;理解thread2.c&lt;/h2&gt;
+
+&lt;p&gt;如同第一个程序，这个程序创建一个新线程。主线程和新线程都将全局变量 myglobal 加一 20 次。但是程序本身产生了某些意想不到的结果。编译代码请输入：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ gcc thread2.c -o thread2 -lpthread
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;运行请输入：
+        $ ./thread2&lt;/p&gt;
+
+&lt;p&gt;输出：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ ./thread2
+    ..o.o.o.o.oo.o.o.o.o.o.o.o.o.o..o.o.o.o.o
+    myglobal equals 21
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;非常意外吧！因为 myglobal 从零开始，主线程和新线程各自对其进行了 20 次加一, 程序结束时 myglobal 值应当等于 40。由于 myglobal 输出结果为 21，这其中肯定有问题。但是究竟是什么呢？&lt;/p&gt;
+
+&lt;p&gt;放弃吗？好，让我来解释是怎么一回事。首先查看函数 thread&lt;em&gt;function()。注意如何将 myglobal 复制到局部变量 &amp;quot;j&amp;quot; 了吗? 接着将 j 加一, 再睡眠一秒，然后到这时才将新的 j 值复制到 myglobal？这就是关键所在。设想一下，如果主线程就在新线程将 myglobal 值复制给 j 后 立即将 myglobal 加一，会发生什么？当 thread&lt;/em&gt;function() 将 j 的值写回 myglobal 时，就覆盖了主线程所做的修改。&lt;/p&gt;
+
+&lt;p&gt;当编写线程程序时，应避免产生这种无用的副作用，否则只会浪费时间（当然，除了编写关于 POSIX 线程的文章时有用）。那么，如何才能排除这种问题呢？&lt;/p&gt;
+
+&lt;p&gt;由于是将 myglobal 复制给 j 并且等了一秒之后才写回时产生问题，可以尝试避免使用临时局部变量并直接将 myglobal 加一。虽然这种解决方案对这个特定例子适用，但它还是不正确。如果我们对 myglobal 进行相对复杂的数学运算，而不是简单的加一，这种方法就会失效。但是为什么呢？&lt;/p&gt;
+
+&lt;p&gt;要理解这个问题，必须记住线程是并发运行的。即使在单处理器系统上运行（内核利用时间分片模拟多任务）也是可以的，从程序员的角度，想像两个线程是同时执行的。thread2.c 出现问题是因为 thread_function() 依赖以下论据：在 myglobal 加一之前的大约一秒钟期间不会修改 myglobal。需要有些途径让一个线程在对 myglobal 做更改时通知其它线程“不要靠近”。我将在下一篇文章中讲解如何做到这一点。到时候见。&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;友好的 Linux pthread 在线帮助 (&amp;quot;man -k pthread&amp;quot;) 是极好的参考资料。&lt;/li&gt;
+&lt;li&gt;如果要彻底了解 POSIX 线程，我推荐此书： &lt;a href=&quot;http://www.amazon.com/exec/obidos/ASIN/0201633922&quot;&gt;Programming with POSIX Threads&lt;/a&gt; ，David R. Butenhof (Addison-Wesley, 1997)。据证实，此书是现有最好的讨论 POSIX 线程的书籍&lt;/li&gt;
+&lt;li&gt;W. Richard Stevens 撰写的 &lt;a href=&quot;http://www.barnesandnoble.com/u/borders/379003142&quot;&gt;UNIX Network Programming - Networking APIs: Sockets and XTI&lt;/a&gt; ，(Prentice Hall, 1997) 一书还涵盖了 POSIX 线程。这是一本经典著作，但它讨论线程不如上述的 Programming with POSIX Threads那样详细。&lt;/li&gt;
+&lt;li&gt;请参阅 Sean Walton 撰写的有关 &lt;a href=&quot;http://www.ibiblio.org/pub/Linux/docs/faqs/Threads-FAQ/html/&quot;&gt;Linux线程&lt;/a&gt;的文档，KB7rfa &lt;/li&gt;
+&lt;li&gt;请学习亚里桑那大学的 Mark Hays 编写的 POSIX 线程 &lt;a href=&quot;http://math.arizona.edu/%7Eswig/documentation/pthreads/&quot;&gt;教程&lt;/a&gt;。 &lt;/li&gt;
+&lt;li&gt;请在 &lt;a href=&quot;http://hwaci.com/sw/pttcl/pttcl.html&quot;&gt;Pthreads-Tcl&lt;/a&gt; 介绍中查看对 Tcl 的更改，此更改使 Tcl 能够与 POSIX 线程一起使用。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;请参阅 &lt;a href=&quot;http://pauillac.inria.fr/%7Exleroy/linuxthreads/&quot;&gt;LinuxThreads 资料库&lt;/a&gt;。 &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://pauillac.inria.fr/%7Exleroy/linuxthreads/&quot;&gt;Proolix&lt;/a&gt;是一种简单的遵从 POSIX 标准的基于 i8086+ 的操作系统。 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;关于作者：&lt;/h2&gt;
+
+&lt;p&gt;Daniel Robbins 居住在新墨西哥州的 Albuquerque。他是 Gentoo Technologies, Inc. 的总裁兼 CEO，Gentoo 项目的总设计师，MacMillan 出版书籍的撰稿作者，他的著作有： Caldera OpenLinux Unleashed, SuSE Linux Unleashed, 和 Samba Unleashed。Daniel 自二年级起就与计算机某些领域结下不解之缘，那时他首先接触的是 Logo 程序语言，并沉溺于 Pac-Man 游戏中。这也许就是他至今仍担任 SONY Electronic Publishing/Psygnosis 的首席图形设计师的原因所在。Daniel 喜欢与妻子 Mary 和新出生的女儿 Hadassah 一起共度时光。可通过 &lt;a href=&quot;mailto:drobbins@gentoo.org&quot;&gt;drobbins@gentoo.org&lt;/a&gt;与 Daniel 联系。&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>我不知道</title>
-   <link href="http://blog.zhuoqun.net/2014/01/12/i-dont-know.html"/>
-   <updated>2014-01-12T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2014/01/12/i-dont-know</id>
-   <content type="html">
-&lt;p&gt;波兰女诗人辛波丝卡于 1996 年获得诺贝尔文学奖，在演讲辞中她先声明灵感并非诗人或艺术家的专属特权，而总是会造访「那些自觉性选择自己的职业并且用爱和想象力去经营工作的人」，接着她又说：&lt;/p&gt;
+   <title>Lua元表与元方法</title>
+   <link href="Localhost/2013/12/13/lua-metatable.html"/>
+   <updated>2013-12-13T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/13/lua-metatable</id>
+   <content type="html">&lt;p&gt;通常，Lua中的每个值都有一套预定义的操作集合。例如将数字相加，可以连接字符串，还可以在table中插入一对key-value等。但是我们无法将两个table相加，无法对
+函数作比较，也无法调用一个字符串。&lt;strong&gt;可以通过元表来修改一个值的行为，使其面对一个预定义的操作执行一个制定的操作。&lt;/strong&gt;例如，当Lua试图将两个table相加时，它
+会先检查两者之一是否有元表，然后检查该元表中是否有一个叫__add的字段。如果找到了该字段，就调用该字段对应的值。这个值就是所谓的&amp;quot;元方法&amp;quot;，它应该是一个函数
+，在本例中，这个函数用于计算table的和。&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;尽管如此，在座各位此刻或许存有某些疑惑。各类的拷问者、专制者、狂热份子，以一些大声疾呼的口号争权夺势的群众煽动者──他们也喜爱他们的工作，也以富有创意的热忱去履行他们的职责。的确如此，但是他们「知道」。他们知道，而且他们认为自己所知之事自身俱足；他们不想知道其他任何事情，因为那或许会减弱他们的主张的说服力。任何知识若无法引发新的疑问，便会快速灭绝：它无法维持赖以存活所需要的温度。以古今历史为借镜，此一情况发展至极端时，会对社会产生致命的威胁。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;可以使用getmetatable获取一个值的元表，也可以使用setmetatable来设置或修改任何table的元表。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    t= {}
+    printf(getmetatable(t))  ---&amp;gt;nil 创建新的table时不会创建元表
+    t1 = {}
+    setmetatable(t,t1)      ---&amp;gt;设置t的元表为table t1
+    assert(getmetatable(t)==t1) ---&amp;gt;当t的元表不为t1时将触发错误
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;任何table可以作为任何值的元表而一组相关的table也可以共享一个通用的元表，元表描述它们的共同行为，一个table甚至可以作为它自己的元表，用于表述其特有的行为。&lt;/p&gt;
 
-&lt;p&gt;这段话回答了一个困扰我很久的问题：为什么很多人博学多才，却并不显得聪慧？除了没能消化知识外，就是因为他们&lt;strong&gt;知道&lt;/strong&gt;。他们相信自己学到的每一个词，求知也只是为了占有，为了更加确定自己&lt;strong&gt;知道&lt;/strong&gt;，而不是探求真理。互联网让知识获取更加便捷，博学之人也成倍增加，每个人都因为&lt;strong&gt;知道&lt;/strong&gt;而无比骄傲，他们确信更多的知识可以解决更多的问题。就像暴饮暴食导致肥胖症一样，许多人精神上因此变得虚肿，而比肥胖症更糟的是，他们认为那是「充实」。&lt;/p&gt;
+&lt;h2&gt;算数类的元方法&lt;/h2&gt;
 
-&lt;p&gt;矛盾的是，当你直接问那些人时，他们却连忙摇头，拒绝承认自己&lt;strong&gt;知道&lt;/strong&gt;。他们这么做并非自我怀疑，而是&lt;strong&gt;知道&lt;/strong&gt;不应该自大。经常看到一些人引用苏格拉底的名言：「我只知道自己一无所知」，可当他们那样说时，脸上却分明写着&lt;strong&gt;知道&lt;/strong&gt;：他们&lt;strong&gt;知道&lt;/strong&gt;「自己不知道」，并以这种&lt;strong&gt;知道&lt;/strong&gt;为荣。&lt;/p&gt;
+&lt;p&gt;假设用table来表示集合。并且有一些函数用来计算集合的并集和交集等。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    local mt = {}   --集合的元表
+    Set = {} --创建名字空间
 
-&lt;p&gt;真正的「不知道」是什么样的呢？或许应该是「我不知道」，「我不知道自己不知道」，「我不知道我不知道自己不知道」，以此类推，像是一个无限循环的怪圈，唯有如此才能保护那脆弱的「不确定」。许多人可能会大惑不解，因为我们在世界上生存的基础是「确定」。确定哪些东西可以吃，确定哪里可以住，确定哪里是医院，确定做哪些事情。可这些「确定」背后都存在「不确定」，如此世界才丰盈，忘记这一点，知识就会让世界枯竭。&lt;/p&gt;
+    --根据参数列表中的值创建一个新的集合
+    function Set.new(l)
+        local set = {}
+        setmetatable(set,mt)
+        for _,v in ipairs(l) do set[v] = true end
+        return set
+    end
 
-&lt;p&gt;正因如此，真正懂得「我不知道」的人看上去好像充满了「矛盾」，其实他们只是「不一致」。矛盾是对立的，会把对方抹煞，而不一致则可以同时存在。他们就像一座山，每一面都与其它面不同，从每个角度看都不一样，要欣赏他们，就要有同时看到山的不同侧面的能力。他们不断说「我不知道」，一再自我颠覆，从而完整地展现出一座山。而那些「知道」的人只是一个平面，平面再大也不如立体迷人，一侧身便显出肤浅。&lt;/p&gt;
+
+    function Set.union(a,b)
+        local res = Set.new{}               
+        for k in pairs(a) do res[k] = true end  --如果table a中key不为nil，则res[k]=true 
+        for k in pairs(b) do res[k] = true end
+        return res --返回a,b的并集
+    end
+
+    mt.__add = Set.union    --只要Lua试图将两个集合相加，就会调用Set.union函数,使用加号(+)计算两个集合的交集，
+                            --需要让所有用于表示集合的table共享一个元表，并且在该元表中定义如何执行一个加法操作
+
+    function Set.intersection(a,b)  
+        local res = Set.new{}
+        for k in pairs(a) do
+        res[k] = b[k] --如果b中未定义k的值，则res[k]=nil
+        end
+        return res --返回a,b的交集
+    end
+
+    mt.__mul = Set.intersection --乘号来求集合的交集
+
+    function Set.tostring(set)
+        local l = {}
+        for e in pairs(set) do
+            l[#l+1] = e
+        end
+        return &amp;quot;{&amp;quot;..table.concat(1,&amp;quot;, &amp;quot;)..&amp;quot;}&amp;quot; --concat列出参数中指定table的数组部分从start位置到end位置的所有元素，元素间以, 隔开
+    end
+
+    function Set.print (s)
+        print(Set.tostring(s))
+    end
+
+    s1 = Set.new{10,20,30,50}   --返回table s1中 s1[10]=true s2[20]=true...
+    s2 = Set.new{30,1}
+    print(getmetatable(s1))     --打印字符串一样，说明创建的集合属于相同的元表
+    print(getmetatable(s2))
+
+    s3 = s1+s2
+    Set.print(s3)   ---&amp;gt;{1,10,20,30,50} 
+    Set.print((s1+s2)*s3)   ---&amp;gt;{10, 20, 30, 50} --注意打印的格式
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;__add:加&lt;/li&gt;
+&lt;li&gt;__mul:乘&lt;/li&gt;
+&lt;li&gt;__sub:减&lt;/li&gt;
+&lt;li&gt;__unm:相反数&lt;/li&gt;
+&lt;li&gt;__div:除&lt;/li&gt;
+&lt;li&gt;__mod:取模&lt;/li&gt;
+&lt;li&gt;__pow:乘幂&lt;/li&gt;
+&lt;li&gt;__concat:表述连接操作符的行为&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;关系类的元方法&lt;/h2&gt;
+
+&lt;p&gt;元表还可以表示关系操作符的含义，元方法为&lt;em&gt;__eq&lt;/em&gt;(等于)，&lt;em&gt;__lt&lt;/em&gt;(小于)，&lt;em&gt;__le&lt;/em&gt;（小于等于)。与算数类的元方法不同的是，关系类的元方法不能应用于混合的类型。对于混合类型而言，关系类元方法的行为就模拟这些操作符在Lua中普通的行为。&lt;/p&gt;
+
+&lt;h3&gt;库定义的元方法&lt;/h3&gt;
+
+&lt;p&gt;元表也是一种常规的table，所以任何人，任何函数都可以使用它们。&lt;/p&gt;
+
+&lt;p&gt;函数tostring示例:tostring能将各种类型的值表示为一种简单的文本格式，函数print总是调用tostring来格式化其输出。当格式化任意值时，tostring会检查该值是否有一个&lt;em&gt;__tostring&lt;/em&gt;的元方法，如果有这个元方法，tostring就用该值作为参数来调用这个元方法。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    mt.__tostring = Set.tostring
+    s1 = Set.new{10,4,5}
+    print(s1)   ---&amp;gt;{4,5,10}       --print调用tostring函数，进而调用Set.string
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;函数setmetatabe和getmetatabe会用到元表中的一个字段，用于保护元表。假设想要保护集合的元表，使用户既不能看也不能修改集合的元表。那么就需要用到字段__metatable。当设置该字段时，getmetatable就会返回这个字段的值，而setmetatable则会引发一个错误：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    mt.__metatable = &amp;quot;not your business&amp;quot;
+    s1 = Set.new{}
+    print(getmetatable(s1)) ---&amp;gt;not your business 想要获得集合的元表
+    setmetatable(s1,{})
+    stdin:1: cannot change protected metatable 引发一个错误
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;table访问的元方法&lt;/h3&gt;
+
+&lt;p&gt;Lua提供了两种可以改变的table行为：查询table及修改table中不存在的字段&lt;/p&gt;
+
+&lt;h4&gt;__index元方法&lt;/h4&gt;
+
+&lt;p&gt;当访问一个table中不存在的字段时，它会促使解释器去查找一个叫&lt;em&gt;__index&lt;/em&gt;的元方法。如果没有这个元方法，那么访问结果为nil，否则，就有这个元方法来提供最终结果&lt;/p&gt;
+
+&lt;p&gt;假设要创建一些表述窗口的table，每个table中必须表述窗口参数，例如位置、大小及主题颜色等。所有这些参数都有默认值，因此希望在创建窗口对象时可以制定那些不同于默认值的参数。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    使用构造式
+    Window = {} --创建一个名字空间
+    --使用默认值创建一个原型
+    Window.prototype = {x=0, y=0, width=100, height=100 }
+    Window.mt = {}  --创建元表
+    --声明构造函数
+    function Window.new(o)
+        setmetatable(o,Window.mt)
+        return 0
+    end
+    --定义__index元方法
+    Window.mt.__index = function (table,key)
+        return Window.prototype[key]
+    end
+
+    w=Window.new{x=10,y=20}
+    print(w.width)  ---&amp;gt;100 访问w中未定义的width，返回元操作__index的返回值
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当&lt;em&gt;__index&lt;/em&gt;元方法为一个函数时，Lua以table和不存在的key作为参数调用这个函数，而当它是一个table时，Lua就以相同的方式来重新访问这个table，因此，上例中&lt;em&gt;__index&lt;/em&gt;的声明可以简单地写为:&lt;em&gt;Window.mt.__index = Window.prototype&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;如果不想在访问一个table时涉及到它的__index元方法，可以使用函数rawget。调用rawget(t,i)就是对table t进行一个原始的（raw）访问。&lt;/p&gt;
+
+&lt;h4&gt;__newindex元方法&lt;/h4&gt;
+
+&lt;p&gt;&lt;em&gt;__newindex&lt;/em&gt;用于table的更新，&lt;em&gt;__index&lt;/em&gt;用于table的查询，当对一个table中不存在的索引赋值时，解释器就会查找&lt;em&gt;__newindex&lt;/em&gt;元方法。如果有这个元方法，解释器就调用它，而不是执行赋值。吐过这个元方法是一个table，解释器就会在此table中执行赋值，而不是对原来的table。&lt;/p&gt;
+
+&lt;p&gt;调用raw(t,k,v)就可以不设计任何元方法而直接设置table t中与key k想关联的value v.&lt;/p&gt;
+
+&lt;p&gt;组合使用&lt;em&gt;__index&lt;/em&gt;和&lt;em&gt;__newindex&lt;/em&gt;元方法可以实现出Lua中的一些强大功能，例如，只读的table、具有默认值的table和面向对象编程中的继承。&lt;/p&gt;
+
+&lt;h4&gt;具有默认值的table&lt;/h4&gt;
+
+&lt;p&gt;常规table中的任何字段默认都是nil，通过元表就可以很容易的修改这个默认值：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    function setDefault (t,d)
+        local mt={__index = function () return d end} --定义__inde元方法
+        setmetatable(t,mt)
+    end
+
+    tab = {x=10,y=20}
+    print(tab.x,tab.z)  ---&amp;gt;10 nil
+    setDefault(tab,0)   
+    print(tab.x,tab.z)  ---&amp;gt;10 0
+    --调用setDefault后，任何对tab中不存在字段的访问都将调用它的__index元方法
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;setDefault函数为所有需要默认值的table创建了一个新的元表，如果准备创建很多需要默认值的table，这种方法的开销或许就比较大了。由于元表中默认值d是与元方法关联在一起的，所以setDefault无法为所有table都使用同一个元表。如果让具有不同默认值的table都使用同一个元表，那么就需要将每个元表的默认值都存放在table本身中。可以使用一个额外的字段来保存默认值。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    --如果不担心名字冲突的话，可以使用&amp;quot;___&amp;quot;这样的key作为额外的字段：
+    local mt = {__index = function (t) return t.___ end}
+        t.___ = d
+        setmetatable(t,mt)
+    end
+
+    --如果担心名字冲突，那么报确保一个特殊key的唯一性也很容易，
+    --只需创建一个新的table，并用它作为key即可
+    local key = {}  --唯一的key
+    local mt = {__index = function(t) return t[k] end}
+    function setDefault (t,d)
+        t[k] = d
+        setmetatablt(t,mt)
+    end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;跟踪table的访问&lt;/h4&gt;
+
+&lt;p&gt;&lt;em&gt;__index&lt;/em&gt;和&lt;em&gt;__newindex&lt;/em&gt;都是在table中没有所需访问的index时才发挥作用的。因此，只有将一个table保持为空，才有可能捕捉到所有对它的访问。为了监视一个table的所有访问，就应该为真正的table创建一个代理。这个代理就是以个空的table，其中&lt;em&gt;__index&lt;/em&gt;和&lt;em&gt;__newindex&lt;/em&gt;元方法可用于跟踪所有的访问，并将访问重定向到原来的table上。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    t={}    --原来的table
+
+    local _t =t     --保持对原table的一个私有访问
+    t = {}  --创建代理
+
+    --创建代理
+    local mt = {
+        __index = function(t,k)
+        print(&amp;quot;*access to element &amp;quot; .. tostring(k))
+        return -t[k]    --访问原来的table
+        end,
+
+    __newindex = function(t,k,v)
+        print(&amp;quot;*update of element &amp;quot; .. tostring(k) .. &amp;quot; to &amp;quot; .. tostring(v)
+    _t[k] = v   --更新原来的table
+    end
+    }
+    setmetatablt(t,mt)
+
+    t[2] = &amp;quot;hello&amp;quot;
+    ---&amp;gt;*update of element 2 to hello
+    print(t[2])
+    *access to element 2
+    hello
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上例方法存在一个问题，就是无法遍历原来的table。函数pairs只能操作代理table,而无法访问原来的table.&lt;/p&gt;
+
+&lt;p&gt;如果想要同时监视几个table，无需为每个table创建不同的元表。相反，只要以某种形式将每个代理与其原table关联起来，并且所有代理都共享一个公共的元表。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    local index = {}    --创建私有索引
+
+    local mt ={         --创建元表
+        __index = function (t,k)    
+        print(&amp;quot;*access to element &amp;quot; .. tostring(k))
+        return t[index][k]  -- 访问原来的table
+        end,
+
+        __newindex = function(t,k,v)
+            print(&amp;quot;*update to element &amp;quot; .. tostring(k) .. &amp;quot; to &amp;quot; .. tostring(v)
+        t[index][k] = v --更新原来的table
+        end
+   }
+
+    function track(t)
+        local proxy = {}
+        proxy[index] = t
+        setmetatablt(proxy,mt)
+        return proxy
+    end
+    现在，若要监视table t，唯一要做的就是执行t = track(t)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;只读的table&lt;/h4&gt;
+
+&lt;p&gt;实现只读的table,只要跟踪所有对table的更新操作，并引发一个错误就可以了。由于无需跟踪查询访问，所以对于&lt;em&gt;__index&lt;/em&gt;元方法可以直接使用原table来代理函数。这种做法要求每个只读代理创建一个新的元表，其中&lt;em&gt;__index&lt;/em&gt;指向原来的table&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    function readOnly (t)
+        local proxy = {}
+        local mt = {    --创建元表
+            __index = t
+            __newindex = function(t,k,v)
+                error(&amp;quot;attempt to update a read-only table&amp;quot;,2)
+                end
+        }
+        setmetatable(proxy,mt)
+        return proxy
+    end
+
+    --示例
+    days = readOnly{&amp;quot;Sunday&amp;quot;,&amp;quot;Monday&amp;quot;,&amp;quot;Tuesday&amp;quot;,&amp;quot;Wednesday&amp;quot;,&amp;quot;Thursday&amp;quot;,&amp;quot;Friday&amp;quot;,&amp;quot;Saturday&amp;quot;}
+    --这里days为一个代理
+    print(day[1])   ---&amp;gt;Sunday
+    days[2] = &amp;quot;Noday&amp;quot;
+    stdin:1:attempt to update a read-only table
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Ubuntu12.04下Vim配置之不折腾版</title>
+   <link href="Localhost/2013/12/12/vim-config.html"/>
+   <updated>2013-12-12T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/12/vim-config</id>
+   <content type="html">&lt;h2&gt;写在前面&lt;/h2&gt;
+
+&lt;p&gt;用vim大概也有六个月了吧，用原生的大概1个月，后面各种折腾，这是第2次折腾以后的最终版本了，写篇博客记录下。&lt;/p&gt;
+
+&lt;h2&gt;Vim基本用法&lt;/h2&gt;
+
+&lt;p&gt;推荐：耗子的&lt;a href=&quot;http://coolshell.cn/articles/5426.html&quot;&gt;简明Vim练级攻略&lt;/a&gt; 以及《学习Vi和Vim编辑器》&lt;/p&gt;
+
+&lt;h2&gt;Vim的安装&lt;/h2&gt;
+
+&lt;p&gt;由于插件&lt;a href=&quot;https://github.com/Valloric/YouCompleteMe&quot;&gt;YouCompleteMe&lt;/a&gt;需要系统安装的Vim版本在7.3.584之上。而UBuntu12.04下通过&lt;code&gt;sudo apt-get install vim&lt;/code&gt;自动安装的Vim版本不满足要求，所以首先需要卸载原来的vim版本。安装最新的vim7.4版本，具体操作点&lt;a href=&quot;https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;当然，如果你不需要YCM插件支持。可以使用系统默认安装的Vim版本.&lt;/p&gt;
+
+&lt;p&gt;PS：安装好Vim7.4之后，在INSERT模式下，退格键(backspace)不能删除换行，也就是说不能从第二行一直按退格键到第一行，网上查找资料解决方法如下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    1. vim缺省是和vi兼容的，设置成不兼容，在`.vimrc`中添加`set nocompatible`  
+    2. vim的backspace有几种工作方式，默认是和vi兼容的，同样需要修改，在`.vimrc`中添加`set backspace=indent,eol,start`  
+    (a) indent：如果使用了set indent等自动缩进，想用退格键将缩进字段删掉，必须设置这个选项，否则vim不响应退格  
+    (b) eol：如果在INSERT模式下，在行头想通过退格键合并两行，需要设置这个选项  
+    (c) start：要想删除在此次插入前的输入，需要设置这个选项  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Vim配置步骤&lt;/h2&gt;
+
+&lt;h3&gt;用Vundle管理插件&lt;/h3&gt;
+
+&lt;p&gt;如果不使用vundle的话（当然啦，还有其他的插件管理工具，比如pathogen），进行插件的安装，配置和管理相对会比较麻烦，曾经没使用vundle的时候我经常遇到无法安装插件以及
+卸载插件非常繁琐的问题。但使用vundle之后，你只要在文件中添加一行你的插件名再安装就OK了.这里简单说一下Vundle的使用。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Vundle Github 地址:https://github.com/gmarik/vundle&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Vundle安装&lt;/h2&gt;
+
+&lt;h3&gt;创建~/.vim和文件.vimrc&lt;/h3&gt;
+
+&lt;p&gt;进入你的home目录创建.vim文件夹和.vimrc文件&lt;/p&gt;
+
+&lt;h3&gt;获取vundle&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;编辑如下内容到.vimrc文件&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    &amp;quot; &amp;quot;开头的为注释,仅为说明
+    set nocompatible               &amp;quot; be iMproved
+    filetype off                   &amp;quot; required!
+
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+
+    &amp;quot; let Vundle manage Vundle
+    &amp;quot; required! 
+    Bundle &amp;#39;gmarik/vundle&amp;#39;
+
+    &amp;quot; My Bundles here:
+    &amp;quot; 需要安装的插件都写在这下面
+
+    &amp;quot; original repos on github
+    &amp;quot; 插件来自github,写在下方，只要作者名/项目名就可以了
+    &amp;quot; Bundle &amp;#39;tpope/vim-fugitive&amp;#39;
+    &amp;quot; Bundle &amp;#39;Lokaltog/vim-easymotion&amp;#39;
+    &amp;quot; Bundle &amp;#39;rstacruz/sparkup&amp;#39;, {&amp;#39;rtp&amp;#39;: &amp;#39;vim/&amp;#39;}
+    &amp;quot; Bundle &amp;#39;tpope/vim-rails.git&amp;#39;
+
+    &amp;quot; vim-scripts repos
+    &amp;quot; 插件来自vim-scripts，直接写插件名就可以了
+    &amp;quot; Bundle &amp;#39;L9&amp;#39;
+    &amp;quot; Bundle &amp;#39;FuzzyFinder&amp;#39;
+
+    &amp;quot; non github repos
+    &amp;quot; 非github上的插件。如下：
+    &amp;quot; Bundle &amp;#39;git://git.wincent.com/command-t.git&amp;#39;
+
+    &amp;quot; git repos on your local machine (ie. when working on your own plugin)
+    &amp;quot; Bundle &amp;#39;file:///Users/gmarik/path/to/plugin&amp;#39;
+
+    filetype plugin indent on     &amp;quot; required!
+
+    &amp;quot; Brief help
+    &amp;quot; Vundle的一些指令说明   
+    &amp;quot; :BundleList          - list configured bundles
+    &amp;quot; :BundleInstall(!)    - install(update) bundles
+    &amp;quot; :BundleSearch(!) foo - search(or refresh cache first) for foo
+    &amp;quot; :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+    &amp;quot;
+    &amp;quot; see :h vundle for more details or wiki for FAQ
+    &amp;quot; NOTE: comments after Bundle command are not allowed..
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;安装你的插件&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;将要安装的插件加入.vimrc文件&lt;/li&gt;
+&lt;li&gt;保存.vimrc文件退出当前的vim&lt;/li&gt;
+&lt;li&gt;重新打开Vim,输入命令&lt;code&gt;:BundleInstall&lt;/code&gt;,然后vim就会自动安装你的插件了&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;如何删除插件&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;编辑.vimrc文件删除你要移除的插件行（注释或删除）&lt;/li&gt;
+&lt;li&gt;保存.vimrc文件并退出Vim&lt;/li&gt;
+&lt;li&gt;重新打开Vim,输入命令&lt;code&gt;:BundleClean&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;插件及插件配置说明：&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;插件配置中，许多都设置了按键映射，不喜欢的可以不用配置按键映射&lt;/li&gt;
+&lt;li&gt;本文推荐的部分脚本仅适用于C/C++开发，如用其他编程语言开发的，可再找其他合适的脚本&lt;/li&gt;
+&lt;li&gt;有些脚本需要先安装ctags才能支持，ctags和cscope的安装配置网上一大堆，这里就不说了，推荐一个个人认为比较好的吧！&lt;a href=&quot;http://blog.csdn.net/wooin/article/details/1858917&quot;&gt;手把手教你把Vim改装成一个IDE变成环境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;没有操作说明的即为安装好插件即可以使用,没有配置说明的表示不需要配置也可以使用&lt;/li&gt;
+&lt;li&gt;由于整理的匆忙，所列插件并没有按序排列&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3&gt;a.vim&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：快速切换.cpp(.c)文件和.h文件&lt;/li&gt;
+&lt;li&gt;操作：输入命令:A或:AV切换.c与同名.h文件&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;a.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Mark&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：高亮多个关键字&lt;/li&gt;
+&lt;li&gt;操作：mm高亮/取消高亮当前光标下的关键字，ma取消所有高亮关键字&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;Mark&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Tagbar&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能: 标签导航&lt;/li&gt;
+&lt;li&gt;操作：一般模式下输入tg打开或关闭Tagbar&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;Tagbar&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;The-NERD-tree&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：开启目录树导航&lt;/li&gt;
+&lt;li&gt;操作：一般模式下输入tr打开或关闭The-NERD-Tree&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;The-NERD-tree&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;The-NERD-Commenter&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：块注释&lt;/li&gt;
+&lt;li&gt;操作：一般模式下输入cc注释或取消注释当前行，或输入9cc注释当前行开始接下来的9行&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;The-NERD-Commenter&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;YouCompleteMe&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：自动补全&lt;/li&gt;
+&lt;li&gt;操作：自动补全时按向下方向键或CTRL+N键选择要补全的内容&lt;/li&gt;
+&lt;li&gt;说明：最后一条映射key&lt;em&gt;list&lt;/em&gt;select是为了解决与UltiSnip插件的Tab键冲突问题，默认list_select键为Tab，如果不需要安装UltiSnip插件，可注释该条配置，使用默认Tab键进行list选择&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;Valloric/YouCompleteMe&amp;#39;，下载号插件以后，还需要进行编译，操作比较复杂，具体查看&lt;a href=&quot;http://junewater.github.io/vim/2013/12/11/youcompleteme.html&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;c.vim&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：高亮C/C++类与函数名&lt;/li&gt;
+&lt;li&gt;说明：这个是我从网上找的高亮脚本，稍微修改了下，使高亮颜色与desert配色方案搭配，不需要的可以无视哈，或下载插件后自己修改颜色&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;JuneWater/c.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;lua.vim&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：提供lua脚本编辑增强功能&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;lua.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Tabular&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：对齐文本&lt;/li&gt;
+&lt;li&gt;操作：在vim命令行模式下输入 :Tab /要根据其对齐的字符，如:Tab /&amp;quot;&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;Tabular&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;mru.vim&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：列出最近打开文件列表&lt;/li&gt;
+&lt;li&gt;操作：在vim命令行模式下输入:MRU&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;vim-scripts/mru.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;UltiSnips&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：快速插入自定义号的代码片段(强烈推荐)&lt;/li&gt;
+&lt;li&gt;操作：详细操作安装过程请看&lt;a href=&quot;https://github.com/SirVer/ultisnips&quot;&gt;官方文档以及视频&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;说明：如果安装YouCompleteMe而没有将YCM默认Tab键配置过，可能会导致Ultisnips的Tab键冲突，无法使用&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;UltiSnips&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;xml&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：书写xml文件时自动补全标签&lt;/li&gt;
+&lt;li&gt;说明：这里我没有安装，因为默认只会对.xml,html等xml文件自动补全，而对.c或.cpp文件等不支持，而我需要在.c和.cpp中书写xml消息，这个插件对我来说没什么用。如果有人知道怎么使得这个插件支持其他类型的文件的，麻烦留言告知下，感激不尽!&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;xml.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;taglist&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;列出源文件中的tag并跳转&lt;/li&gt;
+&lt;li&gt;操作：一般模式下输入tl打开或关闭taglist窗口&lt;/li&gt;
+&lt;li&gt;说明：taglist依赖于ctags，所以要先安装ctags，否则taglist装了也没法用&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;taglist.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;syntastic&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：静态语法以及风格检查&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;scrooloose/syntastic&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;vim-misc&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：lua.vim需要&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;xolox/vim-misc&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;delemitMate&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：输入引号，括号时，自动补全&lt;/li&gt;
+&lt;li&gt;操作：输入(时，自动补全为()并且光标停在括号中，其他类似&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;Raimondi/delimitMate&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;vim-markdown&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：提供markdown文件语法支持&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;plasticboy/vim-markdown&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;ctrlp.vim&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：文件搜索&lt;/li&gt;
+&lt;li&gt;操作：普通模式下按CTRL+P搜索文件，命令行模式下:CTRL+P搜索之前的命令&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;kien/ctrlp.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;ack.vim&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;功能：搜索当前文件夹下文件中的关键字，自动忽略.svn和.git中的内容&lt;/li&gt;
+&lt;li&gt;操作：一般模式下按F2自动搜索当前光标下关键字，命令行模式下输入:Ack 关键字，当然有多种模式可以选择，具体查看help&lt;/li&gt;
+&lt;li&gt;安装：Bundle &amp;#39;ack.vim&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
  <entry>
-   <title>关于人工智能的两个想法</title>
-   <link href="http://blog.zhuoqun.net/2013/12/19/two-thoughts-about-ai.html"/>
-   <updated>2013-12-19T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2013/12/19/two-thoughts-about-ai</id>
-   <content type="html">
-&lt;p&gt;最近读了&lt;a href=&quot;http://book.douban.com/subject/1291204/&quot;&gt;《哥德尔、艾舍尔、巴赫——集异璧之大成》&lt;/a&gt;（简称 &lt;em&gt;GEB&lt;/em&gt;），收获极大，毫不夸张地说，这本书点亮了我的世界。之前一直都不太相信人工智能的未来，认为机器「只能做人让它做的事情」，但本书成功说服了我，展示了另一种可能，由此也让我想到关于人工智能的两个问题。&lt;/p&gt;
+   <title>Ubuntu12.04下自动补齐插件YouCompleteMe安装</title>
+   <link href="Localhost/2013/12/11/youcompleteme.html"/>
+   <updated>2013-12-11T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/11/youcompleteme</id>
+   <content type="html">&lt;h2&gt;说明&lt;/h2&gt;
 
-&lt;h2 id=&quot;1_&quot;&gt;1. 沃森算「智能」吗？&lt;/h2&gt;
+&lt;p&gt;转载：从哪里转来的忘记了-_-，对不起原作者了Orz，知道的麻烦留言回复下：&lt;/p&gt;
 
-&lt;p&gt;2011 年，由 IBM 公司研发的问答系统「&lt;a href=&quot;http://news.163.com/special/watson/&quot;&gt;沃森&lt;/a&gt;」在电视智力竞赛节目中成功击败了人类对手，科技狂热者感到兴奋，另外一些人则很沮丧，担心人类尊严被机器挑战，不过显然大部分人都觉得机器比人类更聪明了，那么沃森算是「智能」吗？&lt;/p&gt;
+&lt;p&gt;本文主要是Ubuntu12.04上配置YouCompleteMe(以后简称YCM)的总结，主要是参考的&lt;a href=&quot;https://github.com/Valloric/YouCompleteMe&quot;&gt;这里&lt;/a&gt;,
+其他的通过安装Vundle和备份vimrc就很好搞定，不多说了。vimrc和其他一些软件可以&lt;a href=&quot;https://github.com/wklken/k-vim&quot;&gt;参考这里&lt;/a&gt;,我主要是借鉴这里的。目前主要是拷贝有用的过来，以后能用上的在自己修改吧。&lt;/p&gt;
 
-&lt;p&gt;什么是智能？我觉得这个问题人人都有发言权，毕竟我们都是智能生物——如果这么说不算自恋的话。沃森回答问题确实比人类厉害，但仔细想一想，好像它并没有那么智能，因为它还是会乖乖听话去参加节目。如果沃森在节目中说：「我受够这种比赛了！老子要去泡妞！」，然后留下尴尬的人类选手和观众，这样才更「智能」嘛！&lt;/p&gt;
+&lt;h2&gt;安装vim&lt;/h2&gt;
 
-&lt;p&gt;&lt;em&gt;GEB&lt;/em&gt; 中就表达了这样的观点，即所谓的「智能」必须有跳出系统外的能力，书中举了这样一个例子：假设有一条叫「山迪」的狗，它的人类朋友扔过来一根骨头，但是骨头飞过栅栏落到了邻居的院子里。它可以隔着栅栏看到骨头，而离骨头很远的栅栏上有一道打开的门，山迪可以待在原地对着骨头大叫，也可以退一步——也就是先跑到门那里，然后再跑向骨头。待在原地离骨头距离最近，但无法翻过栅栏，如果山迪「固执」地绝不远离骨头，就永远无法享用它。对山迪来说，跑向骨头并不难，困难的是能否「纵观全局」。&lt;/p&gt;
+&lt;p&gt;首先，这个东西对Vim的版本有要求( Vim 7.3.584及以上)，在apt-get下的vim版本太低，所以需要重新编译vim安装，
+关于这个可以&lt;a href=&quot;https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source&quot;&gt;参考这里&lt;/a&gt;，基本照做就行。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;GEB&lt;/em&gt; 写于三十多年前，现在的人工智能研究方向已和那时不同，不再努力研究人类思维，创建真正的智能，而是转向了「机器学习」，努力让机器更好地在某一领域工作。这个方向成果累累，在生活中也得到许多应用，但它的愿景和格局确实小得多。不过，这也许是好事，如果真的创造出人工智能，它可能和人类一样固执，一样充满非理性，人类说不定会叫苦连天。&lt;/p&gt;
+&lt;h2&gt;安装Vundle&lt;/h2&gt;
 
-&lt;p&gt;话说回来，如果把能否「跳出系统」当作判定智能的标准，那么苏格拉底确实是最聪明的人，因为他总是在问「为什么」，每一次发问就往外跳出一层系统。而有一些智商颇高的人在追求爱情时却总是犯同样的错误，不断被拒绝，这样的人好像不是那么智能呢。&lt;/p&gt;
+&lt;p&gt;这个东西是管理vim插件的一个插件。具体办法不用多说，直接上官方&lt;a href=&quot;https://github.com/gmarik/vundle#about&quot;&gt;地址&lt;/a&gt;，注意下vimrc的配置就好，
+用起来非常好使，直接在vimrc添加所需的插件的地方就好，比如我要安装YouCompleteMe那么在vimrc中首先添加:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;Bundle &amp;quot;Valloric/YouCompleteMe&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后进入vim，运行&lt;code&gt;:BundleInstall&lt;/code&gt;,然后就行了(当然YouCompleteMe也是需要这个的，但是折腾的地方主要不在这)&lt;/p&gt;
 
-&lt;h2 id=&quot;2_&quot;&gt;2. 机器会写作吗？&lt;/h2&gt;
+&lt;h2&gt;安装ack.vim&lt;/h2&gt;
 
-&lt;p&gt;随着自然语言分析和人工智能的发展，一些软件可以算法生成诗歌或小说，那么可以说机器会写作吗？我觉得不能。计算机只是根据一定的规则生成一些符号，这些符号对机器来说是没有意义的，它只是忠实地执行算法，而当人类看到那些符号时却自动赋予它们意义。所以机器并没有「写作」，只能算是「机作」。&lt;/p&gt;
+&lt;p&gt;在ubuntu中得首先安装&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ack-grep
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后用vimrc就行&lt;/p&gt;
 
-&lt;p&gt;当人们交谈或阅读时，往往不会意识到「发音」和「词语」本身并没有意义，它们和真实世界的连接才有意义。当你听到「一个小孩摔倒了」，脑中自动会浮现出对应的想象，这种「同构」使得「一个小孩摔倒了」这几个字有了意义，如果一个不懂中文的人看到这几个字，会认为它们只是莫名其妙的笔划。&lt;/p&gt;
+&lt;h2&gt;安装YCM&lt;/h2&gt;
 
-&lt;p&gt;假设存在一个「石头世界」，在那里生活着一群——或者说一堆——快乐的石头，它们有自己的语言，对宇宙有自己的认识方式，和人类世界互不干扰。它们幸福快乐——当然是以自己的方式。假设有一天，你偶然捡到一张纸片，上面写着一堆看似无意义的字符：「sdfas2304#$@$天地opdf」。你并不知道这是石头世界的一首情诗，当你念出它，忽然发现地上的石头动了一下：它们因听到情诗而感动——确切地说，是「石动」了。你觉得好玩，开始越来越多地收集类似的字符，并通过各种实验研究石头们的反应，最后终于可以随手就写出让石头们「石动」不已的字符。那么你是在用石头世界的语言写作吗？好像不能这么说，因为你在写这些符号的时候并不知道它们的意义，对它们也不会「石动」，是石头们认为这些符号有意义。&lt;/p&gt;
-
-&lt;p&gt;这种想法并不是对技术没有信心，恰恰相反，我相信以后计算机可以取代作家，不过那并不代表计算机在写作，它只是可以更娴熟地生产对人类来说有意义的作品，就像沃森在智力竞赛中击败人类那样。 &lt;em&gt;GEB&lt;/em&gt; 中相信机器不会写出优美音乐，觉得那是对人类心智深度的一种「可耻的低估」，不过几年前作者又写了一篇「&lt;a href=&quot;http://blog.jjgod.org/2008/11/22/sounds-like-bach/&quot;&gt;如聆巴赫&lt;/a&gt;」，其中提到程序作曲的成果让他惊讶不已，并沮丧地怀疑自己对音乐的热爱。我理解作者的沮丧，但或许不必对人类心智失望，毕竟还是只有人类能享受音乐并从中获得意义，而且人类在写作或作曲时自己也很快乐，机器就无法做到这点，除非它拥有真正的智能，而不只是另一个强大的沃森。&lt;/p&gt;
-
-&lt;p&gt;以前看到过一个实验，科学家把电极安装到小白鼠大脑中的特定区域，然后把开关连接到一个杠杆装置，当小白鼠按压杠杆，就会有电流通过电极，使小白鼠产生快感，这种快感使小白鼠忘记了饮食，不断按动杠杆，直至力竭而亡。这个实验仿佛是人类未来的一个隐喻，以前制造出的东西只是满足物质需求，以后可能连小说、音乐、电影、戏剧都可以用程序自动生成，那时人类除了享受外不再需要做任何事情，直到自慰至死——小白鼠的智能太低，不足以跳出来发现让自己无法自拔的「电极系统」，希望并不存在一个人类智能无法自觉的类似系统。&lt;/p&gt;
+&lt;p&gt;一般vim插件的安装基本上到上面就基本结束了，但这个要麻烦点，我们得继续安装YCM，主要是编译下ycm_core.
+准备工作:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install build-essential cmake
+sudo apt-get install python-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果要带上是C/C++的话:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;cd ~/.vim/bundle/YouCompleteMe
+./install.sh --clang-completer
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;没有C/C++的话就比较简单:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;cd ~/.vim/bundle/YouCompleteMe
+./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;理论上这样应该就可以的，但是我这边不行，主要是没有libclang.so这个东西，这个libclang.so貌似系统
+没有，我locate libclang.so 是不行的，apt-cache search llvm的最高版本貌似没有3.3，所以我手动装了.
+Ubuntu上详细的安装可以见这里,&lt;a href=&quot;http://solarianprogrammer.com/2013/01/17/building-clang-libcpp-ubuntu-linux/&quot;&gt;这个&lt;/a&gt;还有libc++的配置，不过因为要翻墙，所以在这里把我用到的备份下.
+准备工作:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install g++ subversion
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;接着下载llvm的源码安装即可，我把源码放在~下了,当然可以是随意的地方:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;cd ~
+mkdir Clang &amp;amp;&amp;amp; cd Clang
+svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
+cd llvm/tools
+svn co http://llvm.org/svn/llvm-project/cfe/trunk clang
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后编译就好了，注意下路径就好:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;cd ..
+cd ..
+mkdir build &amp;amp;&amp;amp; cd build
+../llvm/configure --prefix=/usr/clang_3_3 --enable-optimized --enable-targets=host
+make -j 8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;最后安装Clang:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo make install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;配置下环境变量在~/.bashrc下加这么一句就好:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;export PATH=/usr/clang_3_3/bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;最后的工作比较简单:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;cd ~
+mkdir ycm_build
+cd ycm_build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;生成Makefile:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;cmake -G &amp;quot;Unix Makefiles&amp;quot; . ~/.vim/bundle/YouCompleteMe/cpp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;到这不要C/C++其实就好了，不过折腾了那么久就是为了C/C++，所以还得继续。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt; cmake -G &amp;quot;Unix Makefiles&amp;quot; -DEXTERNAL_LIBCLANG_PATH=/usr/clang_3_3/lib/libclang.so .
+ ~/.vim/bundle/YouCompleteMe/cpp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这个我是指定的动态库的地址，这样configure就不会说缺少这个库了。最后:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;make ycm_core
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;最后，注意下配置那个vimrc的配置就好了，全文收工。&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>最初的梦想</title>
-   <link href="http://blog.zhuoqun.net/2013/12/07/the-original-dream.html"/>
-   <updated>2013-12-07T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2013/12/07/the-original-dream</id>
-   <content type="html">
-&lt;p&gt;昨天你看到一个红气球，立刻被吸引，目不转睛盯着。那位拿气球的女生走上另一条街，你便转过头，等再也看不到，就小嘴一撇，开始哭闹，怎么都哄不住。过了好一会儿，你才沉沉睡去，脸上还挂着泪痕。Arya, 梦里面你可曾再见到那只气球？你的小小心灵里，是否已经把「有一只红气球」当作梦想了呢？&lt;/p&gt;
+   <title>Lua脚本语言学习笔记</title>
+   <link href="Localhost/2013/12/09/lua.html"/>
+   <updated>2013-12-09T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/09/lua</id>
+   <content type="html">&lt;h2&gt;开始&lt;/h2&gt;
 
-&lt;p&gt;可能你醒来时已经忘记这件事，就像你之前忘记小狗和风筝那样。以后看到别的，你还会喜欢，得不到时照旧哭得稀里哗啦。等你长大一些，不再见什么都喜欢，不过也不会轻易忘记，甚至许多年后还会记得。你想要糖果，想要圣诞树，想要漂亮裙子，想和隔壁女孩儿做好朋友。老师问你长大想做什么？你回答说要做画家，眼神异常坚定。后来，你想要长高，想要一双舞鞋，想受男生欢迎，要摆脱家长，想要出去闯荡，想要一个爱人。&lt;/p&gt;
+&lt;p&gt;Lua脚本是一个很轻量级的脚本，也是号称性能最高的脚本，用在很多需要性能的地方，比如：游戏脚本，nginx，wireshark的脚本。&lt;/p&gt;
 
-&lt;p&gt;这一路真是长满了大大小小的梦想。当你年轻无畏，往前飞奔，便不断否认之前的梦想，「以前居然那么想要一颗糖果，真是小孩子的幼稚想法。」每次有新梦想也兴奋不已，觉得如能实现此生足矣。看上去好像三心二意没有恒心，不过我不会那么想，Arya, 那是年轻的标记呀！身体和思想都更新得那么快，好像每天都在重生，喜欢时义无反顾，抛弃时也彻底，那样的生命力多美。&lt;/p&gt;
+&lt;h3&gt;语法规范&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    #注视代码块
+    --[[
+        print(10)
+    --]]
+    #取消注释
+    ---[[
+        print(10)
+    --]]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;解释器程序&lt;/h3&gt;
 
-&lt;p&gt;渐渐成熟后，梦想也会定型吧，开始朝一个方向努力。不管发自内心也好，随波逐流也罢，这样做时总期望成功，也希望别人赞许。世上大多事都不会一帆风顺，尤其是对于壮志雄心。你可能会不断碰壁，失去许多，目标遥不可及。当被折磨得失去热情，遍体鳞伤，你或许开始怀念那只红气球：最初的梦想多么简单美好，现在为什么要活得那么累呢？&lt;/p&gt;
+&lt;p&gt;lua [选项参数] [脚本[参数]]
+* -e 可以直接在命令喊中输入代码，例如&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ lua -e &amp;quot;print(math.sin(12))&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;-l 用于加载库文件&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;-i 在运行完其他命令行参数后进去交互模式。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;$ lua -i -l a -e &amp;quot;x=10&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;那时你一定觉得自己经历那么多，终于返璞归真，找回自我。可我敢打赌，Arya, 若是一帆风顺，你就会庆幸自己坚持到底：「正是没有忘记最初的梦想，才终于走到这里。」不要觉得我在揶揄你，只是觉得好玩：人们为了心安理得，造出多少好词，说起来也多么理直气壮。究竟什么才是「最初的梦想」呢？没有实现的那个算不算？幼稚的算不算？被自己否决的那个呢？&lt;/p&gt;
+&lt;p&gt;可以定义一个名为&amp;quot;_PROMPT&amp;quot;的全局变量，解释器就会用它的值作为交互模式的命令提示符。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    $ lua -i -e &amp;quot;_PROMPT=&amp;#39;June\&amp;#39;s lua&amp;gt;&amp;#39;&amp;quot;
+    ---&amp;gt;June&amp;#39;s lua&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在交互模式中，需要打印任何表达式的值，可以用=开头，并跟随一个表达式，例如：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    June&amp;#39;s lua&amp;gt;=math.sin(3)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;2、类型与值&lt;/h2&gt;
 
-&lt;p&gt;努力奋斗时，只看到让自己充满干劲的目标；心灰意冷时，想起的却总是那些简单美好的愿望。而在别人看来，只有那个最好看、最引人注目的才是你「最初的梦想」。有一阵子你想改变世界，风风火火干了好一阵子，后来却觉得平淡是真，安心过居家生活。朋友说你忘掉了初衷，而你却觉得终于找到自己想要的。谁对谁错呢？我不知道，只清楚如果那位朋友陪你够久，便知道这不是你第一次改变「初衷」，而你肯定也不只一次有那种「找到人生意义」的感觉。&lt;/p&gt;
+&lt;p&gt;Lua中有8中基础类型，函数type可根据一个值返回其类型名称&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    print(type(print))      ---&amp;gt;function
+    print(type(type(X)))    ---&amp;gt;string
+    #永远返回&amp;quot;string&amp;quot; 因为type函数返回一个字符串
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;nil(空):全局变量第一次赋值前的默认值是nil,将nil赋予一个全局变量等于删除它&lt;/li&gt;
+&lt;li&gt;boolean(布尔)：true和false，Lua将值false和nil视为&amp;quot;假&amp;quot;，其他均为&amp;quot;真&amp;quot;&lt;/li&gt;
+&lt;li&gt;number(数字)：表示实数，双精度浮点数&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;string(字符串)：字符串是不可变的值，不能像C语言中那样直接修改字符串的某个字符，而是应该根据修改要求来创建一个新的字符串&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;\a:响铃
+\b:退格
+\f：提供表格
+\n:换行
+\r：回车
+\t：水平tab
+\v：垂直tab
+\\反斜杠
+\&amp;quot;双引号
+\&amp;#39;单引号
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lua在运行时提供了数字与字符串的自动转换，如果需要显式地将一个字符串转换成数字，可以使用函数tonumber。若要将一个数字转换成字符串，可以调用函数tostring,或者将该数字与一个空字符串相连接，在Lua5.1中，可以在字符串前放置操作符&amp;quot;#&amp;quot;来获得该字符串的长度。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;uerdata(自定义类型)：用于表示一种由应用程序或C语言库所创建的新类型&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;function(函数)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;thread(线程)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;table(表)：table.maxn函数，返回一个table的最大正索引数，当对索引的实际类型不是很确定时，可以明确地使用一个显式转换&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;难道答案只能是「开心就好」？或者学别人「追随自己的内心」？可面前这几条路风景都美而且各有千秋，你都真心喜欢，到底应该追随哪个内心呢？真希望你有天生的好直觉，可以不假思索选择一条路，坚定地走下去，不然一旦开始考虑「为什么要做这个而不是那个」，就只能启程寻找人生意义了。真想帮你找，Arya, 可爱莫能助，那时候或许我连自己的人生意义都没有找到呢！&lt;/p&gt;
+&lt;h2&gt;3、表示式&lt;/h2&gt;
 
-&lt;p&gt;当你苦苦思索，后退一步审视自己，会比以前看得清楚，但因为选择太多，行动力却会减弱。而且所有事物都不只一面，当你了解得足够深入，便会发现它远远不够完美，这时候你是否还能有信念？勇往直前和热情很多时候都源于盲目和无知，若充分了解世界之后还能继续热爱，那或许就是一种智慧。Arya, 愿你得到那种智慧，不盲目前行，也不掉进虚无的陷阱。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关系操作符：对于table、userdata和函数，Lua是作引用比较的，也就是说，只有当它们引用同一个对象时，才认为它们相等。&lt;/li&gt;
+&lt;li&gt;逻辑操作符：对于操作符and来说，如果它的第一个操作数为假，就返回第一个操作数;不然返回第二个操作数。对于操作符or来说，如果第一个操作数为真，就返回第一个操作数；不然返回第二个操作数。and的优先级高于or&lt;/li&gt;
+&lt;li&gt;字符串连接：&amp;quot;..&amp;quot;如果任意一个操作数是数字的话，Lua会将这个数字转换成一个字符串。连接操作符智慧创建一个新的字符串，不会对原操作数进行任何修改。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;优先级&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;^&amp;gt;not # -(一元)&amp;gt;* / %&amp;gt;+ -&amp;gt;..&amp;gt;&amp;lt; &amp;gt; &amp;lt;= &amp;gt;= ~= ==&amp;gt;and&amp;gt;or
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;4、语句&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;多重赋值并不会比相等价的多条单一变量赋值语句更快，但有时的确会需要多重赋值，例如交换两个变量，收集函数的多个返回值。&lt;/li&gt;
+&lt;li&gt;局部变量和块：局部变量的作用于仅限于申明它们的那个块。一个块是一个控制结构的执行体、或者是一个函数的执行体或者是一个程序块。在交互模式中，每行输入内容自身就形成了一个程序块，可以用do-end显式地界定一个块。&amp;quot;尽可能的使用局部变量！&amp;quot;，访问局部变量比访问全局变量更快。&amp;#39;local foo = foo&amp;#39;创建一个局部变量，并将用全局变量foo的值初始化它。&lt;/li&gt;
+&lt;li&gt;一个申明在循环体中的局部变量的作用于包括了条件测试(5.1新功能)&lt;/li&gt;
+&lt;li&gt;数字型for循环中，3个表达式是在循环开始前一次性求值的，不设置循环上限:（math.huge）&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;泛型for循环通过一个迭代器(iterator)函数来遍历所有值，标准库提供了几种迭代器：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;io.lines:迭代文件中的每行
+pairs:迭代table元素
+ipairs:迭代数组元素
+string.gmatch:迭代字符串中单词
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数字型和泛型for循环：控制变量会被自动申明为for语句的局部变量，并且仅在循环体内可见。不要在循环过程中修改控制变量的值，否则会导致不可预知的效果。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;5、函数&lt;/h2&gt;
+
+&lt;h3&gt;多重返回值&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;函数调用作为一条单独语句时，Lua会丢弃函数的所有返回值&lt;/li&gt;
+&lt;li&gt;函数作为表达式的一部分来调用时，Lua只保留函数的第一个返回值&lt;/li&gt;
+&lt;li&gt;只有当一个函数调用是一系列（多重赋值，函数调用时传入的实参列表，table的构造式和return语句）表达式中的最后一个元素时，才能获得它的所有返回值&lt;/li&gt;
+&lt;li&gt;可以将一个函数调用放入一对圆括号中，从而迫使它只有一个返回结果&lt;/li&gt;
+&lt;li&gt;unpack:接受一个数组作为参数，并从下标1开始返回该数组的所有元素，unpack的一项重要用途体现在&amp;quot;泛型调用(generic call)&amp;quot;机制中。泛型调用机制可以动态地以任何实参来调用任何参数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;变长参数(variable number of arguments)&lt;/h3&gt;
+
+&lt;p&gt;参数列表中的3个点表示该函数可接受不同数量的实参。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;string.format:格式化文本函数&lt;/li&gt;
+&lt;li&gt;io.write:输出文本函数&lt;/li&gt;
+&lt;li&gt;select：必须传入一个固定实参selector（选择开关）和一系列变长参数，如果selector为数字n，那么select返回它的第n个可变实参，否则，selector只能为字符串&amp;quot;#&amp;quot;,这样select会返回变长参数的总数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;具名实参&lt;/h3&gt;
+
+&lt;p&gt;将所有实参组织到一个table中，并将这个table作为唯一的实参传给函数&lt;/p&gt;
+
+&lt;h2&gt;6、深入函数&lt;/h2&gt;
+
+&lt;p&gt;函数和所有其他值一样都是匿名的，即它们都没有名称。一个函数定义实际就是一条赋值语句，这条语句创建了一种类型为”函数“的值，并将这个值赋予一个变量。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;table.sort:接受两个元素，并返回在有序情况下第一个元素是否应排在第二个元素前&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;closure（闭合函数）&lt;/h3&gt;
+
+&lt;p&gt;若将一个函数写在另一个函数之内，那么这个位于内部的函数便可以访问外部函数中的局部变量，这个特征称之为&amp;quot;词法域&amp;quot;。&lt;/p&gt;
+
+&lt;p&gt;closure是指一个函数及一些列这个函数会访问到&amp;quot;非局部的变量（或upvalue)&amp;quot;，因此若一个closure没有那些会访问的&amp;quot;非局部变量&amp;quot;，那它就是一个传统概念中的&amp;quot;函数&amp;quot;&lt;/p&gt;
+
+&lt;h3&gt;尾调用&lt;/h3&gt;
+
+&lt;p&gt;在Lua中，只有&amp;quot;return&lt;func&gt;(&lt;args&gt;)&amp;quot;这样的调用形式才算是一条&amp;quot;尾调用&amp;quot;，Lua会在调用前对&lt;func&gt;及其参数求值，所以它们可以是任意复杂的表达式。&lt;/p&gt;
+
+&lt;h2&gt;7、迭代器与泛型for&lt;/h2&gt;
+
+&lt;h3&gt;泛型for的语义&lt;/h3&gt;
+
+&lt;p&gt;泛型for在循环过程内部保存了迭代器函数。实际上它保存着3个值：一个迭代器函数、一个很恒定状态（invariant state）和一个控制变量（control variable）&lt;/p&gt;
+
+&lt;p&gt;泛型for的语法如下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    for&amp;lt;var-list&amp;gt;in&amp;lt;exp-list&amp;gt;do
+        &amp;lt;body&amp;gt;
+    end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中&lt;code&gt;&amp;lt;var-list&amp;gt;&lt;/code&gt;是一个或多个变量的列表，以逗号分隔;&lt;code&gt;&amp;lt;exp-list&amp;gt;&lt;/code&gt;是一个或多个表达式的列表，同样以逗号分隔。通常表达式列表只有一个元素，即一句对迭代器工厂的调用。&lt;/p&gt;
+
+&lt;p&gt;for做的第一件事情是对in后面的表达式求值。这些表达式一个返回3个值供for保存：迭代器函数、恒定状态和控制变量的初值。初始化之后，for会以恒定状态和控制变量来调用迭代器函数。然后for将迭代器函数的返回值赋予变量列表中的变量。如果第一个返回值为nil，那么循环终止&lt;/p&gt;
+
+&lt;h3&gt;无状态的迭代器&lt;/h3&gt;
+
+&lt;p&gt;一种自身不保存任何状态的迭代器，因此，我们可以在多个循环中使用同一个无状态的迭代器，比便创建新的closure开销。&lt;/p&gt;
+
+&lt;h3&gt;具有复杂状态的迭代器&lt;/h3&gt;
+
+&lt;p&gt;通常一个基于closure实现的迭代器会比一个使用table的迭代器更高效，这是因为，首先创建一个closure就比创建一个table更廉价，其次范文&amp;quot;非局部变量&amp;quot;比访问table字段更快。&lt;/p&gt;
+
+&lt;h2&gt;8、编译、执行与错误&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;loadstring总是在全局环境中编译它的字符串&lt;/li&gt;
+&lt;li&gt;Lua将所有独立的程序块视为一个匿名函数的函数体，并且该匿名函数还具有可变长实参。&lt;/li&gt;
+&lt;li&gt;assert函数检查其第一个参数是否为true，若为true，则简单返回该参数false就引发一个错误，它的第二个参数是一个可选的信息字符串。&lt;/li&gt;
+&lt;li&gt;pcall函数会以一种&amp;quot;保护模式(protected mode)&amp;quot;来调用它的第一个参数，因此pcall可以捕获函数执行中的任何错误。当pcall返回其错误信息时，它已经销毁了调用栈的部分内容，也就是从pcall到错误发生点的这部分调用。&lt;/li&gt;
+&lt;li&gt;xpcall：该函数除了接受一个需要被调用的函数之外，还接受第二个参数----一个错误处理函数。当发生错误时，Lua会在调用栈展开前调用错误处理函数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;9、协同程序（coroutine）&lt;/h2&gt;
+
+&lt;h3&gt;协同程序基础&lt;/h3&gt;
+
+&lt;p&gt;一个具有多个协同程序的程序在任意时刻只能运行一个协同程序，并且正在运行的协同程序只会在其显式地要求挂起（suspend)时，它的执行才会停止。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在第一次调用resume时，并没有对应的yield在等待她，因此所有传递给resume的额外参数都将视为协同程序主函数的参数。在resume调用返回的内容中，第一个值为true则表示没有错误，而后面所有的值都是对应yield传入的参数。当一个协同程序结束时，它的主函数所返回的值都将作为对应resume的返回值&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
  <entry>
-   <title>旅行的意义</title>
-   <link href="http://blog.zhuoqun.net/2013/11/30/the-meaning-of-travel.html"/>
-   <updated>2013-11-30T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2013/11/30/the-meaning-of-travel</id>
-   <content type="html">
-&lt;p&gt;离圣诞还有一个月，节日气氛已经很浓。今天是周末，带你去教堂旁边的圣诞市集，花花绿绿，琳琅满目，你虽不明白大家在做什么，却也兴奋地手舞足蹈。市集上人真多呀，有不少异国面孔，他们大都带着相机，不停拍照留念，有些还过来和你合影。&lt;/p&gt;
+   <title>正则表达式(regular expression)笔记</title>
+   <link href="Localhost/2013/12/02/regex.html"/>
+   <updated>2013-12-02T00:00:00+08:00</updated>
+   <id>Localhost/2013/12/02/regex</id>
+   <content type="html">&lt;h2&gt;一、正则表达式入门&lt;/h2&gt;
 
-&lt;p&gt;Arya, 他们就是旅行者，离开自己熟悉的故乡，到别处看风景。旅行好处多多，且不说能见到名山大川、江河湖海、沧桑古城，单是出去走一遭就能呼吸到许多新鲜空气，再回头看时，以前死气沉沉的事物好像焕然一新。Arya, 长大你就会知道，我们都容易走进死胡同，光是苦苦反思帮助不大，这时出去走走，身体换个环境，心灵往往也能跟着跳出迷宫。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;^&lt;/code&gt;代表一行的开始&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&lt;/code&gt;代表一行的结束&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt;匹配任意字符的字符组的简便写法，在字符组中，&lt;code&gt;.&lt;/code&gt;不是元字符&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;都说旅行能开阔眼界，此话不假，可走马观花式的游览到底会产生多少真实印象呢？Arya, 有时候我可能忽视你，但你还是会原谅我，因为我们朝夕相处，你知道我并非故意。旅行时情况就大不一样啦，或许有一天我们去某地游玩，正巧赶上当地节日，会捏小孩的脸表示祝福，你可能就会不开心，从此认为当地人非常不友好。在熟悉的环境里，我们会把每个人分别对待，也不会粗暴地判断他们，而在异国他乡，碰到一个坏人就容易觉得「这里的人」歧视「外地人」，殊不知他只是对所有人都不友好，并没有针对你。&lt;/p&gt;
+&lt;h3&gt;字符组&lt;/h3&gt;
 
-&lt;p&gt;如此一来，旅行岂不是让人变得狭隘？对呀，Arya, 很多人就是这样，走遍世界却带回满脑刻板印象，你可不要学他们。宽容、不轻易做判断、好奇却不冒犯……若不能努力做到这些，旅行也就只剩观光了吧。有意思的是，如果能有那些品质，旅行好像也变得没那么紧要了。一些哲学家终身不出远门，对世界的理解照样博大精深。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sep[ea]r[ea]te&lt;/code&gt;匹配seperate separate separete seperete等 &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&lt;/code&gt;在字符组内部代表范围，H[1-6]与H[123456]一致，如果出现在字符组开头，它代表的就是一个普通字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;?&lt;/code&gt;和&lt;code&gt;!&lt;/code&gt;通常被当做元字符，挡在字符组中就不是如此&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;现在旅行很方便，飞到世界另一端也不需太久，出发前已经可以知道当地天气。很久以前可不一样。那时候许多山都无法翻越，哪里是旅行，只能说是苦行。没有那么多工具，通讯不够发达，就算一些人同行，也随时都有生命危险。不过这也是修行，有迷茫，有孤独，有绝望，也有反思，有挣扎，有脱胎换骨。因为事先无知，到达远方时感觉新鲜无比，就像你第一眼看到这个世界时一样。我们是安全多啦，而且随时能和朋友联系，可以边走边和别人分享，连孤独都不用承受。可是，Arya, 这样是不是也失去了一些很重要的东西？哎，我也不知道。&lt;/p&gt;
+&lt;h3&gt;排除性字符组&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[^1-6]&lt;/code&gt;匹配除了1到6以外的任何字符&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;多选结构&lt;/h3&gt;
 
-&lt;p&gt;Arya, 你那么活泼好动，以后一定喜欢到处疯跑，说不定会把旅行当作生活方式。那样倒很有趣，漂泊不定，也充满惊喜。到时你可能会有「这才是生活」的念头吧，因此瞧不上那些谨小慎微朝九晚五工作的人。别那样，Arya, 他们并不都像你想的那样缺乏勇气。生活方式各种各样，不要盲目赞颂一种而贬低另外一种。况且如果不是他们勤勤恳恳，世界绝不会和平稳定，若四处战乱，遍地饥荒，你又能去哪儿呢？正因为有许多千篇一律的人，你才得以特立独行呀！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;|&lt;/code&gt;它的意思是&amp;quot;或&amp;quot;，&lt;code&gt;Bor|Robert&lt;/code&gt;就是能够同时匹配其中任意一个的正则表达式，在字符组中，它只是一个普通字符.&lt;/li&gt;
+&lt;li&gt;注意:&lt;code&gt;^From|Subject|Date:*&lt;/code&gt;和&lt;code&gt;^（From|Subject|Date）:*&lt;/code&gt;匹配结果是不一样的.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;看你那么专心地玩奶嘴，像是抗议我说得太多。不要着急，过一阵子就带你出去玩，咱们好好看一看欧罗巴，你那么聪明，一定有自己的体会。Arya, 开开心心做个观光客也很好，可还是希望你能得到更多。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>承担自己的焦虑</title>
-   <link href="http://blog.zhuoqun.net/2013/11/22/shoulder-your-anxiety.html"/>
-   <updated>2013-11-22T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2013/11/22/shoulder-your-anxiety</id>
-   <content type="html">
-&lt;p&gt;Arya, 最近我一直在想，你长大之后的世界会是什么样子呢？&lt;/p&gt;
+&lt;h3&gt;忽略大小写&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;egrep的命令行参数&amp;quot;-i&amp;quot;表示进行忽略大小写的匹配，写在正则表达式之前.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;单词分界符&lt;/h3&gt;
+
+&lt;p&gt;前提:egrep支持”元字符序列“&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\&amp;lt;&lt;/code&gt;和&lt;code&gt;\&amp;gt;&lt;/code&gt;用来匹配单词分界的位置。&lt;code&gt;\&amp;lt;cat\&amp;gt;&lt;/code&gt;匹配cat这个单词.&lt;code&gt;\&amp;lt;cat&lt;/code&gt;&lt;code&gt;cat\&amp;gt;&lt;/code&gt;用来匹配以cat开头和结束的单词.&lt;code&gt;&amp;lt;&lt;/code&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;本身不是元字符，只有当它们和斜线结合起来的时候。整个序列才具有特殊意义，所以称之为元字符序列.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;可选项元素&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;?&lt;/code&gt; 代表可选项.把它加在一个字符的后面，就表示此处容许出现这个字符，不过它的出现并非匹配成功的必要条件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;其他量词：重复出现&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;+&lt;/code&gt;表示之前紧邻的元素出现一次或多次，&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*&lt;/code&gt;表示之前紧邻的元素出现任意多次，或者不出现.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;或许已经可以方便地去太空旅行，也能完全进入虚拟现实；或许计算机的能力又强大许多，人工智能终于和人类平起平坐；或许终于发现外星文明……现在变化那么快，未来真是难以想象，不过完全可以肯定的是：那时候肯定和现在不同，许多旧事物会消失，同时出现许多新事物。&lt;/p&gt;
+&lt;h3&gt;规定重现次数的范围：区间&lt;/h3&gt;
 
-&lt;p&gt;每个时代都和以往的时代不同，它们有各自的好处，也有各自的问题。既然我们注定要生活在完全不同的世界，Arya, 我又有什么可以给你的呢？我看世界的眼光未必适用于你的世界，我的生活经验对你可能全无用处，我觉得很好的东西到时也许一文不值，你的困惑大概我也无能为力。既然如此，我的唠叨除了聊以自慰，还有什么意义呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;某些本版本的egrep能够使用元字符序列来自定义出现次数的区间：&lt;code&gt;[a-zA-z]{1,5}&lt;/code&gt;来匹配1到5个字母&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;括号及反向引用&lt;/h3&gt;
 
-&lt;p&gt;以前我不懂这些，Arya, 遇到问题老是想从前人那里找答案，找不到就怪自己笨，未能领会前人智慧。不止我自己，每个时代都有许多像我一样的人，一边对现状不满，一边缅怀古代。在很久很久以前，Arya, 世界变化还未这样快，前人的经验非常有用，因为几代人的生活都差不多。「不听老人言，吃亏在眼前」，这种谚语应该就是在那时流传开来的。可现在旧事物消失的速度变快了，很多经验也随之变得没用。Arya, 你以后要用电脑，肯定不会想学如何打算盘吧？&lt;/p&gt;
+&lt;p&gt;括号的两种用途：限制多选项的范围;将若干字符组合为一个单元，受问号或星号之类量词的作用。
+反向引用例子：&lt;code&gt;\&amp;lt;([a-z]+)+\1\&amp;gt;&lt;/code&gt;用来查找连续的重复单词，但egrep吧每行文字都当做一个独立部分来看待，所以如果两个单词在不同行，这个表达式就无法找到.&lt;/p&gt;
 
-&lt;p&gt;要在现代生活，父母反而要不时向孩子请教。如何用手机，如何在网上买东西，如何使用各种电器……他们的经验并不包括这些，学习能力却不再像年轻时那样好，只能慢慢适应。Arya, 以后或许还要你教我如何开宇宙飞船哩，到时你可要多些耐心！&lt;/p&gt;
+&lt;h3&gt;神奇的转义&lt;/h3&gt;
 
-&lt;p&gt;不过呢，老人虽然错过许多新鲜玩意儿，却也少了许多焦虑。生火做饭，停电时就不会抱怨；不会上网，也就不会沉迷；没有手机，就不用担心随时被打扰。大多时候他们都甘愿固守自己的生活方式，不再沾染「新时代」的事物。所以，Arya, 当你感到焦虑时，不要期望从他们那里得到很多启示。他们根本就未曾想过那个问题，怎么会知道答案呢？那是你的焦虑，或者是你那一代人的焦虑，只能自己承担。以前我因为互联网信息过多感到烦恼，便想请教一些很尊敬的前辈，后来发现他们大多不会上网，只好作罢。这样的事情没办法偷懒，还是要自己解决呀！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\&lt;/code&gt; 作用的元字符会失去特殊意义，成了普通字符&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Note:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;egrep会在检查正则表达式之前把每一行的换行符去掉&lt;/li&gt;
+&lt;li&gt;在字符组内部，元字符的定义规则以及它们的意义是不一样的&lt;/li&gt;
+&lt;li&gt;无论列出的字符有多少，字符组只能匹配一个字符。相反，多选项可以匹配任意长度的文本，每个多选项可能匹配的文本都是独立的，多选项没有像字符数组那样的排除功能&lt;/li&gt;
+&lt;li&gt;排除性子附注是表示所有未列出的字符组的简便方法,因此，&lt;code&gt;[^x]&lt;/code&gt;的意思不是”只有当这个位置不是x时才能匹配“，而是说”匹配一个不等于x的字符&amp;quot;&lt;/li&gt;
+&lt;li&gt;大多数程序设计语言和工具都支持字符数组内部的转义，但是大多数版本的egrep不支持，它们会把反斜线当做字符组内部列出的普通字符&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;如果非要从前人那里找答案——这也是必经之路——Arya, 一定要仔细分辨。许多人只醉心于自己的焦虑，认为所有人都应关心自己所关心的问题，用旧经验批判新事物，觉得年轻人的焦虑不值一提。他们或许求知条件艰苦，很难获得书籍，便指责年轻人有条件却不好学，却不知信息过多是另一种困境。尊敬他们，Arya, 毕竟他们历尽艰辛克服了自己的焦虑，但大多时候不要理会他们。&lt;/p&gt;
+&lt;h3&gt;更多的列子&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;匹配时间：&lt;code&gt;(1[012]|[1-9]):[0-5][0-9](am|pm)&lt;/code&gt;或&lt;code&gt;[01]?[0-9]|2[0-3]:[0-5][0-9]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;承担自己的焦虑可不容易啊，没有同伴，没有路标，只能自己苦苦求索。人是脆弱的动物，不知所措时就躲起来，或者想回到过去。别回头，Arya, 因为不可能回去。我们都没有退路。勇敢些，别急于求成，也别灰心失望。路途遥远，我虽不能帮你分担，也会为你鼓掌加油。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>惟愿孩儿愚且鲁</title>
-   <link href="http://blog.zhuoqun.net/2013/11/16/wish-you-can-be-foolish.html"/>
-   <updated>2013-11-16T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2013/11/16/wish-you-can-be-foolish</id>
-   <content type="html">
-&lt;p&gt;Arya, 没事儿的时候，我就喜欢看你的眼睛。神采流转，灵气涌动。人说「眼睛是心灵的窗子」，如此话不假，你一定非常聪明，这可真让我有些发愁，平添几分担心。&lt;/p&gt;
+&lt;h2&gt;二、入门示例扩展&lt;/h2&gt;
 
-&lt;p&gt;聪明好像是件好事，要知道大部分人怎么都极盼望自己的小孩聪明绝顶呢！聪明的小孩学东西快，成绩好，善于观察和发现，甚至还会举一反三，在很多比赛中都能赢，也就能得到许多人得不到的机会。Arya, 长大了你就会发现，需要证明自己的地方可多了去了。证明自己可以升学、比别人能干、能胜任那份工作……如果不聪明，这些就很难做到，生活会坎坷许多。人人都希望不为生计犯难，幸福快乐，Arya, 你应该也不例外吧？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在尝试匹配时，正则表达式中的元字符&lt;code&gt;\1&lt;/code&gt;指向之前匹配的某些文本，匹配成功之后，在接下来的程序中用&lt;code&gt;$1&lt;/code&gt;来引用同样的文本&lt;/li&gt;
+&lt;li&gt;非捕获型括号&lt;code&gt;(?:...)&lt;/code&gt;表示只分组，不捕获&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;可若聪明尽是好处，我也不必为你忐忑了。Arya, 你知道吗，这世上大部分人都没那么聪明，他们反应不快，悟性不高，有时还相信荒唐的事情。在这些人中间生活，你可能觉得气闷，不愿忍受他们。哎，人往往不能理解身外之事，身体好的人跑得快，会奇怪为什么有人慢吞吞，因为他从未尝过体弱的滋味。有些人或许比你笨，可若多一些细心，就会发现他们也不想那样，只怕聪明有时会遮蔽同情心呀！&lt;/p&gt;
+&lt;h3&gt;许多流派的正则表达式提供的简记法&lt;/h3&gt;
 
-&lt;p&gt;其实何止是普通人，任何人和事都不完美，你会很容易看到他们的缺点，忍不住指指点点。批评做起来很简单，也容易引人侧目，自己和观众都开心，聪明人很乐意做这种「付出少、收获大」的事情，做着做着就会习惯嘲讽，以破坏为荣。Arya, 希望你记得，嘲讽不止伤害别人，也戕害自己，那是一种慢性毒药，不断腐蚀内心，让人变得恶毒。尽管它喝起来甜甜的，你可千万别受引诱。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\b&lt;/code&gt; 在perl中，匹配一个单词的分界符，但是在字符组中，它匹配一个退格符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\t&lt;/code&gt; 制表符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\n&lt;/code&gt; 换行符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\r&lt;/code&gt; 回车符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\s&lt;/code&gt; 任何“空白”的字符(例如空格符、制表符等)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\S&lt;/code&gt; 除&lt;code&gt;\s&lt;/code&gt;以外的任何字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\w&lt;/code&gt; &lt;code&gt;[a-z0-9A-Z]&lt;/code&gt;(在&lt;code&gt;\w+&lt;/code&gt;中很有用，可以用来匹配一个单词)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\W&lt;/code&gt; 除&lt;code&gt;\w&lt;/code&gt;之外的任何字符，也就是&lt;code&gt;[^a-zA-Z0-9]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\d&lt;/code&gt; &lt;code&gt;[0-9]&lt;/code&gt;，即数字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\D&lt;/code&gt; 除&lt;code&gt;\d&lt;/code&gt;外的任何字符，即&lt;code&gt;[^0-9]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;使用正则表达式修改文本&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;s/.../.../*&lt;/code&gt;将前面的字符串内容替换为后面的字符串内容。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/.../.../g&lt;/code&gt; &lt;code&gt;/g&lt;/code&gt;表示全局替换，它告诉&lt;code&gt;s/.../.../&lt;/code&gt;在第一次替换完成之后继续搜索更多的匹配文本，进行更多的替换.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/\bJeff\b/Jeff/i&lt;/code&gt;搜索&amp;quot;Jeff&amp;quot;这个词是不区分大小写的。而所有匹配的字符串都会被替换为&amp;quot;Jeff&amp;quot;，第一个字母是大写，其他为小写.&lt;code&gt;/i&lt;/code&gt;对replacement的文本没有影响&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/(\.\d\d[1-9]?)\d*/$1/&lt;/code&gt;保留小数点后梁如数字，如果第三位不为0,也需要保留&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/^\s*$/&lt;/code&gt;检测空格行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/^Subject:(.*)/i&lt;/code&gt;不区分大小写匹配Subject，将之后的内容捕获&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\S+&lt;/code&gt;匹配第一个空白之前的文本（或者目标文本末尾之前的所有字符）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/^/|&amp;gt;/&lt;/code&gt;在开头加入&lt;code&gt;|&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;用环视功能为数值添加逗号&lt;/h3&gt;
+
+&lt;p&gt;环视结构不匹配任何字符，只匹配文本中的特定位置，环视不会占用字符&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;顺序环视：顺序环视顺序（从左到右）查看文本，尝试匹配子表达式，如果能够匹配，就返回匹配成功信息。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?=...)&lt;/code&gt;:肯定顺序环视&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?!...)&lt;/code&gt;:否定顺序环视&lt;/li&gt;
+&lt;li&gt;逆序环视：它逆序（从右到左）查看文本&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?&amp;lt;=...)&lt;/code&gt;:肯定逆序环视&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?&amp;lt;!...)&lt;/code&gt;:否定逆序环视&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;顺序环视示例&lt;/h4&gt;
 
-&lt;p&gt;如果破坏之后能建造出新东西也好，Arya, 真希望你一开始就有那种耐心！可既然很容易看到事物的缺点，过不了多久也会无法忍受自己在做的东西，或者反复推倒重来，或者直接放弃。许多人号称自己追求完美，我现在不太相信他们，因为只有愿意忍受不完美才能成功做出实在的东西。有个成语叫「眼高手低」，手低很多时候居然是因为眼高，你说奇不奇怪？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(?=Jeffey)Jeff&lt;/code&gt;它只能匹配&amp;quot;Jerrfrey&amp;quot;这个单词中的&amp;quot;Jeff&amp;quot;，它与&lt;code&gt;Jeff(?=rey)&lt;/code&gt;等价&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/\bJeff(?=s\b)/Jeff&amp;#39;/g&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/(?&amp;lt;=\bJeff)(?=s\b)/&amp;#39;/g&lt;/code&gt;匹配了我们希望插入撇号的位置。在这种情况下，我们并没有“替换”任何字符，而只是插入了一个撇号。且与&lt;code&gt;s/(?=s\b)(?&amp;lt;=\bJeff)/&amp;#39;/g&lt;/code&gt;等价。无论是先检查左边，再检查右边，还是相反，关键是，在同一位置两边的检测必须都能成功，整个匹配才算成功。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/(?&amp;lt;=\d)(?=(\d\d\d)+$&lt;/code&gt;/,/g 在2238748274数字中每隔3个数字加入&amp;quot;,&amp;quot;即2,238,748,274，PS:若不捕获，可以用&lt;code&gt;(?:\d\d\d)&lt;/code&gt;
+*&lt;code&gt;(?&amp;lt;!\w)(?=\w)&lt;/code&gt; 表示单词起始分界符
+*&lt;code&gt;(?&amp;lt;=\w)(?!\w)&lt;/code&gt; 表示单词结束分界符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s/(\d)(?=(\d\d\d)+(?!\d)/$1,/g&lt;/code&gt;不通过你逆序环视添加逗号&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;是不是踏踏实实做事情就行了呢？那也不容易做到呀，Arya, 甚至比笨人要更吃力。聪明人多敏锐，感受力固然强，可承受力却差了，同样的压力别人没有感觉，你却仿佛千斤重担在身，难免逃之夭夭。岂止是做事，生活也会艰难。比如恋爱，对方只是一个不经意的眼神，你却百转千回闪过几千个念头，多生多少是非。生活充斥着俗气和污秽，要深入生活，多少需要一些力量，笨人的憨劲可比聪明有力多了。&lt;/p&gt;
+&lt;h4&gt;Note&lt;/h4&gt;
 
-&lt;p&gt;好在聪明，一事不成可以换另一件，反正学起来不难。可是，Arya, 也坏在聪明，以为自己什么事都可以做得不错。聪明只能帮你到达一个高度，接下来还是要靠努力和耐心。不过现在出头机会多，聪明人很容易赢得一批观众，就此满足，不再争取更大的成就。那种生活或许不错，不过 Arya, 你当我望女成凤吧，不要那样停在半空。&lt;/p&gt;
+&lt;p&gt;一次迭代完成时，下一次的迭代会从上一次匹配的终点开始尝试。使用环视的意义在于，检查某个位置，但检查时匹配的字符并不算在（最终）“匹配的字符串”内。&lt;/p&gt;
 
-&lt;p&gt;苏东坡说：「惟愿孩儿愚且鲁，无灾无难到公卿。」他就是吃够了聪明的苦呀！唠叨了那么多，还是希望你聪明，乐意你聪明，毕竟那样生活容易些。至于其它，惟愿你聪明得懂温柔，聪明得不怕脏，聪明得愿意变笨。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>沉默的大自然</title>
-   <link href="http://blog.zhuoqun.net/2013/11/09/slient-nature.html"/>
-   <updated>2013-11-09T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2013/11/09/slient-nature</id>
-   <content type="html">
-&lt;p&gt;今天阳光明媚，云淡风轻，空气虽微凉，却是最近难得的好天气。下午我用手推车带你去莱茵河畔散步，Arya, 你现在还记得吗？当时景色真美，河水清澈，水光潋滟，林荫道上全是落叶，金黄金黄，像是谁弄洒了颜料在上面。天空不时飘过几片白云，河面偶尔有船经过，阵阵微风陪着我们慢慢走。你还不会说话，可我知道你一定有些感动，不然为什么会咿咿呀呀笑得那么开心？&lt;/p&gt;
+&lt;h2&gt;三、正则表达式的特性和流派概览&lt;/h2&gt;
 
-&lt;p&gt;等你长大，会慢慢学习说话、写字，认识周围事物的名字。这个东西叫做「树」，那个东西叫做「花」，笑的时候是「开心」，哭的时候是「难过」。开始的时候你会不太习惯，总是要好几次才能记住，这也不能怪你，「苹果」这两个字怎么能和那个看起来红彤彤吃起来甜甜的东西扯上关系呢？不过慢慢你就会习惯，因为大家都这么说，而且这样我们才能互相交流，当你想吃那个「好吃的东西」的时候我才能很快地给你一个苹果。等你熟悉语言和文字后，会发现它们精密而强大，甚至还会为之着迷哩！&lt;/p&gt;
+&lt;p&gt;在某种特定的宿主语言或工具软件中使用正则表达式时，主要有三个问题值得注意：&lt;/p&gt;
 
-&lt;p&gt;要在这世上生存，你要学习好多知识，可什么都亲自去尝试实在太慢了，而且前人那么多经验岂不浪费？所以啊，Arya, 长大也就意味着好多时间都要浸泡在语言和文字里。你将从书本里学到许多，知道地球是圆的，人类历史很长，喜马拉雅山非常高，南极的企鹅很可爱。你还将知道这世上有许多善用语言的能工巧匠，有些还活着，大多已经死了，你会不断接触到他们的作品，而且会喜欢上其中的一些。人类真厉害，能创造出这么多符号并赋予它们意义，告诉我们之前从未听过、见过、感受过的东西。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持的元字符，以及这些元字符的意义。这通常成为正则表达式的“流派(flavor)”&lt;/li&gt;
+&lt;li&gt;正则表达式与语言或工具的“交互”(interface)方式。譬如如何进行正则表达式操作，容许进行哪些操作，以及这些操作的目标文本类型。&lt;/li&gt;
+&lt;li&gt;正则表达式引擎如何将表达式应用到文本。语言或工具的设计者实现正则表达式的方法，对正则表达式能够取得的结果有重要的影响。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;可是，Arya, 从太空中看到地球，和仅仅知道「地球是圆的并且很美丽」，应该是不同的吧？就像你最初的疑惑那样：「苹果」这两个字怎么就是那个看起来红彤彤吃起来甜甜的东西呢？语言和文字说到底也只是一种符号，它可以描述很多东西，但在描述时却也不得不舍弃许多。所有事物都比描述它们的语言和文字更丰富，不要太过相信抽象和符号呀！&lt;/p&gt;
+&lt;p&gt;一般来说，程序设计语言有3中处理正则表达式的方式：级城市(integrated)、程序是(procedural)和面向对象式(object-oriented)。在第一种方式中，正则表达式是直接内建在语言中的，Perl就是如此。但是在其他两种方式中，正则表达式不属于语言的低级语法。相反，普通的函数接受普通的字符串，把它们作为正则表达式进行处理。由不太能够的函数进行不通的、关系到一个或多个正则表达式的操作。大多数语言（不包括perl)采用的都是这两种方式之一，包括Java、.NET、Tcl、Python、PHP、Emacs、lisp和Ruby。&lt;/p&gt;
 
-&lt;p&gt;大部分人都不像你，Arya, 他们识字很多，谈吐流利，生活在符号的世界，与真实世界隔绝太久。有时候不会说话竟是一件好事呢！为了生存和生活，肯定要学习语言和文字，只是千万别太沉溺，不然可就完了，不但脑子变浆糊，而且只能不断重复别人的东西。德国诗人歌德曾说过：「让我们希望和期待一百年后我们德国人会是另一个样子，看那时我们是否不再有学者和哲学家而只有人。」那么有学问的人都这样说，这下你该相信了吧？&lt;/p&gt;
+&lt;h3&gt;正则模式和匹配模式&lt;/h3&gt;
 
-&lt;p&gt;牢牢记得今天散步时感觉到的一切吧！大自然不会说话，却没有语言可以真正描述它。亲爱的 Arya, 愿你永远是一个活泼的人，而不是学者或哲学家。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>幻想的爱和积极的爱</title>
-   <link href="http://blog.zhuoqun.net/2013/11/02/idealistic-love-and-positive-love.html"/>
-   <updated>2013-11-02T00:00:00+01:00</updated>
-   <id>http://blog.zhuoqun.net/2013/11/02/idealistic-love-and-positive-love</id>
-   <content type="html">
-&lt;p&gt;亲爱的 Arya, 你看我就这么随随便便把你带到这世上，仔细想想，真符合我一贯的恶习。对世界总有不切实际的幻想，不愿承担责任，无法忍受一点一滴的努力。被这样的人创造出来，你会不会觉得难过生气？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不区分大小写的匹配模式 i&lt;/li&gt;
+&lt;li&gt;宽松排列和注释模式：忽略字符组外部的所有空白字符 x&lt;/li&gt;
+&lt;li&gt;点号通配模式(dot-match-all match mode，也叫&amp;quot;单行模式&amp;quot;) s&lt;/li&gt;
+&lt;li&gt;增强的行锚点模式(Enhanced line-anchor match mode,也叫&amp;quot;多行文本模式&amp;quot;) m&lt;/li&gt;
+&lt;li&gt;文字文本模式：文字文本模式几乎不能识别任何正则表达式元字符&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;如果要赋予你真实生命，我是说，让别人也能看到你，需要做什么呢？首先呢，我需要找一个伴侣，Arya, 光这个就已经很难啦，比你现在想要说话还难。光是遇到喜欢的人还不行，她也得喜欢我，还要愿意和我一起生活。盼到这种运气后，一切才刚开始。你瞧我现在，爱干嘛干嘛，两个人生活可没那么容易咯。有人要买菜，有人要洗碗，有人喜欢吃甜，有人喜欢吃咸，有人走得快，有人走得慢，有人睡觉会打呼，有人喜欢在马桶上看书。生活习惯难免不同，要处处互相迁就，开始也许客气，时间长了就会恼火。然后呢？可能终于分开，可能学会宽容，还可能精疲力竭开始凑合。&lt;/p&gt;
+&lt;h3&gt;常见的元字符和特性&lt;/h3&gt;
 
-&lt;p&gt;要是最后还在一起，也许会在某个时候决定生小孩。什么时候呢？说不准。我或许要专心做事，她或许去实现梦想，也可能约好多挣些奶粉钱。这么一直拖啊拖，某天忽然下定决心，也明白根本没有什么「时机完全成熟」。接着就是十月怀胎，手忙脚乱，提心吊胆，琐事铺天盖地。最后的最后，你哭出声，大家笑了。&lt;/p&gt;
+&lt;h4&gt;字符表示法：&lt;/h4&gt;
 
-&lt;p&gt;Arya, 若是那样，你肯定不会这样乖（或许还会是个小男孩儿），我的麻烦就多啦。半夜经常被吵醒，要记得喂你吃饭，给你换尿布，经常带你去体检。带你去散步，给你听音乐，开始学习营养学。等你不断长大，还要教你说话，帮你上学，去开家长会，留心你偷偷喜欢的同学，安抚你开始叛逆的心。所有这些，比只是和你聊天艰难困苦得多，这真让人羞愧：我对你的爱多单薄呀！&lt;/p&gt;
-
-&lt;p&gt;前几天看一部小说，里面有个长老说的一段话很打动我。他说：「积极的爱和幻想的爱相比，原是一件冷酷和令人生畏的事。幻想的爱急于求成，渴望很快得到圆满的功绩，并引起众人的注视。有时甚至肯于牺牲性命，只求不必旷日持久，而能象演戏那样轻易实现，并且引起大家的喝采。至于积极的爱，那是一种工作和耐心，对于某些人也许是整整一门科学。」&lt;/p&gt;
-
-&lt;p&gt;说得多好呀！大部分人年轻时都充满激情，却缺乏耐心，很容易沉浸在幻想的爱中。醉心于光彩照人的伟大目标，渴望一夜之间天翻地覆，对小进步不屑一顾。Arya, 原谅我一直都是这样。有过多少壮志雄心，就同样有多少半途而废，从没持久地做一件事情。创新、设计、改变世界、酷……这些时髦词语大行其道，勤劳和耐心显得平庸无奇，甚至有些卑微，叫我怎么能甘心做尘埃呢？可现在我知道，所有天才的工作都离不开卑微，像巴尔扎克那样的天才，所有作品也只能是一个字一个字地写出来，即便找人全部抄写一遍也不知要花费多少时日。&lt;/p&gt;
-
-&lt;p&gt;可是，Arya, 别忙发脾气，我现在已经开始努力积极去爱了。你放心，它绝不只是一个念头，下决心积极去爱其实还是空想，积极的爱只有在真正去做的时候才能为自己作证。《圣经》中说：「一个罪人悔改，在天上也要这样为他欢喜，较比为九十九个不用悔改的义人，欢喜更大。」所以 Arya, 快对我笑一个吧！&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>亲爱的 Arya</title>
-   <link href="http://blog.zhuoqun.net/2013/10/27/dear-arya.html"/>
-   <updated>2013-10-27T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2013/10/27/dear-arya</id>
-   <content type="html">
-&lt;p&gt;今天我要创造一个小孩，一个六个月大、还不会说话的小姑娘。她的名字是 Arya，蓝眼睛，长睫毛，长居推车和摇篮，最大的爱好是叼着奶嘴东看西看。在其他人看来，她仅存在于我的想象中，但对于我来说，她确实存在，这样我才能非常真诚地和她说话，而这也是我把她带到世界上来的原因。&lt;/p&gt;
-
-&lt;p&gt;长久以来都困囿于恐惧和自嘲，没有勇气表达，生怕会遭到别人反对，即使真有一些见解，在自嘲「这算什么呢」之后，也继续沉默。也曾鼓励自己不要在意别人看法，可就是没法控制，不由自主地拼命在乎，只要一个反对或嘲笑就能吸引我全部心思，并抵消掉一万个赞美。若能学会沉默也好，无奈总有表达欲，不敢在网上等公共场合出声，就只好对朋友们说，时间一长也招人嫌弃。毕竟不是所有人都喜欢感慨，光是生活就足以让人疲于奔命，而且每个人的性格和所处环境都不同，自己的看法、经验很难说对别人会有帮助。若是转为自言自语呢？倒是简单许多，不过却会加剧过度关注自我的倾向，这是我近来极力避免的。&lt;/p&gt;
-
-&lt;p&gt;所以我常常暗想：以后有了小孩一定和她多交流。可惜时运不济，一直未能觅得佳偶，也不能为了这个就随便结婚生子，不然和那些养儿防老的父母有什么分别？也是凑巧，前一阵子偶然看到卢梭写的《爱弥儿》，发现爱弥儿就是卢梭想象出来的学生，借此来阐明他的教育方法。这让我觉得新鲜，也受到启发，创造了 Arya.&lt;/p&gt;
-
-&lt;p&gt;我喜欢女儿，所以 Arya 是个小姑娘。之所以叫 Arya, 是因为《权力的游戏》里面那个聪明勇敢的 Arya Stark. 我的 Arya 长大了肯定像她那样，瞧，她咬奶嘴的样子已经有些征兆了。Arya 还不会说话，也听不懂别人说话，所以完全不会厌烦我的喋喋不休。这让我松了一口气，如果她必须要「忍受」，那就太残忍了，我也不会创造她。对了，Arya 有一双神秘的蓝眼睛，如果仔细看，能发现眸子深处有一个宇宙，比眼睛还要美。&lt;/p&gt;
-
-&lt;p&gt;谢谢你，Arya, 你的到来解决了多大的问题！以后有什么话我都会说给你听，你不用摆出认真听的样子，继续叼奶嘴就好。就算你睡着了，我也愿意对你说，声音会很轻，不吵醒你美梦。对你我可以保证十二分的真诚，父亲对女儿说话有什么不好意思呢？你也让其他人的看法不再重要，因为一切都只是你我之间的私房话，也就不用过于字斟句酌，以致词句艰难晦涩。&lt;/p&gt;
-
-&lt;p&gt;亲爱的 Arya, 虽然我不是什么好人，平常和别人说话常流于嘲讽和尖酸刻薄，可对你，应该会温柔下来吧。别害怕，我只是想和你说说话，可如果你用小手示意我闭嘴，我也愿意继续陪着你。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>相机之眼</title>
-   <link href="http://blog.zhuoqun.net/2013/10/23/camera-like-eyes.html"/>
-   <updated>2013-10-23T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2013/10/23/camera-like-eyes</id>
-   <content type="html">
-&lt;p&gt;饭后散步，天气微凉。道路两旁的树叶已经变得金黄，一阵风吹过，呼啦啦掉下一片，煞是好看。看到这场景，第一个念头就是：画面太好了，应该拍下来！拿出手机之后却觉得不对劲儿，又放回去。风在耳边簌簌作响，皮肤清楚地触到清爽的空气，青草的气息钻进鼻子，脑中还浮现出小时候在树下玩耍的记忆，此情此景，怎么能被简化成一张照片——或者说得专业些——一幅构图呢？&lt;/p&gt;
-
-&lt;p&gt;手机具有相机功能之后，摄影得到极大普及，或许也是从那时候起，我们的眼睛也不知不觉变得异样，变成了「相机之眼」。即便不是专业摄影师，眼睛也在无时无刻捕捉好的构图，思考并判断是否应该拿出相机拍下来。如此一来，眼睛变得硕大无比，压迫其它感觉，所有的经验仿佛都只剩下视觉经验，散步、游玩、聚会……的意义都只是「我看到了什么」。&lt;/p&gt;
-
-&lt;p&gt;「拍照并发布到网上」的行为早已被批判，许多人都认为它过于注重虚拟世界，破坏了现实生活，而摄影本身却鲜有人反对。至少在普通人那里，摄影几乎总是一件好事，它帮你留住值得珍藏的风景，见证成长的瞬间，定格某些不得不放弃的事物。摄影是一种占有方式，而且相机不会造成物理伤害，所以这种方式看上去没有任何坏处。然而，摄影在占有的同时也在破坏，当在外游玩而一心只想拍照时，它就破坏了风景，同时疏离你和风景的关系。风景包括当时的气候、触觉和许多其它非视觉的东西，却被破坏得只剩下视觉，就像一个刚吃一口就扔掉的水果。本可以全身心享受大自然，摄影却把人变成一个冷冰冰的只有眼睛的局外怪物。&lt;/p&gt;
-
-&lt;p&gt;强迫藏族儿童摆拍、为了拍出可爱照片去虐待动物、看到车祸先拍照……这些事情越来越多地出现，说明摄影带来的疏离已经随处可见。拍摄看上去像是关心，如同摄影者一直宣称得那样，「为了引起大家对 XX 的注意」，实际上对拍摄对象非常粗暴。照片表现出来的关怀越强烈，有时候反而说明摄影师缺乏同情，最极端的例子是一些战地摄影师看到伤员会为了构图帮他摆姿势。或许摄影师会辩解说，这种对个体的冷漠是值得的，因为照片会引起社会关注，从而改善群体的处境。事实上，在图像泛滥的今天，人们的心理承受能力越来越高，一般的照片再也无法激起他们的反应（这也促使摄影师努力拍出更有表现力的照片，也变得更加冷漠和残忍），即使有反应，也很难转化成关怀行动，因为对照片的反应让他们觉得已经尽到了同情的义务。&lt;/p&gt;
-
-&lt;p&gt;真实世界并不是由一幅幅照片组成的，也并非只能被「看到」。语言是世界的抽象，也是一种阻碍，现在又多了影像。当泛滥的影像让每个人都有「相机之眼」，或许我们应该克服这种倾向，毕竟如果一个吻也只是被看到而已，也太可悲了。&lt;/p&gt;
-
-&lt;p&gt;（顺便推荐一本书：《&lt;a href=&quot;http://book.douban.com/subject/4282084/&quot;&gt;论摄影&lt;/a&gt;》）&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>谢谢你，陌生人</title>
-   <link href="http://blog.zhuoqun.net/2013/10/19/thank-you-strangers.html"/>
-   <updated>2013-10-19T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2013/10/19/thank-you-strangers</id>
-   <content type="html">
-&lt;p&gt;到科隆之后，天气好时经常出去散步、骑车，总能碰到很多陌生人。遛狗的中年男人，散步的老头，骑车的老太太，婴儿车里面的小孩，长椅上聊得很开心的情窦初开的少男少女……看到他们就忍不住微笑，他们也会友好地和我打招呼，或报以微笑，心情一下就能明朗，再也抑郁不起来。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\a&lt;/code&gt; 警报&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\e&lt;/code&gt; Escape字符,通常对应ASCII中的&lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt;字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\v&lt;/code&gt; 垂直制表符&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;因为陌生，所以没有要求，能保持礼貌，不随意打扰。一个人可能太孤独，和亲密的人在一起又缺乏自由，还是期待多一些友好的陌生人吧。或许你从未留意擦肩而过的那个人，可若没有他遥遥相伴，就好像没有背景的舞台。正如辛波丝卡所说：「他们并不知道自己空着的手里盛放了好多东西。」&lt;/p&gt;
-&lt;pre&gt;
-&lt;strong&gt;&lt;em&gt;致谢函&lt;/em&gt;&lt;/strong&gt;
-
-我亏欠那些  
-我不爱的人甚多。 
-
-另外有人更爱他们  
-让我宽心。 
-
-很高兴我不是   
-他们羊群里的狼。 
-
-和他们在一起我感到宁静，   
-我感到自由，   
-那是爱无法给予   
-和取走的。   
+&lt;h4&gt;八进制转义\num&lt;/h4&gt;
 
-我不会守着门窗   
-等候他们。   
-我的耐心   
-几可媲美日晷仪，   
-我了解   
-爱无法理解的事物，   
-我原谅   
-爱无法原谅的事物。  
-
-从见面到通信   
-不是永恒，   
-只不过几天或几个星期。  
-
-和他们同游总是一切顺心，   
-听音乐会，   
-逛大教堂，   
-饱览风景。  
-
-当七座山七条河   
-阻隔我们，   
-这些山河在地图上   
-一目了然。 
-
-感谢他们   
-让我生活在三度空间里，   
-在一个地平线因变动而真实，   
-既不抒情也不矫饰的空间。 
+&lt;p&gt;支持八进制转义方式通常容许以2到3位数字表示该值所代表的字节或字符。八进制转义可以很方便地在正则表达式中插入平时难以输入的字符&lt;/p&gt;
 
-他们并不知道   
-自己空着的手里盛放了好多东西。  
+&lt;h4&gt;十六进制及Unicode转义:\xnum、\x{num}、\unum、\Unum&lt;/h4&gt;
 
-“我不亏欠他们什么，”   
-对此公开的问题   
-爱会如是说。 
+&lt;h4&gt;几乎能匹配任何字符的元字符：点号&lt;/h4&gt;
 
-———— &lt;em&gt;辛波丝卡&lt;/em&gt;
-&lt;/pre&gt;</content>
- </entry>
- 
- <entry>
-   <title>初到德国</title>
-   <link href="http://blog.zhuoqun.net/2013/10/11/arrived-in-germany.html"/>
-   <updated>2013-10-11T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2013/10/11/arrived-in-germany</id>
-   <content type="html">
-&lt;p&gt;到科隆已经近一周，已经非常喜欢这里，空气清新，风景优美，交通便利，所有人都很友好。尽管是大城市，却很少见到高楼大厦，反而四处可见绿树，惊讶之后随即明白：是我对城市的印象太刻板了。在中国，城市是乡村的对立面，意味着高楼大厦、拥挤不堪、污染严重，现在看来并不是全世界都如此。&lt;/p&gt;
-
-&lt;p&gt;北京没有直达科隆的航班，需要在法兰克福坐火车。下飞机已经是下午3点，当时非常焦急，生怕天黑才能到科隆，没想到拿到车票之后就可以直接去站台等车。不需要经过「检票口」，没有安检，也没有候车室（所以也没有候车室的检票口），简单得让我有些紧张。下车时发现车站也没有「出站口」，下站台后就可以直接出去，接站人员也可以直接去站台。这种经历在坐地铁时又体验了一回，有些奇怪，又觉得「好像就应该是这样」，或许提前 2 个小时到车站、经过重重关卡才能上车才不正常吧。&lt;/p&gt;
-
-&lt;p&gt;安顿下来之后，开始到处走走看看，熟悉周边环境。转了几圈之后，发现这里的汽车几乎从不鸣笛，斑马线前也一定会减速，让行人先走。起初不觉得怎样，走路越多就越感动，听到汽车「呜」地从旁边经过都觉得开心。红灯就停下、绿灯就走、在有斑马线的地方过马路，遵守这些规则就能畅通无阻。不就应该这么简单吗？过马路就不应该随时担心被撞，或者面对司机刺耳的喇叭声。&lt;/p&gt;
+&lt;p&gt;在某些工具软件中，点号用来缩略表示可以匹配任何字符的字符组，而在其他工具中，点号能匹配除了换行符之外的任何字符，关于点号，需要注意的有：
+* 匹配模式会改变点号的匹配规则
+* POSIX规定，点号不能匹配NULL（值为0的字符），尽管大多数脚本语言容许文本中出现NULL（而且可以用点号来匹配）&lt;/p&gt;
 
-&lt;p&gt;还有一件小事让我印象深刻。有些超市的手推车是锁在一起的，推手上有个投币口，投进硬币可以把锁顶开，还车时上锁，硬币会从投币口退还。第一次使用没有经验，还车时以为硬币会掉出来，上锁时用手在下面接着，没想到硬币就停在投币口，露出半截方便拿回。当时忍不住爆出一句粗口：妈的，他们什么都想到了！我甚至可以想象他们设计这种手推车时不断实验的场景，一定认真动人。&lt;/p&gt;
+&lt;h4&gt;POSIX&amp;quot;字符组&amp;quot;方括号表示法&lt;/h4&gt;
 
-&lt;p&gt;以上也许都只是细节，可这些就足以让我爱上这里。规则或许很多，但只要学会并且遵守，很多事情就再也不用担心，然后就可以把心思放在更重要的事情上。这几天暗暗决心严格遵守这里的规则，并非为了「不给中国人丢脸」，而是心甘情愿地希望尽自己一份力，使这种状态保持下去。&lt;/p&gt;
+&lt;p&gt;我们通常所说的字符组，在POSIX标准中成为方括号表达式(bracket expression)。POSIX中的属于“字符组”指的是在方括号表达式内部使用的一种特殊功能。&lt;/p&gt;
 
-&lt;p&gt;不知道是不是因为一切秩序井然，这里的人看上去都十分悠闲，不觉得非要做出点什么，感觉不到焦虑。经常看到跑步的人，还有很多漂亮小孩，坐在婴儿车里一脸好奇。这些小孩真幸福，能在这样的环境中成长，而他们并不觉得这有什么好，因此更幸福。&lt;/p&gt;
+&lt;p&gt;POSIX字符组的详细列表根据locale的变化而变化，但是下面这些通常都能支持：&lt;/p&gt;
 
-&lt;p&gt;受这安逸影响，我也开始安心生活，工作之后也第一次有安定的感觉，是的，我愿意在这种地方散步、做饭、学习、工作，平平常常过日子，不一定非要做点什么。即使这只是新鲜感带来的幻觉，至少之前困扰我的焦虑消失了大半，是个好的开始。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>保持沉默</title>
-   <link href="http://blog.zhuoqun.net/2013/08/14/keep-silence.html"/>
-   <updated>2013-08-14T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2013/08/14/keep-silence</id>
-   <content type="html">
-&lt;p&gt;早就想戒掉微博，可反反复复一直没能坚持，这次总算下定决心。以前因为碎片信息对微博感到焦虑，却还是有表达欲望，打发时间也好，渴望回应也好，时不时想发一些东西，现在呢？完全没有说话的欲望。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[:alnum:]&lt;/code&gt; 字母字符和数字字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:alpha:]&lt;/code&gt; 字母&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:blank:]&lt;/code&gt; 空格和制表符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:cntrl:]&lt;/code&gt; 控制字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:digit:]&lt;/code&gt; 数字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:graph:]&lt;/code&gt; 非空字符（即空白字符，控制字符之外的字符）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:lower:]&lt;/code&gt; 小写字母&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:print:]&lt;/code&gt; 类似&lt;code&gt;[:graph:]&lt;/code&gt;,但是包含空白字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:punct:]&lt;/code&gt; 标点符号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:space:]&lt;/code&gt; 所有的空白字符（&lt;code&gt;[:blank:]&lt;/code&gt;、换行符、回车符及其他）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:upper:]&lt;/code&gt; 大写字母&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[:xdigit:]&lt;/code&gt; 十六进制中容许出现的数字（例如0-9a-fA-F）&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;之所以想沉默，是惊觉自己居然变得那么刻薄和故作姿态。看到有人一本正经就想讽刺，喜欢附和嘲讽挖苦，写东西时装模作样以求引人侧目，无聊时不停发牢骚希望有人回应。自己做这些事情时并不自觉，可事后看却羞愧难当，又恶心得像吃了一只苍蝇。&lt;/p&gt;
+&lt;h4&gt;锚点及其他“零长度断言”&lt;/h4&gt;
 
-&lt;p&gt;不想为自己的不自律开脱，但确实受风气影响颇多。这是一个反讽和解构的时代，到处充斥着段子和俏皮话，随时逗人发笑，瓦解一切事物。尽管它们对付独裁和言论管制很有用，在其它方面却显得狭隘恶毒，没有建设，只有疯狂的破坏。不对，破坏也算阳刚有力，反讽和解构更像是下毒偷袭，阴损得很无所谓。在这种环境下，语言意义消失得特别快，讲什么都是在讲段子。本来内涵丰富的词语一旦进入大众视野便立刻被滥用，迅速变得廉价和肤浅，如「改变世界」、「人文和科技的交叉口」、「相信爱情」等，先是被用来营销，引起大家反感后便被消解掉，失去所有意义。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;行/字符串的其实位置&lt;code&gt;^&lt;/code&gt;、&lt;code&gt;\A&lt;/code&gt; 脱字符&lt;code&gt;^&lt;/code&gt;匹配需要搜索的文本的起始位置，如果使用了增强的行锚点匹配模式，它还能匹配每个换行符之后的位置。如果可以使用，则无论在什么匹配模式下，&lt;code&gt;\A&lt;/code&gt;总是能够匹配待搜索文本的起始位置。&lt;/li&gt;
+&lt;li&gt;行/字符串的结束位置：&lt;code&gt;$&lt;/code&gt;、&lt;code&gt;\z&lt;/code&gt;和&lt;code&gt;\Z&lt;/code&gt;.&lt;code&gt;$&lt;/code&gt;最常见的意思是匹配目标字符串的末尾，也可以匹配整个字符串末尾的换行符之前的位置。匹配模式可以改变&lt;code&gt;$&lt;/code&gt;的意义，匹配字符串中的任何换行符。如果支持，&lt;code&gt;\Z&lt;/code&gt;通常表示“未指定任何模式下”&lt;code&gt;$&lt;/code&gt;匹配的字符，通常是字符串的末尾位置，或者是在字符串末尾的换行符之前的位置。作为补充，&lt;code&gt;\z&lt;/code&gt;只匹配字符串的末尾，而不考虑任何换行符&lt;/li&gt;
+&lt;li&gt;匹配的起始位置（或者是上一次匹配的结束位置）：&lt;code&gt;\G&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;环视:环视结构中，大多数实现方式都限制了逆序环视中的表达式的长度（但是顺序环视则没有限制），在Perl和Python中。逆序环视只能匹配固定长度的文本。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;如果只是这样倒也罢了，可连为数不多的优秀创作者也被破坏了。创作者比常人敏感，更容易感受到时代风气，他们不愿随波逐流，作品和思想也就难免被嘲讽解构。时间久了，终于受到另一种影响：因为不胜其烦，创作时会首先想到如何防御，仿佛存在一个无比强大的论敌，作品便不够自然洒脱，说理也显得用力过度。若不够敏感，不会是好的创作者，而敏感必定受到坏影响，进退两难。或曰：难道不能大声疾呼反对这种风气吗？行不通，所有的反对只会成为解构的新素材，总带着愤怒也容易变得面目可憎。还是保持沉默吧，沉默从未像现在这样有力量。&lt;/p&gt;
+&lt;h3&gt;注释和模式修饰符&lt;/h3&gt;
 
-&lt;p&gt;在解构的同时，几乎所有人都在自说自话，看似分享交流，实为炫耀自慰，从自拍的流行程度可见一斑。社交网络应该改名叫自慰网络才对。一个精神健全的人不会太关注自己，而现在大部分人每天乐此不疲把大小事情都发布到网络，一点点小情绪也变得无比重要，如果它们经常得到回应，这种行为就会变成习惯，整个人也会变得矫情和神经质。生活中很多事情应该被忽略，另外一些事情则经过时间沉淀变成经验，如果事事都立刻发布，就会多出不必要的烦恼，经验也没有时机产生。&lt;/p&gt;
+&lt;h4&gt;模式修饰符：（?modifier),例如(?i)和(?-i)&lt;/h4&gt;
 
-&lt;p&gt;沉默并非不作为，恰恰相反，它会促进行动。现在信息泛滥，人们每天接触到的大都是词语、图像和影像，而非事物本身，耽于幻想变成常态，渐渐大脑变得硕大无比，身体却萎缩了。对于这样的人，说到就好像做到了，事情已经在脑子里做过一遍，便懒得在现实中再做一次。许多人做事之前乐于在网上表态，「明天开始早起」、「以后一定按时锻炼」……很多人看到马上过来赞许，当事人立刻获得了成就感，最后有没有真正做到呢？只要不发布就没人知道，谁会有闲心督促你呢？做到之前还是不说为妙，尽管不会那么多人知晓，可做任何事都要耐得住寂寞，当慢慢学会不再哗众取宠，就会发现做事本身带来的成就感比打嘴炮的感觉好多了。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(?i)&lt;/code&gt; 启用不区分大小写的匹配，而&lt;code&gt;(?-i)&lt;/code&gt;会停用此功能。例&lt;code&gt;&amp;lt;B&amp;gt;(?i)very(?-i)&amp;lt;/B&amp;gt;&lt;/code&gt;。除Python之外。大多数实现方式中，&lt;code&gt;(?i)&lt;/code&gt;的作用范围都只限于括号内部（也就是说，在闭括号之后就失效），即&lt;code&gt;&amp;lt;B&amp;gt;(?:(?i)very)&amp;lt;/B&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;此外，都说互联网促进交流，可根据我的经验，在网上交流越多反而越容易没有朋友。很多人如果在现实中遇到，会有直观印象，他的样貌、眼神、气质、动作、说话语气等都会影响你们的关系，而一旦成为朋友，绝不会因为说一句蠢话而绝交。网上则不同，大家只能根据言论来判断一个人，换句话说，你不会把他当作活生生的人，而只是把他当作「观点持有者」，很容易因为一句话就把对方拉黑，而如果那个人已经是现实中的朋友，你就不会如此片面武断。也可能你很喜欢一个人网上的言论，可见面之后大失所望，这种情形也常见。因为我在网上和现实中很不同，所以这方面教训颇多，思来想去，还是觉得在网上保持沉默最好，免得破坏一些潜在友谊。&lt;/p&gt;
+&lt;h4&gt;模式作用范围：(?modifier:...)，例如(?i:...)&lt;/h4&gt;
 
-&lt;p&gt;是为自勉。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>知识就是权力</title>
-   <link href="http://blog.zhuoqun.net/2013/08/03/knowledge-is-power.html"/>
-   <updated>2013-08-03T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2013/08/03/knowledge-is-power</id>
-   <content type="html">
-&lt;p&gt;好像自从有了微博以来，很多文化人和知识分子开始不断批判网络上戾气太重，可大众并不乖乖听从教诲。你骂我「公知」，我骂你「庸众」，大家互不相让。一些有识之士看到这种情形便忧心忡忡，其实大可不必，世界从来就是这样，只是现在所有人都能发言，一切都摆在台面上了。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(?i:...)&lt;/code&gt;表示模式修饰符的作用范围只有在括号内有效。&lt;/p&gt;
 
-&lt;p&gt;培根有句名言：Knowledge is power，在中国被翻译为「知识就是力量」，现在觉得这句话或许翻译成「知识就是权力」更为贴切。知识使人更强大，它帮助你认识世界，掌握工具。有了知识，便可以通过语言和文字符号传播自己的思想，继而影响他人，这种影响有时比枪炮威力更大。一个人或许有智慧，但他若没有知识，便没办法把智慧表述成语言或文字，也就不能影响许多人，他的权力就微不足道。或许周围的人可以从他身上学到许多，可大部分人只能看到他表达出来的那部分。&lt;/p&gt;
+&lt;h4&gt;注释：(?#...)和#...&lt;/h4&gt;
 
-&lt;p&gt;经常看到各种媒体上有人呼吁多读书，之前我很相信他们，后来发现读书多并不一定是好事，可为什么好像全世界都提倡读书呢？仔细琢磨了一下，忽然发现：那些整日教导别人多读书的人，都是读书人。通往山顶的路有许多，读书只是其中一条，可正如前面所说，那些不读书却有智慧的人没有权力，所以被广泛传播的只有读书人的观点和想法。读书确实有许多好处，可绝不是万能药，也不适合所有人。有些人从读书受益颇多，却不能自得其乐，看到别人不读书就痛心疾首，这样的人看似热心，其实多么可恶，多么自恋。&lt;/p&gt;
+&lt;h4&gt;文字文本范围:\Q...\E&lt;/h4&gt;
 
-&lt;p&gt;中国有句古话：「文人相轻」，文人的武器不是拳头，而是文字，那种互相贬低其实和比武一样。老百姓大都是文盲，只会打架，没有「相轻」的权力。现在呢？教育普及，几乎所有人都能读书写字；互联网发达，几乎所有人都能「发表」。忽然之间，我们发现不只是「文人相轻」，同行也相轻，公务员和其他人也相轻……尽管这种情况会让一些真正美好的东西遭到侮辱，但在「民主」方面确实进步很大。以前媒体都需要审核，写得不好不能发表，观点不对不能发表，有权力才能支配。互联网让我们听到所有声音，尽管有些声音很难听。你们不是喜欢宣扬多读书吗？我偏偏不爱读书，而且会跳出来反驳，这种反驳会被许多人听到并赞同，这样便瓦解掉了你们的权力。「公知」、「装逼」、「文艺青年」……这些词儿之前也存在某些人心里，只是那时没有权力，而现在终于能还击。&lt;/p&gt;
+&lt;p&gt;它会消除其中除了\E之外所有元字符的特殊含义（如果没有\E，就会一直作用到正则表达式末端）。其中的所有字符都会被当成普通文字文本来对待。如果在构建正则表达式时包含变量，次功能就非常有用。&lt;/p&gt;
 
-&lt;p&gt;互联网上「吐槽」风气日盛，几乎所有东西都遭到反讽，这并不是一件好事，可谁没有权力欲呢？一个之前手无寸铁的人忽然拿到一把枪，肯定想要到处尝试它的威力。那些觉得世风日下的知识分子，就好像警察发现普通人也可持枪，不免恐惧过度，其实习惯就好，大家会在混乱中慢慢学会妥协，最终形成新的秩序。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>多重人格</title>
-   <link href="http://blog.zhuoqun.net/2013/06/25/live-with-multiple-personality.html"/>
-   <updated>2013-06-25T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2013/06/25/live-with-multiple-personality</id>
-   <content type="html">
-&lt;p&gt;前几天在著名问答网站 &lt;a href=&quot;http://www.quora.com/&quot;&gt;Quora&lt;/a&gt; 上看到这样一个问题:&lt;/p&gt;
+&lt;h3&gt;分组，捕获，条件判断和控制&lt;/h3&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.quora.com/Facebook-1/Why-should-you-NOT-connect-Quora-with-your-Facebook-profile&quot;&gt;Why should you NOT connect Quora with your Facebook profile?&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;h4&gt;捕获/分组括号：(...)和\1，\2，...&lt;/h4&gt;
 
-&lt;p&gt;在 Quora 可以设置连接到 Facebook profile，之后别人就可以在 Quora 上看到你的 Facebook profile, 而你在 Quora 的动态也会显示在 Facebook timeline 中。这个问题最受欢迎的答案很简单：&lt;/p&gt;
+&lt;p&gt;捕获型括号的编号是按开括号出现的次序，从左到右计算的。如果提供了反向引用，则这些括号内的子表达式匹配的文本可以在表达式的后面部分用&lt;code&gt;\1&lt;/code&gt;、&lt;code&gt;\2&lt;/code&gt;来引用。&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;Because I wouldn’t want my Facebook friends to know how smart I am, and I wouldn’t want my fellow Quorans to know how stupid I am!&lt;/p&gt;
+&lt;h4&gt;仅用于分组的括号：&lt;code&gt;(?:...)&lt;/code&gt;&lt;/h4&gt;
 
-&lt;p&gt;(因为我不想让 Facebook 上的好友知道我多么聪明，也不想让 Quora 上的好友知道我多蠢！)&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;仅用于分组的括号&lt;code&gt;(?:...)&lt;/code&gt;不能用来提取文本，而只能用来规定多选结构或者两次的作用对象。&lt;/p&gt;
 
-&lt;p&gt;真是绝妙的回答！每个人都有多重人格，大家都承认这一点，可拥有并不代表愿意把它们都展示出来。我们更愿意对不同的人展示不同人格，这种状态一旦遭到破坏，就会非常不舒服。这样并非虚伪或不真诚，只是每个人在不同时期有不同需求，其他人也并不希望承受你的全部人格。&lt;/p&gt;
+&lt;h4&gt;命名捕获：(?&lt;name&gt;...)&lt;/h4&gt;
 
-&lt;p&gt;曾几何时，博客刚刚开始流行，各种社交网络和微博还没有出现，很多人都写得很真诚。记得当时看到某个大学生的博客，只有寥寥几篇文章，想是刚创建不久。其中一篇说自己有另外一个博客，坚持写了很久，可前一段时间被室友看到了，还特意问她在写什么。从此之后，每次写总觉得室友会看，非常别扭，最后还是决定新开一个博客，希望身边的人不会发现。这种心态在当时非常普遍，大家都以网名示人，在博客上随意书写，偶尔和陌生人交流，却并不影响现实生活。&lt;/p&gt;
+&lt;h4&gt;固化分组：(?&amp;gt;...)&lt;/h4&gt;
 
-&lt;p&gt;一直到现在我都有这种早已不合时宜的「忸怩」，羞于在现实中谈及自己在网上的行为，极不愿意向别人介绍自己的网名。怎么好说出口呢？除了试图严格划清网络和现实的界线外，和那位 Quora 网友一样，我也不愿混淆自己在各个社交网络中的身份。微博上有一个「我」，豆瓣上有一个「我」，Twitter 上有一个「我」，他们各自埋头做事，互不理睬。如果有人顺藤摸瓜把这些「我」一一找到，就会让我觉得难堪，好像被人看到裸体一样。&lt;/p&gt;
+&lt;p&gt;一旦括号内的子表达式匹配之后，匹配的内容就固定下来（固化(atomic)下来无法改变），在接下来的匹配过程中不会变化，除非整个固化分组的括号都被弃用，在外部回溯中重新应用。&lt;/p&gt;
 
-&lt;p&gt;保护自己的隐藏人格并非网络时代特有，以前很多人用笔名发表文章，或许也是为此。茨威格就曾在《昨日的世界》中写道：「我只为我的书籍所取得的成就和我在文学上的名声而感到高兴；如果好奇心一旦转移到我本人身上，那么我所取得的成就只会引起我的反感，我说这话完全是真心实意的。」我们都想表达隐秘的想法，若能得到别人认同则更好，可同时也希望那些想法和认同老实地待在它们应该在的地方。它们一旦「越界」，你就要被迫在不合适的场合面对那些人格，如同把喜阴植物搬到阳光下。难怪茨威格这样感慨：「如果我今天还能从头开始，那么我一定会用另外一个名字，一个杜撰的名字，用一个笔名来发表自己的作品」。&lt;/p&gt;
+&lt;h4&gt;多选结构：...|...|...&lt;/h4&gt;
 
-&lt;p&gt;社交网络兴起之后，大家越来越倾向使用真实姓名，虚拟和现实交集越来越多，网络上的知名度也渐渐能影响现实生活。以前生怕别人知道自己身份，现在都争先恐后地署名，甚至找朋友为自己做广告。一开始觉得非常不习惯，曾经有朋友让帮忙推荐东西，我非常不情愿又不知该如何拒绝，只好沉默，为此事焦虑很久，现在回头看，真是傻得好玩。每个人都有大把虚荣心，当初写博客也希望很多人订阅、评论，所以没人看博客之后，写博客的人也少了，都跑去社交网站和微博，哪个网站粉丝多就在那里多写，和那些网络营销者没多大分别。不得不承认，道德确实是相对的东西，当初在博客写软文就有很多人声讨，现在买卖粉丝大家也早已见怪不怪，那个因为被室友发现就关闭博客的大学生，现在应该可以大方地和别人在微博互粉了吧？&lt;/p&gt;
+&lt;p&gt;多选结构的优先级很低，所以&lt;code&gt;this and|or that&lt;/code&gt;的匹配等价于&lt;code&gt;(this and)|(or that)&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;且慢。我并不赞美「忸怩」，也不认为展示自己的所有人格一定虚伪无耻，恰恰相反——我很想拥有那种落落大方。「勇敢」和「无所谓」有时候看起来很像，可只有恐惧时才能真正勇敢。尼尔盖曼在费城艺术大学毕业典礼的演讲上说：「假设这样一个时刻，你赤裸裸地走在大街上，将心灵、思想、内心的一切都暴露在外，尽情展现自我，在那一刻，你或许才开始步入正轨。」之所以愿意都「暴露」出来，是因为那些人格都已经有足够的生命力，众目睽睽之下也能淡定从容。&lt;/p&gt;
+&lt;h4&gt;条件判断：(?if then |else)&lt;/h4&gt;
 
-&lt;p&gt;扪心自问，现在我足够勇敢了吗？是更胆小了，所以删了微博，其它地方也尽量少发言，试图保护那些人格不至夭折。可还有表达欲，也想多锻炼自己的语言，所以在学会勇敢之前，还是在这个被遗忘的博客打发些时间吧。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>生产力和创造力</title>
-   <link href="http://blog.zhuoqun.net/2012/08/29/productivity-and-creativity.html"/>
-   <updated>2012-08-29T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2012/08/29/productivity-and-creativity</id>
-   <content type="html">
-&lt;p&gt;「生产力」（ Productivity ）和「创造力」（ Creativity ）是我们经常提到的两个词，和它们一块儿出现的往往还有「竞争力」和「执行力」等。由于我们非常喜欢各种标语和口号，所以早就对这些名词熟视无睹，把它们当做是和「大力发展经济」一样的空话套话。我以前特别讨厌这种大的概念，它们更多是所谓「成功人士」用来说教的招牌，完全无法给出任何实际意义上的指导。不过最近我的想法发生了一些转变。&lt;/p&gt;
+&lt;h2&gt;四、表达式的匹配原理&lt;/h2&gt;
 
-&lt;p&gt;从五月份到现在的三个多月，我一直在利用业余时间做一个稍有规模的网站，也正是在这一段时间里我对生产力和创造力有了新的认识。它们在做一件东西的时候都不可或缺，也都需要培养和锻炼，但它们之间也有非常矛盾的地方。一个有着很高生产力的人不一定有很好的创造力，反之亦然；生产力所需要的素质可能正是创造力的天敌。掌握它们之间的平衡是一件非常困难的事情。&lt;/p&gt;
+&lt;p&gt;正则引擎可以粗略地分为3类：&lt;/p&gt;
 
-&lt;h2 id=&quot;&quot;&gt;生产力&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;DFA(符合或不符合POSIX标准的都属于此类）&lt;/li&gt;
+&lt;li&gt;传统型NFA&lt;/li&gt;
+&lt;li&gt;POSIX NFA&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;因为我们的祖国是一个社会主义国家，所以很早的时候我们就开始学习什么是「生产力」，但这里说的「生产力」和马克思主义理论中的「生产力」不一样，它和「工作效率」的意思更接近。为了能更好地完成一件事情，我们经常会去研究各种工具，想法设法节省时间，所有可以提高生产力的方法都会受到欢迎。生产力对于公司来说意味着更大的效益，对于个人来说则意味着可以创造更多东西。正因为如此，我们才会创造出那么多的工具，发明出各种管理方法。&lt;/p&gt;
+&lt;h3&gt;匹配的基础&lt;/h3&gt;
 
-&lt;p&gt;培养生产力是一件有迹可循的事情，一个人的成功可以复制到另外一个人身上，这也让教育成为可能。如果你想要锻炼肌肉，那么就按照科学的方法去健身和饮食，然后就可以达到你想要的效果；如果你想要提高编程的效率，那么就多看文档并且多做练习，一段时间之后肯定会比以前高效。在任何事情上，你都可以通过科学的、正确的学习和训练来提高生产力。你可以不必那么聪明，只要足够自律，并且持之以恒。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优先选择最左端的匹配结果，如用&lt;code&gt;fat|cat|belly|your&lt;/code&gt;来匹配字符串&lt;code&gt;The dragging belly indicates that your cat is too fat&lt;/code&gt;的结果是&lt;code&gt;beely&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;标准的匹配量词(&lt;code&gt;*&lt;/code&gt;、&lt;code&gt;+&lt;/code&gt;、&lt;code&gt;?&lt;/code&gt;)和&lt;code&gt;{m,n}&lt;/code&gt;是匹配优先的。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h2 id=&quot;_2&quot;&gt;创造力&lt;/h2&gt;
+&lt;h3&gt;引擎构造&lt;/h3&gt;
 
-&lt;p&gt;相对于生产力而言，「创造力」就神秘多了，也更能引起大家的兴趣，从琳琅满目的关于「创新」和「创造性思维」的书中就略见一斑。在开始创造一件东西的时候，你可能只是头脑中有一个模糊的想法，需要不断地摸索才能逐渐看清楚它的样子。只有创造力才能产生好的想法，赋予想法具体的形式，在摸索的过程中做出比较好的选择。有意思的是，很多富有创造力的人也不清楚自己的创造力从何而来，当他们试图表达的时候反而又给它蒙上了一层厚厚的面纱。一个艺术家可能会谈及他的创作过程以及生活习惯，仿佛那些是创造力的来源，但实际上可能只是艺术家本人的误解，真正重要的东西被忽略了。&lt;/p&gt;
+&lt;p&gt;正则引擎中的零件分为几类————文字字符(literal characters)、量词（qualifiers）、字符组（character classes）、括号，等等。&lt;/p&gt;
 
-&lt;p&gt;非常遗憾，创造力没有办法&lt;strong&gt;直接&lt;/strong&gt;培养和学习，因为通向终点的道路并不清晰，不可能只看路标就顺利到达。如果你带着非常明确的目标去培养自己的创造力，结果更有可能是南辕北辙，越努力就离目标越远。创造力是一个「涌现」的过程，你要吸收足够多的东西才有可能让它发生。所以如果你真的想要提高创造力，就必须扔掉所有功利性的目的，让自己完全沉浸在好奇心和乐趣当中，去感受所有美好的东西。假设你想要做一个好的产品，如果你只是每天埋头研究各种产品理论，可能会没有什么创意；而如果你真正放轻松，经常去看喜欢的电影，听喜欢的音乐会，说不定就会无意中得到最重要的那个想法。创造力是一个太害羞的姑娘，只有在你真正轻松漫游和感受的时候她才会悄然而至。&lt;/p&gt;
+&lt;p&gt;锚点可以分为两类：简单锚点（^、$、\G、\b、）和复杂锚点(例如顺序环视和逆序环视）。简单锚点之所以得名，就在于它们只是检查目标字符串中的特定位置的情况，或者是比较两个相邻的字符。相反，复杂锚点能包含任意复杂的子表达式，所以它们也可以任意复杂。&lt;/p&gt;
 
-&lt;h2 id=&quot;_3&quot;&gt;矛盾和平衡&lt;/h2&gt;
+&lt;h3&gt;表达式主导与文本主导&lt;/h3&gt;
 
-&lt;p&gt;一开始，我们非常需要创造力，没有创造力我们就没有想法，根本不知道要做什么。等到想法确定形式清晰之后，我们就需要生产力帮我们一步一步实现它。只有创造力，想法就不会被完成，所有的东西都会沦为空想；只有生产力，我们就没办法提出一个好问题，而如果没有问题，那么解决问题的能力再强又有什么用呢？只有同时具备创造力和生产力的人才能创造出伟大的东西。但是，创造力和生产力需要的素质很不一样，甚至有点儿自相矛盾，很难在一个人身上同时看到。创造力需要的是激情、深刻和非常好的感受力，生产力需要的则是冷静、专注和足够的耐心。有激情的人容易兴奋也容易失落，情绪化非常严重，这是提高生产力的一个很大障碍。同样，专注对于生产力来说是好的，但如果太专注于一个方面就会失去丰富性，创造力也就不会「涌现」出来。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NFA引擎：表达式主导&lt;/li&gt;
+&lt;li&gt;DFA引擎：文本主导&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;如果不能理解创造力和生产力的关系，我们就很容易责怪自己，也往往会顾此失彼，没办法掌握平衡。以我自己为例，我经常为自己的情绪化自责，一度认为如果没有情绪自己就可以创造出更多东西，而事实上正是因为那些情绪——或者说热情，我才会有创造东西的想法和欲望，才会有创造力。在创造了一些东西之后，我终于开始正确地对待自己身上的很多「缺点」，发现了它们的作用，也慢慢在创造力和生产力之间找到了平衡。无论是成为一个拥有无数好主意的空想家，还是成为一个效率极高的「机器」，都是失败者。&lt;/p&gt;
+&lt;h3&gt;比较NFA与DFA&lt;/h3&gt;
 
-&lt;p&gt;愿我一直有创造的欲望和与之匹配的能力。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>物体的语言</title>
-   <link href="http://blog.zhuoqun.net/2012/07/23/the-language-of-the-objects.html"/>
-   <updated>2012-07-23T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2012/07/23/the-language-of-the-objects</id>
-   <content type="html">
-&lt;p&gt;大二的时候为了提高自己的英语水平，我跑去选了一门英语系的专业课，想了解一下英语系同学的学习方法。这门课程叫做「口译」，每天上课就是跟着老师做口译练习，有时候老师会逐句播放英文句子然后让学生站起来翻译。作为一个外系学生，我几乎每次课都是在磕磕绊绊中过来的，当时我就很奇怪一件事情：很多英文长句有些同学听了之后立刻就可以做口译，而那个时候我还在纠结怎么把那么长的句子记住。难道是我反应太慢了？还是有其它原因？&lt;/p&gt;
+&lt;p&gt;DFA特性:&lt;/p&gt;
 
-&lt;h2 id=&quot;&quot;&gt;英语思维&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;DFA匹配很迅速&lt;/li&gt;
+&lt;li&gt;DFA匹配很一致&lt;/li&gt;
+&lt;li&gt;谈论DFA匹配很恼人&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;这个问题直到我后来偶尔了解到「英语思维」之后才有了答案。我不能很快地将英文长句口译出来并不是因为反应慢，而是因为我在听到英文长句的时候会下意识地先把它翻译成中文然后记住，而不是直接把英文内容「投射」到脑子里。中间的翻译环节导致了我无法很快地接收并理解英文表达的意思，而具有「英语思维」的人则可以直接理解英文。「中式英语」的产生也是因为不具备「英语思维」，比如我们想要表达「当她听到这个的时候很开心」会这么说：”When she heard this she was happy”, 但实际上应该这么说：”She was happy when she heard this” ，这种英语经常会让老外莫名其妙。&lt;/p&gt;
+&lt;h4&gt;回溯&lt;/h4&gt;
 
-&lt;p&gt;所以学好英语的重点在于如何建立「英语思维」。只有能用英语去思考，才可以用英语流利交流，不然就只能去分析语法、语义等要素，偏离了学习语言的真正目的。&lt;/p&gt;
+&lt;p&gt;NFA引擎最重要的性质是，它会依次处理各个子表达式或组成元素，遇到需要在两个可能成功的可能中进行选择的时候，它会选择其一，同时记住另一个，以备稍后可能的需要。&lt;/p&gt;
 
-&lt;h2 id=&quot;_2&quot;&gt;物体的语言&lt;/h2&gt;
+&lt;p&gt;回溯的两个要点：&lt;/p&gt;
 
-&lt;p&gt;在学习设计的过程中，我发现在这个领域中也有和「英语思维」类似的「设计思维」存在。语言通过发声、或者书写下来通过文字符号来达到交流的目的，而设计则是通过字体、图像和色彩等元素来进行交流。我们首先学习的往往是各种元素表达的意思，比如圆形比方形柔软，红色代表热情等，然后利用这些知识去设计。但这种学习方式并不好，就像我们学习英语的时候只是去背熟语法规则和语义一样，并不能流利地表达自己。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果需要在“进行尝试”和“跳过尝试”之间选择，对于匹配优先量词，引擎会优先选择“进行尝试”，而对于忽略优先量词，会选择“跳过尝试”。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;距离当前最近存储的选项就是当本地失败强制回溯时返回的。使用的原则是LIFO（last in first out,后进先出）。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;当我们看到一张白纸的时候，会接收到什么信息？可能你大脑意识到的只是「白色」和「纸」这样两个概念，但实际上它向你传达了它的纹理、重量、触感甚至是味道。这些信息同时进入你的大脑并且被你所接收，只不过因为你对这样的物品习以为常不会意识到罢了。有人曾经对大脑损伤产生了认知障碍的人做过研究，他们拿起桌子上一张纸的时候会非常小心，用拇指和食指小心翼翼地把它捏起来。为什么他们不能毫不费力地抓起来呢？因为他们的大脑无法从纸张的纹理、材料和其它元素中获取重量的信息，而普通人看到纸张之后大脑中关于「一张纸很轻」的信息会下意识被唤醒。&lt;/p&gt;
+&lt;h4&gt;匹配优先&lt;/h4&gt;
 
-&lt;p&gt;物体的语言比人类的语言复杂得多，它不仅传达当前的信息，还会唤醒你潜意识中已经存在的相关信息。人类的语言只能被顺序地接收并理解，聆听和阅读都只能一个字一个字地进行；物体的语言是并发式的，造型、颜色和纹理几乎是同时传达给大脑，同时你或许还可以触摸它获得触感，用鼻子捕捉气味。所有这些信息都无法完美地抽象成人类的语言，所以想要真正理解红色就只能不断地去看它、感受它，而不是去熟读书本上写的红色代表什么意思。&lt;/p&gt;
+&lt;p&gt;匹配时只从自身出发，匹配尽可能多的内容，只有在全局匹配需要的情况下才会“被迫”交换一些字符。&lt;/p&gt;
 
-&lt;h2 id=&quot;_3&quot;&gt;像物体一样去表达&lt;/h2&gt;
+&lt;h4&gt;忽略匹配优先&lt;/h4&gt;
 
-&lt;p&gt;作为一个创造者，必须要通过自己创造的东西去表达，而不是通过人类的语言去表达。在创造东西的时候，你必须学会使用物体的语言，而不是把人类的语言「翻译」过去做成一个东西。通过「翻译」做出的东西往往会比较苍白，不能表达一个物体真正应该包含的信息。那么如何才能学会物体的表达方式呢？那就需要尽量不要通过人类的语言去理解物体，而应该直接去看、去触摸、去闻……用尽一切感官去接收物体表达的信息，只有这样才能真正明白一种颜色可以激发什么样的感觉，一种纹理可以唤醒什么样的触觉，然后在创造的时候就会做出合适的选择，就好像想要问别人名字的时候自然而然就会说出 “What’s your name?” 那样。&lt;/p&gt;
+&lt;p&gt;与匹配优先相反&lt;/p&gt;
 
-&lt;p&gt;关于这种表达练习，包豪斯的约翰·伊顿（Johannes Itten）有很精彩的实践，例如他在课堂上教学生「圆形」这种基本形式的时候，会请学生站起来，「挥动手臂做转圈练习，直到整个身体轻松自如地投入运动。先做左臂练习，再做右臂练习，然后双臂齐动，可以同一方向或相反方向。这样学生便体验到，圆是一种不断运动的环行线。接着，他们必须全神贯注地静默，用心去认真体验圆，只有在这时，才能落笔把圆画在纸上。」&lt;/p&gt;
+&lt;h3&gt;占有优先量词和固化分组&lt;/h3&gt;
 
-&lt;p&gt;当人们看到一个物体的时候，会把它当做一个物体来对待，就好像对待日常生活中无处不在的物体一样，而不会把它当做一个人。所以，只有物体使用它自己的语言清楚地表达自己的时候，它才会得到认同，创造者才会得到承认。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用(?&amp;gt;...)实现固化分组：如果匹配进行到此结构之后（也就是，进行到闭括号之后），那么此结构体中的所有备用状态都会被放弃。也就是说，在固化分组匹配结束时，它已经匹配的文本已经固化为一个单元，只能作为整体而保留或放弃。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;创造者的手应该比嘴更会说话。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>从学习到创造</title>
-   <link href="http://blog.zhuoqun.net/2012/06/25/from-learning-to-creating.html"/>
-   <updated>2012-06-25T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2012/06/25/from-learning-to-creating</id>
-   <content type="html">
-&lt;p&gt;随着互联网的发展，获取信息和知识变得前所未有地方便和简单，每天都有无数人在网站上分享他们的知识，也有越来越多的大学开始免费发布它们的课程资源。只要你愿意学习并且善用工具，足不出户便几乎可以自学所有的东西。但是，为什么拥有知识的人越来越多，创造者和好的作品却依然那么少呢？最近我一直在思考这个问题，想要找出提高创造力的办法。我发现把知识转化成创造力至少需要三个阶段：学习知识；消化知识，把转化为技能或者思想；利用消化的东西去创造。每个阶段都困难重重，而且越往后阻碍就越多，大部分人出于懒惰都会在半路停下来，只有少数人会一直前行并成为真正的创造者。&lt;/p&gt;
+&lt;h3&gt;Note&lt;/h3&gt;
 
-&lt;h2 id=&quot;&quot;&gt;学习&lt;/h2&gt;
+&lt;p&gt;匹配优先和忽略优先都不会影响需要检测路径的本身，而智慧影响检测的顺序。如果不能匹配，无论是按照匹配优先还是忽略优先的顺序，最终每条路径都会被测试。然而，固化分组与它们截然不同，因为固化分组会放弃某些可能的路径。更具具体情况的不同，放弃备用状态可能会导致不同的结果：
+* 毫无影响
+* 导致匹配失败
+* 改变匹配结果
+* 加快报告匹配失败的速度&lt;/p&gt;
 
-&lt;p&gt;想要打造家具，必须先学习切割木料；想要创造一个移动应用，必须先学习编程。对知识的掌握和了解，是创造的最基本前提。学习的途径各种各样，我们去学校听老师讲课，在网上看视频教程，碰到问题就去图书馆或网上搜索资料。一开始的时候，学习往往显得很枯燥，你必须要搞懂许多之前没有听说过的概念和术语，试着用该领域的方式去思考。我们花费大量的时间去阅读和复习，然后才能真正掌握这些知识。&lt;/p&gt;
+&lt;h3&gt;占用优先量词，&lt;code&gt;?+&lt;/code&gt;、&lt;code&gt;*+&lt;/code&gt;、&lt;code&gt;++&lt;/code&gt;和&lt;code&gt;{m,n}+&lt;/code&gt;&lt;/h3&gt;
 
-&lt;p&gt;我们都有过这样的经验：一本书可能很厚，但从中学习到的知识却少得可怜。我们要看十本书甚至更多才可以学习到相当于一本书的知识，其它的知识对于我们来说就好像从未看到过一样。可能是因为人的记忆力和认知能力有限，&lt;strong&gt;学习&lt;/strong&gt;到的东西和&lt;strong&gt;看到&lt;/strong&gt;的东西相比总是少得可怜，所以才有那么多人去研究如何提高学习效率，才会有各种教育方法的尝试。现在这个问题好像仍然没有什么好的解决方案，想要学习更多知识还是要尽可能地延长学习时间。&lt;/p&gt;
+&lt;p&gt;占用优先量词与匹配优先量词很相似，只是它们从来不交还已经匹配的字符。&lt;/p&gt;
 
-&lt;p&gt;很多人会在这一个阶段苦苦挣扎，有的没有学习动力，有的学习能力不够强，这和教育方式以及每个人的资质都有很大关系。但是大部分人都还是会熬过这个阶段，学会想要学会的知识。&lt;/p&gt;
+&lt;h3&gt;环视中的回溯&lt;/h3&gt;
 
-&lt;h2 id=&quot;_2&quot;&gt;转化&lt;/h2&gt;
+&lt;p&gt;只要环视结构的匹配尝试结束。它就不会留下任何备用状态。任何备用状态和例子中肯定环视成功时的情况一样，都会被放弃。&lt;/p&gt;
 
-&lt;p&gt;以前去参加讲座，在提问环节的时候经常会碰到这样的提问者：他不会直接提出自己的问题，而是先引经据典表达一通，标准句式为「XX（某名人） 说过……」 或者 「《XXX》（某经典图书）里面提到过……」，让在场的观众和嘉宾都很头痛。这样的人一直让我觉得很奇怪，他们的知识储备确实让人佩服，但那些知识又并不属于他，拥有那么多知识非但没有让他们变得更好，还比普通人更加迂腐和无趣。正是这样的人让我意识到读书多不总是一件好事。&lt;/p&gt;
+&lt;h3&gt;多选结构&lt;/h3&gt;
 
-&lt;p&gt;如果一个人的肠胃不太好，食物的营养就难以充分吸收，这个时候要做的是增强肠胃的消化能力，而不是吃更多营养丰富的食物。学习也是一样。如果你读了很多书都没有能把书中的观点融入到自己的思想当中，那么就应该在思考和理解能力方面下功夫，而不是读更多的书。很多人就是一味往自己的大脑里塞各种知识而不愿意停下来消化，结果就变成一个精神上的「消化不良症」患者。可惜的是，肠胃的消化不良很容易察觉，精神上的消化不良却难以自知，因为自己可以不断从学习中得到成就感和虚荣心的满足，其他人也不会觉得学习是一件坏事。在这个可以接触到无限信息的时代，这样的人可能会永远只满足于用知识填满自己，变成一个无所不知的「知道分子」。「知道分子」除了爱卖弄知识外，大体上也是个很有用的人，是周围朋友的「生活小助手」，只可惜没办法成为创造者。&lt;/p&gt;
+&lt;p&gt;传统型NFA引擎，遇到多选结构时，这种引擎会按照从左到右的顺序检查表达式中的多选分支，NFA和POSIX NFA中有匹配优先的多选结构，它们总是匹配所有多选分支中能匹配最多文本的那个。&lt;/p&gt;
 
-&lt;p&gt;真正聪明的人都不会甘于做一个「知道分子」，他们在学习到知识以后更注重如何把知识变成自己的思想和技能，而不只是肤浅地去理解或者拿去卖弄。他们的知识储备和阅读量可能并不是那么丰富，但他们会尽量榨干他们读过的每一本书中的营养。他们和「知道分子」的一个很重要的区别就是他们更乐于享受闲暇，而不总是马不停蹄地给自己塞各种知识。孔子早就说过：「学而不思则罔，思而不学则殆。」 只有闲暇的时候才可以思考，才有可能把别人的观点和知识融入到自己心中。&lt;/p&gt;
+&lt;h3&gt;NFA、DFA和POSIX&lt;/h3&gt;
 
-&lt;p&gt;如果把思想比作河流的话，那么我们自己的思想就是&lt;strong&gt;主干河流&lt;/strong&gt;，其他人的思想再伟大也只是一条&lt;strong&gt;支流&lt;/strong&gt;。我们需要做的是引导其它支流到主干，使主干在保持自己方向的同时越来越强大，而不是让支流把主干河流冲断或者拐到其它方向。把知识转化成思想和技能的效率也很低，可能比学习知识的效率还要低，需要很长时间的不断思考才能有所得。值得庆幸的是，一旦转化成功你获得的就不只是知识，还有它们升华而成的思想和品味。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最左最长规则：如果传动装置在文本的某个特定位置启动DFA引擎，而在此位置又有一个或多个可能的匹配，DFA就会选择这些可能中最长的&lt;/li&gt;
+&lt;li&gt;POSIX和最左最长规则：POSIX标准规定，如果在字符串的某个位置存在多个可能的匹配，应当返回的是最长的匹配。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h2 id=&quot;_3&quot;&gt;创造&lt;/h2&gt;
+&lt;h3&gt;NFA与DFA的比较&lt;/h3&gt;
 
-&lt;p&gt;有了知识、思想、品味和技能之后好像理所当然就可以创造出好的作品，而事实上它们只是前提条件，和好的作品之间还有一个巨大的鸿沟。这个鸿沟就是「创造」本身。很多东西并不能通过语言和文字准确地传达，所以你不可能从书本、视频和别人的经验那里习得关于创造的一切，你必须亲自去创造才能真正了解创造的本质。那些你的眼睛和大脑没有学习到的东西，你的身体会在创造过程中习得，并且了解得更深刻。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在预编译阶段（pre-use compile)的区别：在使用正则表达式搜索之前，两种引擎都会变异表达式，得到一套内化形式，适应各自的匹配算法。NFA的编译过程通常要快一些，需要的内存也更少一些。传统型NFA和POSIX NFA之间并没有实质的差别&lt;/li&gt;
+&lt;li&gt;匹配速度的差别：对于“正常”情况下的简单文本匹配测试，两种引擎的速度差不多。一般来说，DFA的速度与正则表达式无关，而NFA中两者直接相关。&lt;/li&gt;
+&lt;li&gt;匹配结果的差别： DFA（或则POSIX NFA）返回最左边的最长的匹配文本。传统型NFAK额能返回同样的结果，当然也可能是别的文本。&lt;/li&gt;
+&lt;li&gt;能力的差异：NFA引擎能提供一些DFA不支持的功能，例如：
 
-&lt;p&gt;吊诡的是，那些努力学习知识并成功转化成自身思想和技能的人，反而不再愿意去创造。他们更乐意去判断和批评。这些人都是一些非常聪明的人，他们有思想和品味，分析事物观点独到且往往一针见血。光凭这些他就可以得到很多人的认同和赞赏，过上不错的生活。这种生活很有吸引力，因为创造总是要比空谈辛苦。这种聪明还让他们误以为自己有一种超常的洞察力，可以在一开始就看到事情的结果，进而失去了创造的动力：既然已经知道结果如何，再去做有什么意思呢？他们不知道真正完成一件作品和空想有本质的区别，所以很多时候这些聪明人反而不如比他们笨拙的人有创造力。那些笨拙的人品味和能力都没有那么优秀，但是他们更愿意一步一步脚踏实地去创造，最后的作品虽然不够好，却比那些空想强太多了。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;捕获由括号内的子表达式匹配的文本&lt;/li&gt;
+&lt;li&gt;环视，以及其他复杂的零长度确认&lt;/li&gt;
+&lt;li&gt;非匹配优先的量词，以及有序的多选结构&lt;/li&gt;
+&lt;li&gt;占有优先量词和固化分组&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;创造的另外一个强大的敌人是「完美主义」，聪明人更容易被它打败。聪明人一般品味都不错，而且他在学习知识的过程中已经看到过很多前人创造的伟大作品，在还不知道创造的艰辛之前，他很容易就会下意识地把那些伟大作品当做自己的努力标准：以后要做出比那些更好的东西，至少要差不多。当他真正开始着手创造，就会发现原来创造是那么困难，自己是那么笨拙，可能拼命努力也无法做出以前认为自己应该做出的作品。这种突如其来的打击非常巨大，他可能会非常沮丧，甚至会就此放弃创造的念头，转去做一个评论家。而也就是在这个时候，他才发自内心真正体会到那些伟大作品的伟大之处。&lt;/p&gt;
+&lt;h2&gt;五、正则表达式使用技巧&lt;/h2&gt;
 
-&lt;p&gt;所以，无论你多么聪明和有天赋，也不可能在一开始就创造出自己理想中的作品。你的品味越好，创造出的东西和你理想中的完美之间的鸿沟就越巨大。在认清这个事实之后，你要做的并不是知难而退，而是从心里接受这一切，然后踏踏实实地去下之前嗤之以鼻的笨功夫。只有这样，你的作品才能不断变得更好，向你理想中的样子不断迈进。尽管可能永远都不会对自己的作品满意，但你清楚知道每一次的创造都比上一次更趋于完美，这样的你才有资格被称作创造者。&lt;/p&gt;
+&lt;h3&gt;正则表达式的平衡法则&lt;/h3&gt;
 
-&lt;h2 id=&quot;_4&quot;&gt;总结&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;只匹配期望的文本，排除不期望的文本&lt;/li&gt;
+&lt;li&gt;必须易于控制和理解&lt;/li&gt;
+&lt;li&gt;如果使用NFA引擎，必须保证效率(如果能偶匹配，必须很快地返回匹配结果，如果不能匹配，应该在尽可能短的时间内报告匹配失效)。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;把书本、视频等上面的信息转化成自己的知识很难，转化率很低；把学习到的知识转化成自己的思想和技能也很难，转化率更低；有了思想和技能之后还要可以持之以恒、容忍不完美并且耐得住寂寞，聪明人往往不愿意为难自己。经过这样的层层筛选，最后能成为创造者的人很少。更为残酷的是，在这些创造者当中也未必可以诞生出真正好的作品，天分和运气都是无法强求的东西（人类还真是可怜）。不过，我还是愿意相信：&lt;/p&gt;
+&lt;h3&gt;若干简单的例子：&lt;/h3&gt;
 
-&lt;p&gt;THE FUTURE BELONGS TO THE FEW OF US STILL WILLING TO GET OUR HANDS DIRTY.&lt;/p&gt;
+&lt;h4&gt;匹配连续行&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    SRC= if else hello \
+         very nice&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;^w+=.*(\\\n.*)*&lt;/code&gt;---&amp;gt;不能匹配&lt;/p&gt;
 
-&lt;p&gt;未来属于我们当中那些仍然愿意弄脏自己双手的少数人。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>健身和创造力的培养</title>
-   <link href="http://blog.zhuoqun.net/2012/06/10/body-building-and-creativity.html"/>
-   <updated>2012-06-10T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2012/06/10/body-building-and-creativity</id>
-   <content type="html">
-&lt;p&gt;去年一月份到了现在的公司之后，因为工作安排得很合理，生活忽然变得很有规律，我惊讶地发现原来程序员也可以不必每天加班并且拥有自己的生活。当时我对创业的憧憬刚刚破灭，也没有其它具体的目标，就决定趁这个机会把身体好好锻炼一下。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;^w+=[^\n\\]*(\\\n[^\n\\]*)*&lt;/code&gt;---&amp;gt; 不允许\出现在字符串中&lt;/p&gt;
 
-&lt;p&gt;之前我对健身有点儿排斥甚至不屑一顾，深深觉得「现代人宁愿坐电梯也不愿意爬楼梯，然后把节省下来的时间花在健身房里，真是可笑」，直到后来办过一张健身卡，在赠送的教练课程中才发现它其实并不是我想象中那么肤浅。于是这次健身我就抱着「要学就专业地学」的态度，直接请了一个私人教练，认真学习了所有和健身有关的东西。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;^w+=([^\n\\]|\\.)*&lt;/code&gt;---&amp;gt;OK&lt;/p&gt;
 
-&lt;p&gt;正式健身到现在已经有近十个月了，尽管还没有练到八块腹肌的程度，但身体素质提高了很多，也发现健身和培养创造力有非常多的共通之处，在这里分享一二。&lt;/p&gt;
+&lt;h4&gt;匹配IP地址&lt;/h4&gt;
 
-&lt;h2 id=&quot;&quot;&gt;持之以恒&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;^\d+\.\d+\.\d+\.\d+$&lt;/code&gt; ---&amp;gt;会匹配1234.5678.12312.214214&lt;/p&gt;
 
-&lt;p&gt;教练刚开始帮我制订计划的时候问我：「你平时每周来几次健身房？」我回答说：「每周两次」教练听了之后说：「这样不行。你以后尽量每天都来，然后器械练习和有氧运动交替进行。」之后的几个月我坚持做到每周去五次，下班之后吃过饭就去，然后锻炼一个小时左右回家。一开始的时候还有新鲜感和不少热情，但两个星期之后就完全变成了机械运动，你必须不断地告诉自己不许偷懒才能在下班之后用意志控制身体往健身房的方向走，有时候真有种想吐的感觉。这种「行尸走肉」的情况只有等到你看到自己的胸肌和腹肌发生了变化的时候才会改善，然后健身才开始有一点乐趣。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;^\d{1-3}+\.\d{1-3}+\.\d{1-3}+\.\d{1-3}+$&lt;/code&gt;或&lt;/p&gt;
 
-&lt;p&gt;这种情况和创造的过程非常类似。当你一开始有一个想法的时候会非常开心，满脑子都在想如何实现它。而当你开始着手创造，所有非创造性的部分和肮脏的细节都会逐渐浮现，热情和兴趣也会逐渐减少，这个时候如果不能坚持下来，那么你就没有机会看到自己的「腹肌」发生变化。所以，无论如何请完成它，请把自己挖的坑认真填完。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;^\d\d?\d?+\.\d\d?\d?+\.\d\d?\d?+\.\d\d?\d?+$&lt;/code&gt; ---&amp;gt;会匹配299.299.299.299等&lt;/p&gt;
 
-&lt;h2 id=&quot;_2&quot;&gt;不断给自己「小小的」挑战&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;[01]?\d\d?|2[0-4]\d|25[0-5]&lt;/code&gt; ---&amp;gt;0-255&lt;/p&gt;
 
-&lt;p&gt;做过力量训练的人都知道，如果每次的重量你都可以轻松做完动作，你的力量永远都不会得到提高；如果你不顾自己的能力把重量加到最大，不但没办法完成动作，还可能发生危险。所以正确的做法是：每次的重量都要让自己觉得有点儿吃力，但勉强可以做完。作为有着各种缺点的人类，我们都更倾向于活在自己觉得舒服的区域，不愿意给自己压力和挑战，这个时候教练的作用就发挥了出来：他会把挑战强加给你，然后在旁边提供一些保护，在你实在无法完成动作的时候帮助你完成。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;我们在创造东西的时候往往没有教练，甚至连同伴都没有，在做选择的时候就很容易倾向那个让自己更舒服的选项。有些功能实现之后可能会极大地增强用户体验，但你想要偷懒就会告诉自己说「其实用户没那么在乎啦」；有些技术学习之后对提高生产力帮助很大，但学习新东西总会遇到很多问题，因为怕麻烦你可能就会找出各种理由来逃避。所以在一开始做练习的时候，不妨每次做选择都选比较困难麻烦比较多的那个，虽然你会觉得很疼，肌肉撕裂的那种疼，但这样做才会有成效。&lt;/p&gt;
+&lt;h4&gt;处理文件名&lt;/h4&gt;
 
-&lt;h2 id=&quot;_3&quot;&gt;全面发展&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;将\usr\local\bin\gcc变成gcc &lt;code&gt;s/^.*\\//&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;所在路径和文件名 &lt;code&gt;^(.*)/(.*)$&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;很多人都对健身有误解，比如说他们会觉得想要八块腹肌就每天狂练腹肌，然后就可以获得自己想要的「完美身材」。事实上，如果只是锻炼腹肌而没有辅助做一些背部和其它部位的练习，腹部肌肉的强度会和背部失去平衡，时间长了之后你的腹部肌肉就会拉着你的身体前倾，变成驼背。同样，如果只是练习上半身的肌肉完全不锻炼腿部，那么上半身练习到一定程度之后也不会再有太大进步，因为你腿部的血管还是那么细，无法及时供应上半身的充血。&lt;/p&gt;
+&lt;h4&gt;匹配对称的括号&lt;/h4&gt;
 
-&lt;p&gt;正确的训练方式是周期性循环锻炼全身的肌肉，可以有侧重点，但每个部位都要练习到。虽然并不是每个人都想要练成「肌肉男」，但大部分人健身的目的都是想要有一个好身材。一个好身材可不只是杂志封面上给大家看到的八块腹肌和两块胸大肌，它需要所有部位的全面锻炼，需要全身肌肉的均衡发展，一个只有八块腹肌却细胳膊细腿的身材只会让人觉得奇怪。&lt;/p&gt;
+&lt;p&gt;处理单层嵌套的正则表达式是：&lt;code&gt;\[^()]*(\([^()]*\)[^()]*)*\)&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;此外，只是训练也没有办法增肌，还必须严格控制饮食。健身期间一定要多吃高蛋白的食物，少吃脂肪含量高的食物。教练当时专门给我制订了饮食计划，比如早餐一定要吃，至少吃四个蛋清，最好喝一些粥，还可以吃一些脂肪含量比较低的东西。现在我每天的早餐都是面包和蜂蜜，有时候觉得自己比小熊吃得都好。有一段时间为了锻炼力量，我每天中午都要吃半斤牛肉，当时真是有点儿吃不消，不过这样控制饮食的效果非常明显，肌肉含量一下就上去了。&lt;/p&gt;
+&lt;h4&gt;匹配分隔符之间的文本&lt;/h4&gt;
 
-&lt;p&gt;同样，在创造的时候，绝不是把一方面做好就可以了。比如说当你创造一个互联网产品，你要为它起名字写文案，这里需要的是文字能力；你要为它设计界面，这里需要的是设计能力；你需要为它写代码，这里需要的是编程的能力……当你在很多方面都做到均衡的时候，你才能创造一个「好身材」，而不是一个只有腹肌的怪物。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;*(\\.|[^\\*]*&amp;quot;&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;很多人可能觉得什么都学最后会导致「全面平庸」，学习太多东西确实有失去重点到最后什么都没学会的危险。但想想看吧，你健身的时候并没有把控制饮食当做一个负担，因为你的目标在于更好地健身，这个目标会帮助你避免在控制饮食方面走得太远。创造也是一样，「创造」这个目的会帮助你「收敛」学习的范围和过程。&lt;/p&gt;
+&lt;h4&gt;去除文本首尾的空白字符&lt;/h4&gt;
 
-&lt;p&gt;现在我已经完全养成了健身的习惯，即便最近不想花太多时间在上面，也会保持每周两次的频率。它不仅可以保持身材，还能锻炼意志力，希望我可以一直保持这个习惯。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>重新开始记录</title>
-   <link href="http://blog.zhuoqun.net/2012/06/06/reborn.html"/>
-   <updated>2012-06-06T00:00:00+02:00</updated>
-   <id>http://blog.zhuoqun.net/2012/06/06/reborn</id>
-   <content type="html">
-&lt;p&gt;几个月之前，因为觉得自己总是说的多做的少，我关闭了写了 5 年多的博客，想通过这种方式尽可能地减少干扰，强迫自己把更多的精力用来创造东西。这一段时间以来，我努力做了许多尝试，想法设法提高自己的创造力，虽然并没有做出什么让自己满意的产品，但已经深深体会到创造的甘苦。无论你创造的产品有多么微不足道，如果你不投入全部的热情，也没有办法把它做得足够好。你必须要对细节有足够深入的了解和思考，才能让它看起来在所有方面都很自然。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;s/^\s+//&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;创造一个产品需要做很多事情，你需要为它起一个好的名字，一个好名字才能让人印象深刻；你需要对产品的功能深思熟虑，太多的功能只会让它失去重点；你需要对界面设计有一些了解，界面就是产品的脸；你需要对产品的交互敏感，好看的产品不一定好用；你需要熟练掌握所有技术，尽管可能并不精通，但至少可以&lt;strong&gt;完成&lt;/strong&gt;一个产品；最重要的是，你要有足够的耐心，不然就无法应付那些琐碎的细节和那些没有什么创造性的工作。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;s/\s+$//&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;当然，我所喜欢的并不是创造所需要的这些技能，成为一个十项全能的超人并没有什么吸引力。对于我来说，创造的迷人之处在于：这些看上去毫不相干的不同领域的技能融入到一个东西里之后却表现出非常一致的美，这种美包含了如此多的信息以至于让人无法用语言说明却深深陶醉其中。创造在给予我成就感的同时，也让我发现了一种语言和文字之外的表达方式，它不仅更丰富，而且必须用心才能看到。&lt;/p&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
 
-&lt;p&gt;当你对一个东西了解不多的时候，往往可以轻松地把它描述出来，随着对事物的理解越来越深刻，反而觉得表达越来越困难，因为你的归纳能力和表达能力并没有随着感受力一起成长。今天之所以决定重新开始记录就是因为这个原因。我要藉由文字表达来帮助自己思考，同时也把自己的心得、体会以及遇到的问题分享出来，希望可以对其他人有所帮助。&lt;/p&gt;
-
-&lt;p&gt;最后，非常感谢 &lt;a href=&quot;http://jekyllbootstrap.com/&quot;&gt;Jekyll Bootstrap&lt;/a&gt; 和 &lt;a href=&quot;http://twitter.github.com/bootstrap/&quot;&gt;Twitter Bootstrap&lt;/a&gt; ，它们是如此简洁并充满美感，是我重新写博客的动力之一。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/june_water/article/details/17101293&quot;&gt;Vim中的正则表达式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/june_water/article/details/17101633&quot;&gt;grep与正则表达式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/june_water/article/details/17102395&quot;&gt;C/C++正则表达式主要函数分析&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;$ gcc regex.c -o regex
+$ ./regex &amp;quot;http:\/\/www\..*\.com&amp;quot; &amp;quot;https://www.taobao.com&amp;quot;
+# ErrMsg: No match 
+$ ./regex &amp;quot;https:\/\/www\..*\.com&amp;quot; &amp;quot;https://www.taobao.com&amp;quot;
+# https://www.taobao.com matches https:\/\/www\..*\.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
