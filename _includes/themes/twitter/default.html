@@ -45,6 +45,14 @@
             {% include JB/pages_list %}
 
             <li><a href="http://junevimer.com/atom.xml">RSS</a></li>
+
+            <li style="padding-left:10px">
+              <form class="navbar-search pull-right" method="GET" action="https://www.google.com/search">
+                <input type="text" name="as_q" class="search-query" placeholder=" Search... ">
+                <input type="hidden" name="as_sitesearch" value="www.junevimer.com">
+              </form>               
+            </li>
+
           </ul>
 
           <span class="pull-right slogan"> {{ site.tagline }} </span>
