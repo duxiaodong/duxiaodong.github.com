@@ -27,8 +27,8 @@ author :
 # Else if you are pushing to username.github.com, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : www.junevimer.com
-# production_url : localhost
+# production_url : www.junevimer.com
+production_url : localhost
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -80,6 +80,11 @@ JB :
   # Set 'provider' to the comment provider you want to use.
   # Set 'provider' to false to turn commenting off globally.
   #
+#comment config
+duoshuo:
+  config: true
+  id: Junevimer
+
   comments :
     provider : false
     disqus :
