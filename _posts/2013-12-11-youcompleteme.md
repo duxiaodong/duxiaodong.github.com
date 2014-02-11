@@ -299,6 +299,12 @@ tags: [vim, YCM]
         'do_cache': True
       }
 
+##集成Syntastic
+
+YCM很早就支持集成[Syntastic](https://github.com/scrooloose/syntastic)了，上面demo里面，代码前的出现红色叉叉，就是YCM结合Syntastic爆出的语法错误。刚开始用YCM的时候，更看重其代码补全功能，Syntastic没放在心上，结果发现越用越离不开了。当编写C++代码的时候，每次光标悬停2秒钟以上的时候，YCM都会在后台扫描你当前的文件，你刚刚输入的代码有什么编译错误，马上就能显示出来，及时的改掉，不再积累到最后编译的时候。当然这是现代IDE的标配功能，vim中也有插件可以实现，但是有了YCM后，再用vundle安装Syntastic，甚至不用任何配置就实现了这些功能，实在是太方便了
+
+![](/images/syntastic.png)
+
 ##YouCompleteMe提供的其他功能
 
 YCM除了提供了基本的补全功能,自动提示错误的功能外,还提供了类似tags的功能:
