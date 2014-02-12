@@ -3,7 +3,7 @@ layout: post
 title: 使用Github和Jekyll搭建自己的博客
 description: ""
 category: "tools"
-tags: [jekyll, github, CSS, JS] 
+tags: [jekyll, github] 
 ---
 {% include JB/setup %}
 
