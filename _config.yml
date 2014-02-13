@@ -95,6 +95,13 @@ JB :
       width: 580
       colorscheme: light
    
+follow :
+  email : mailto:junevimer@gmail.com
+  github : https://github.com/junevimer
+  weibo : http://weibo.com/junevimer
+  twitter: https://twitter.com/junevimer
+  rss: /atom.xml
+  
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.

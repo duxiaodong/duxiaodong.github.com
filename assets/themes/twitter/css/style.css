@@ -145,4 +145,14 @@ h1.title {
 	border:1px solid #4C964D;
 	color:#FFF;
 }
-	
+
+.follow {
+    float: left;
+    padding-top: 14px;
+    margin:0 2px;
+	/* letter-spacing:7px; */
+    text-align: center;
+}
+.follow a {
+    color: #bbbbbb;
+}
