@@ -3,29 +3,26 @@
 <div class="row post">
   <div class="span8">
     <h1 class="title"><a href="{{ latest_post.url }}" title="{{ latest_post.title }}">{{ latest_post.title }}</a> {% if latest_post.tagline %} <small>{{ latest_post.tagline }}</small>{% endif %}</h1>
-    {{ latest_post.content }}
+    <h4>Published：{{ latest_post.date | date_to_long_string }}</h4>
+    </p>{{ latest_post.content }}</p>
     <ul class="pager">
       <li class="next"><a href="{{ BASE_PATH }}/archive.html" title="所有文章">查看所有文章 &rarr;</a></li>
     </ul>
   </div>
 
   <div class="span4 sidebar">
-    <h4 class="date">Published：<span>{{ latest_post.date | date_to_long_string }}</span></h4>
+    <h1 class="title">Archives</i></h1>
+    {% assign posts_collate = site.posts %}
+    {% include JB/posts_collate_june %}
 
-  {% unless latest_post.tags == empty %}
-    <h4>Category</h4>
-    <ul class="tag_box">
-    {% assign categories_list = latest_post.categories %}
-    {% include JB/categories_list %}
-    </ul>
-  {% endunless %}  
+    <!-- <h4 class="date">Published：<span>{{ latest_post.date | date_to_long_string }}</span></h4> -->
 
-  {% unless latest_post.tags == empty %}
-    <h4>Tags</h4>
-    <ul class="tag_box">
-    {% assign tags_list = latest_post.tags %}
-    {% include JB/tags_list %}
-    </ul>
-  {% endunless %}  
+  <!-- {% unless latest_post.tags == empty %} -->
+    <!-- <h4>Tags</h4> -->
+    <!-- <ul class="tag_box"> -->
+    <!-- {% assign tags_list = latest_post.tags %} -->
+    <!-- {% include JB/tags_list %} -->
+    <!-- </ul> -->
+  <!-- {% endunless %}   -->
   </div>
 </div>
