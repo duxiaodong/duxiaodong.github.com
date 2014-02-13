@@ -125,9 +125,11 @@ tags: [jekyll, github]
 
 2.添加多说评论系统(比较适合中国用户使用)
 
-3.修改添加google analytics
+3.修改添加Google Analytics
 
-4.post页面右侧添加部分功能
+4.Post页面右侧添加当前博文分类
 
 5.添加社会化分享,JiaThis
+
+6.添加Font-awesome
 
