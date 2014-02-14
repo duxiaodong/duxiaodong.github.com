@@ -1,10 +1,10 @@
 #Junevimer的个人博客
 
-这是一个使用Jekyll Bootstrap自带的Twitter搭建的个人博客,在Twitter Theme基础上添加多说评论系统,Jiathis,Google search,Google Analystics,Font-awesome等.
+这是一个使用Jekyll Bootstrap自带的Twitter主题搭建的个人博客,在Twitter Theme基础上添加多说评论系统,Jiathis,Google search,Google Analystics,Font-awesome等.
 
 ![](images/blog-theme.png)
 
-##一.使用方法
+##使用方法
 
 ###1.获取源码
 
@@ -22,11 +22,11 @@
 * comments部分:设置comments helper
 * analytics部分:设置analytics helper
 
-###4.域名绑定
+###3.域名绑定
 
 将CNAME文件下的域名修改为需要绑定的域名地址,绑定一级,二级域名均可.
 
-###3.本地调试
+###4.本地调试
 
 将自己的博文Copy到`_post`目录下,运行 ```jekyll server```，浏览器打开 http://localhost:4000 便可以看到修改后的主题,
 
