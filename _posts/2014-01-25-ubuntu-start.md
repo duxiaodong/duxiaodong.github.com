@@ -203,9 +203,7 @@ git配置:[配置文件](https://github.com/Junevimer/dotfiles/blob/master/gitco
 
 1.下载dropbox deb包
 
-For ubuntu-32位：
-
-https://www.dropbox.com/download?dl=packages/ubuntu/dropbox\_1.6.0\_i386.deb
+UBuntu 32位：https://www.dropbox.com/download?dl=packages/ubuntu/dropbox\_1.6.0\_i386.deb
 
 2.安装：
 
@@ -249,6 +247,61 @@ Retext配置可以查看[retext wiki configuration](http://sourceforge.net/p/ret
         $ sudo tar -xjvf ~/Downloads/stardict-langdao-ce-gb-2.4.2.tar.bz2
 
 5.在stardict中的辞典管理可以看到增加的词库
+
+`Done!`
+
+##安装pywebqq
+
+说明：安装webQQ3.0应用，用于解决ubuntu系统环境下面的QQ聊天解决方法
+
+1.安装依赖包
+
+        $ sudo apt-get install python-notify python-keybinder python-ctypeslib python-webkit python-glade2
+
+2.下载pywebqq,并解压
+
+        $ wget www.junevimer.com/files/pywebqq.tar.gz
+        $ tar -xzvf pywebqq.tar.gz
+
+3.配置软件
+
+解压后，需要修改webqqview.py文件中的一个文件引用地址
+
+修改前：
+
+`libsoup = ctypes.CDLL(‘/usr/lib/libsoup-2.4.so.1′)`
+
+修改后：
+
+`libsoup = ctypes.CDLL(‘/usr/lib/i386-linux-gnu/libsoup-2.4.so.1′)`
+
+这里需要修改是因为ubuntu系统路径有点不一样。如果你在第一次运行时说找不到这个文件，你就需要修改。
+
+4.添加桌面启动程序
+
+`$ sudo vi /usr/share/applications/pywebqq.desktop`
+
+        [Desktop Entry]
+        Encoding=UTF-8
+        Name=PyWebQQ
+        Comment=pywebqq1027
+        Exec=python /home/june/QQ/pywebqq.py
+        Terminal=false
+        Type=Application
+        Icon=/home/june/QQ/QQ.png
+        StartupNotify=true
+        Categories=Office;
+        MimeType=application/pywebqq;
+
+启动程序请根据实际路径进行修改(Exec和Icon)
+
+这时你就可以到"Dash主页"里面去搜索pywebqq，运行后把它锁定在unity栏里面。
+
+5.运行效果
+
+![](/images/ubuntu-start3.png)
+
+pywebqq将webqq脱离浏览器，并在系统托盘提示消息。用户体验不错！
 
 `Done!`
 
