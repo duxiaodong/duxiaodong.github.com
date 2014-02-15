@@ -55,10 +55,8 @@ tags: [jekyll, github]
 
 想要本地预览，就需要使用jekyll生成静态网站，在终端下执行下面的命令安装jekyll,当然先需要安装jekyll的依赖包。
 
-        $ sudo apt-get install ruby1.9.1-dev
-        $ sudo apt-get install rdiscount
-        $ sudo apt-get install RedCloth
-        $ sudo apt-get install jekyll
+        $ sudo apt-get install ruby1.9.3
+        $ sudo gem install jekyll
 
 使用jekyll创建网站，会在网站根目录下生成site目录，上传到Github中时，请先删除site目录。生成成功后，使用jekyll作为内置的Web服务器（默认在端口4000开启Web服务）
 

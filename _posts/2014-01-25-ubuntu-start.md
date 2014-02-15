@@ -110,7 +110,7 @@ touchpad-indicator管理。（真的不错）
 
 2.从源码安装vim
 
-详细参见博文[从源码安装Vim7.4](2013/12/17/vim-setup.html)
+详细参见博文[从源码安装Vim7.4](/2013/12/17/vim-setup.html)
 
 3.说明
 
@@ -160,7 +160,7 @@ Add:添加Git指令补全功能,进入git源码目录下:
 
 ###Vim配置
 
-我的Vim配置可查看[Ubuntu12.04下Vim配置之不折腾版](2013/12/12/vim-config.html):
+我的Vim配置可查看[Ubuntu12.04下Vim配置之不折腾版](/2013/12/12/vim-config.html):
 
 1.下载我的vim配置文件
 
@@ -172,9 +172,9 @@ Add:添加Git指令补全功能,进入git源码目录下:
 安装完以后发现vim-powerline不能正常显示符号，解决方法如下：
 
         $ mkdir ~/.fonts && cd ~/.fonts
-        $ git clone https://github.com/Lokaltog/vim-powerline 
+        $ git clone git@github.com:eugeneching/consolas-powerline-vim.git
 
-YouCompleteMe插件通过vundle下载好以后还需要手动编译才能使用,具体操作步骤查看[Vim自动补全神器–YouCompleteMe](2013/12/11/youcompleteme.html)
+YouCompleteMe插件通过vundle下载好以后还需要手动编译才能使用,具体操作步骤查看[Vim自动补全神器–YouCompleteMe](/2013/12/11/youcompleteme.html)
 
 3.git以及bashrc配置(即dotfiles配置)
 
@@ -240,7 +240,7 @@ Retext配置可以查看[retext wiki configuration](http://sourceforge.net/p/ret
 
 2.在Dash中可以找到安装的stardict
 
-3.到http://abloz.com/huzheng/stardict-dic/zh_CN/下载需要的词库(推荐朗道字典)
+3.到http://abloz.com/huzheng/stardict-dic/zh_CN/ 下载需要的词库(推荐朗道字典)
 
 4.安装词典:
 
@@ -254,4 +254,4 @@ Retext配置可以查看[retext wiki configuration](http://sourceforge.net/p/ret
 
 ##结语
 
-这篇博文主要做一个备忘,为以后重装系统时能方便点吧!由于重装好系统没多久,以前的好多工具都还没装上,以后安装好了再从Evernote上的更新到博客里来吧!
+这篇博文主要做一个备忘,为以后重装系统时能方便些。由于重装好系统没多久,以前的好多工具都还没装上,以后安装好了再从Evernote上的更新到博客里来吧!
