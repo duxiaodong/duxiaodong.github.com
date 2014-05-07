@@ -61,7 +61,7 @@ test1.c
     #include <stdio.h>
     
     int array[] = {23, 34, 12, 17, 204, 99, 16};
-    #define TOTAL_ELEMENTS (sizeof(array/sizeof(array[0])))
+    #define TOTAL_ELEMENTS (sizeof(array)/sizeof(array[0]))
     
     void main()
     {
@@ -76,7 +76,7 @@ test2.c
     #include <stdio.h>
     
     int array[] = {23, 34, 12, 17, 204, 99, 16};
-    #define TOTAL_ELEMENTS (sizeof(array/sizeof(array[0])))
+    #define TOTAL_ELEMENTS (sizeof(array)/sizeof(array[0]))
     
     void main()
     {
@@ -85,9 +85,6 @@ test2.c
             x = array[d+1];
         return;
     }
-
-Problem:按照ECP(Expert C Programming简写，下同)的解释，test2.c应该能否编译通过，但在我的机器上，用gcc -o test test2.c编译时，还是出现与test1.c同样的错误，gcc版本 gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)等待解决中...
-
 
 ###4.第一次执行行为与以后执行行为不同示例
 
