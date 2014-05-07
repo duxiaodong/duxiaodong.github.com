@@ -1,75 +1,36 @@
 ---
 layout: post
-title:  Vim自动补全神器–YouCompleteMe
+title:  Vim下自动补齐插件YouComplete安装与配置
 description: ""
 category: "Vim"
 tags: [vim, YCM]
 ---
 {% include JB/setup %}
 
-##Vim代码补全现状
+使用Vim编写程序少不了使用自动补全插件，在Linux下有没有类似VS中的Visual Assist X这么方便快捷的补全插件呢？以前用的是omnicppcomplete,但效果还是不是很好,并且在项目比较大时,会出现卡顿的现象.在使用了YCM实现自动补全之后,完全抛弃了之前的插件.
 
-在漫长的Vim发展历史中，代码补全一直是比较被忽视的环节，相比众多IDE，vim本身的代码提示功能包括其众多补全插件显得无比简陋, 这是因为vim的先天不足，它是文本编译器，不能理解程序语意。引用王垠的一段文字：
-
-    “文本编辑器”这种东西一般都不真正的理解程序语言。很多 Emacs 和 vi 的用户以为用 etags 和 ctags 这样的工具就能让他们“跳转到定义”，然而这些 tags 工具其实只是对程序的“文本”做一些愚蠢的正则表达式匹配。它们根本没有对程序进行 parse，所以其实只是在进行一些“瞎猜”。简单的函数定义它们也许能猜对位置，但是对于有重名的定义，或者局部变量的时候，它们就力不从心了。
-
-##YouCompleteMe的特别之处
-
-###基于语义补全
-
-总所周知,Vim是一款文本编辑器.也就是说,其最基础的工作就是编辑文本,而不管该文本的内容是什么.在Vim被程序员所使用后,其慢慢的被肩负了与IDE一样的工作,文本自动补全(ie.acp,omnicppcompleter),代码检查(Syntastic)等等工作.
-
-针对文本自动补全这个功能来说,主要有两种实现方式.
-
-1.基于文本
-
-我们常用的omnicppcompleter,acp,vim自带的c-x, c-n的实现方式就是基于文本.更通俗的说法,其实就是一个字:
-
-猜
-
-其通过文本进行一些正则表达式的匹配,再根据生成的tags(利用ctags生成)来实现自动补全的效果.
-
-2.基于语意
-
-顾名思义,其是通过分析源文件,经过语法分析以后进行补全.由于对源文件进行分析,基于语义的补全可以做到很精确.但是这显然是vim所不可能支持的.而且经过这么多年发展,由于语法分析有很高的难度,也一直没有合适的工具出现.直到,由apple支持的clang/llvm横空出世.YouCompleteMe也正是在clang/llvm的基础上进行构建的.
-
-###整合实现了多种插件
+###YCM整合实现了多种插件:
 
 * clang_complete
 * AutoComplPop
 * Supertab
 * neocomplcache
-* [Syntastic](https://github.com/scrooloose/syntastic)(类似功能,仅仅针对c/c++/obj-c代码)
+* Syntastic(类似功能,仅仅针对c/c++/obj-c代码)
 
-###支持语言
-
-* c
-* c++
-* obj-c
-* c#
-* python
-
-对于其他的语言,会调用vim设置的omnifunc来匹配,因此同样支持php,ruby等语言.
-
-已知的有
-
-* javascript —-[tern\_for\_vim](https://github.com/marijnh/tern_for_vim)
-* ruby/java —-[eclim](http://eclim.org/)
-
-使用效果图
+###YCM使用效果图
 
 ![](/images/ycm.gif)
 
-###使用感受
+###YCM使用感受
 
 * 和IDE一样,自动补全,
 * 根据include的文件进行补全
 * 不用再蹩脚的生成tags
 * 补全非常精准,而且速度很快,不会有延迟(以前在大项目上,acp用起来实在是很卡)
 * 支持类似tags的跳转,跳到定义处以及使用处
-* 出错提示很智能,并且用起来真的是如丝般柔滑,不用输入:w进行强制检测
+* 出错提示很智能,不用输入:w进行强制检测
 
-##安装
+###安装
 
 说完了那么多好处,就要说到安装了.不同于以往其他vim插件,YCM是一款编译型的插件.在下载完后,需要手动编译后才能使用.对应其他的插件来说,仅仅就是把.vim的文件丢到相应文件夹下就可以.而这也加大了使用YCM的难度.
 
@@ -77,7 +38,7 @@ tags: [vim, YCM]
 * cmake(mac可以通过[homebrew](http://brew.sh/)安装,brew install cmake,ubuntu可以通过sudo apt-get install cmake)
 * 安装[vundle](https://github.com/gmarik/Vundle.vim#about)插件,用于安装管理vim的插件,不会安装和使用vundle的可以查看[Ubuntu12.04下Vim配置之不折腾版](/2013/12/12/vim-config.html)
 
-###mac下快速安装
+###Ubuntu12.04下快速安装
 
 在.vimrc中添加下列代码
 
@@ -93,7 +54,7 @@ tags: [vim, YCM]
 
         cd ~/.vim/bundle/YouCompleteMe
         git submodule update --init --recursive
-        ./install --clang-completer
+        ./install.sh --clang-completer
 
 如果不需要c-family的补全,可以去掉--clang-completer.如果需要c#的补全,请加上--omnisharp-completer.
 
@@ -101,27 +62,7 @@ tags: [vim, YCM]
 
 就这样,安装结束.打开vim,如果没有提示YCM未编译,则说明安装已经成功了.
 
-###手动编译安装
-
-安装的脚本并不是什么时候都好用,至少对我来说是这样的.安装完之后出现了问题,参考issue#809.
-
-在用:BundleInstall安装完成或者使用
-
-        git clone --recursive https://github.com/Valloric/YouCompleteMe.git
-
-获取最新的仓库,而后使用git submodule update --init --recursive确认仓库的完整性后,开始安装流程.
-
-* 下载最新的clang二进制文件 YCM要求clang版本 > 3.2,一般来说都是[下载最新的](http://llvm.org/releases/download.html#3.4).
-* 安装python-dev.(ubuntu下使用sudo apt-get install python-dev,mac下默认提供,否则请安装[command line tools](http://marchtea.com/?p=104))
-* 编译
-
-        cd ~ 
-        mkdir ycm_build 
-        cd ycm_build cmake -G “Unix Makefiles” -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/cpp make ycm_support_libs
-
-这里需要注意的是,~/ycm\_temp/llvm\_root\_dir中包含的是根据第一步下载的压缩包解压出来的内容(包括include, bin等等文件)
-
-这样就完成了,开始感受YCM提供的完全不逊色于大型IDE所提供的自动补全功能吧.
+Ps:安装的脚本并不是什么时候都好用,可能会出现情况,具体可以参考github上的完整安装说明.
 
 ##配置
 
@@ -301,7 +242,7 @@ tags: [vim, YCM]
 
 ##集成Syntastic
 
-YCM很早就支持集成[Syntastic](https://github.com/scrooloose/syntastic)了，上面demo里面，代码前的出现红色叉叉，就是YCM结合Syntastic爆出的语法错误。刚开始用YCM的时候，更看重其代码补全功能，Syntastic没放在心上，结果发现越用越离不开了。当编写C++代码的时候，每次光标悬停2秒钟以上的时候，YCM都会在后台扫描你当前的文件，你刚刚输入的代码有什么编译错误，马上就能显示出来，及时的改掉，不再积累到最后编译的时候。当然这是现代IDE的标配功能，vim中也有插件可以实现，但是有了YCM后，再用vundle安装Syntastic，甚至不用任何配置就实现了这些功能，实在是太方便了
+YCM很早就支持集成[Syntastic](https://github.com/scrooloose/syntastic)了.刚开始用YCM的时候，更看重其代码补全功能，Syntastic没放在心上，结果发现越用越离不开了。当编写C++代码的时候，每次光标悬停2秒钟以上的时候，YCM都会在后台扫描你当前的文件，你刚刚输入的代码有什么编译错误，马上就能显示出来，及时的改掉，不再积累到最后编译的时候。当然这是现代IDE的标配功能，vim中也有插件可以实现，但是有了YCM后，再用vundle安装Syntastic，甚至不用任何配置就实现了这些功能，实在是太方便了
 
 ![](/images/syntastic.png)
 
@@ -319,28 +260,36 @@ YCM除了提供了基本的补全功能,自动提示错误的功能外,还提供
         nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
         nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-另外,YCM也提供了丰富的配置选项,同样在.vimrc中配置.具体请参考
+另外,YCM也提供了丰富的配置选项,同样在.vimrc中配置.同时,YCM可以打开location-list来显示警告和错误的信息:YcmDiags.个人关于ycm的配置如下:
 
-        let g:ycm_error_symbol = '>>'
-        let g:ycm_warning_symbol = '>*'
-
-同时,YCM可以打开location-list来显示警告和错误的信息:YcmDiags.个人关于ycm的配置如下:
-
-        " for ycm
-        let g:ycm_error_symbol = '>>'
-        let g:ycm_warning_symbol = '>*'
-        let g:ycm_confirm_extra_conf = 0
-        nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-        nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-        nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+        """"""""""YouCompleteMe""""""""
         nmap <leader>gd :YcmDiags<CR>
-
+        nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
+        nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
+        nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+        let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+        let g:ycm_error_symbol = '>>'                                   " 编译错误标识符
+        let g:ycm_warning_symbol = '>*'                                 " 编译警告标识符
+        let g:ycm_confirm_extra_conf=0                                  " 关闭加载.ycm_extra_conf.py提示
+        let g:ycm_collect_identifiers_from_tags_files=1                 " 开启 YCM 基于标签引擎
+        let g:ycm_min_num_of_chars_for_completion=2                     " 从第2个键入字符就开始罗列匹配项
+        let g:ycm_cache_omnifunc=0                                      " 禁止缓存匹配项,每次都重新生成匹配项
+        let g:ycm_seed_identifiers_with_syntax=1                        " 语法关键字补全
+        let g:ycm_complete_in_comments = 1                              " 在注释输入中也能补全
+        let g:ycm_complete_in_strings = 1                               " 在字符串输入中也能补全
+        let g:ycm_collect_identifiers_from_comments_and_strings = 0     " 注释和字符串中的文字也会被收入补全
+        " let g:ycm_semantic_triggers = {}
+        " let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+        set completeopt=longest,menu                                    " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+        autocmd InsertLeave * if pumvisible() == 0|pclose|endif         " 离开插入模式后自动关闭预览窗口
+        inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    " 回车即选中当前项
+        
+        " YCM 补全菜单配色
+        " highlight Pmenu ctermfg=2 ctermbg=3 guifg=SeaGreen guibg=darkgreen    " 菜单
+        " highlight PmenuSel ctermfg=2 ctermbg=3 guifg=SeaGreen guibg=darkgreen " Select
+        
 YCM提供的跳跃功能采用了vim的jumplist,往前跳和往后跳的快捷键为Ctrl+O以及Ctrl+I.
 
 ##总结
 
 YouCompleteMe是我用过的最爽的一个自动补全的插件了.之前使用acp时,遇到大文件基本上就卡死了,以至于都不怎么敢使用.由于YCM使用的时C/S结构,部分使用vim脚本编写,部分认为原生代码,使得跑起来速度飞快.
-
-抛弃Vim自带的坑爹的补全吧,抛弃ctags吧,抛弃cscope吧,YCM才是终极的补全神器.
-
-最后祝大家码年顺利,一码平川,码到功成.

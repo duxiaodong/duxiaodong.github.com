@@ -1,13 +1,32 @@
 ---
 layout: post
-title: 安装完Ubuntu之后需要做的事情(持续更新)
+title: 安装完Ubuntu之后需要做的事情
 description: ""
 category: "Linux System"
 tags: [ubuntu, Linux]
 ---
 {% include JB/setup %}
 
-##前言
+##Index
+
+* [一. 前言](#前言)
+* [二. 应用](#Applications)
+  * [Google Chrome](#Chrome)
+  * [搜狗输入法](#搜狗输入法)
+  * [Vim](#Vim)
+  * [Git](#Git)
+  * [Dropbox](#Dropbox)
+  * [Retext](#Retext)
+  * [Goagent](#Goagent)
+  * [翻译词典](#翻译词典)
+  * [pywebqq](#pywebqq)
+* [三. 配置](#Configuration)
+  * [禁用笔记本电脑触摸板](#禁用笔记本电脑触摸板)
+  * [Dotfiles配置](#Dotfiles配置)
+  * [Vim配置](#Vim配置)
+* [四. 结语](#结语)
+
+## <span id="前言">一. 前言</span>
 
 前天回到了温州老家,家里的破房子是老爸老妈结婚的时候盖的,装修完以后房间没有网口,路由器所在房间和我的房间还隔了一个楼层,无奈只能准备用无线上网,结果小Y的wifi开关在Ubuntu下打不开.网上google了下,结果被告知在Windows下关闭的wifi需要在Windows下打开,Linux下开启不了.真是坑爹啊!既然要装回下windows打开wifi开关,并且UBuntu也被自己折腾得不知道装了多少乱七八糟的东西,那就重装系统呗!也顺便整理下UBuntu下的一些软件和配置.
 
@@ -15,7 +34,11 @@ tags: [ubuntu, Linux]
 
 废话不多说,下面具体介绍安装好UBuntu系统以后需要安装的Applications和需要配置的东东
 
-##安装Google Chrome
+## <span id="Applications">二. 应用</span>
+
+***
+
+### <span id="Chrome">Google Chrome</span>
 
 1.下载google chrome deb包
 
@@ -34,9 +57,9 @@ tags: [ubuntu, Linux]
 
 这样,就会先自动安装依赖的软件,然后自动安装好google-chrome
 
-`Done!`
+***
 
-##安装搜狗输入法
+###<span id="搜狗输入法">搜狗输入法</span>
 
 1.卸载原有的输入法，fcitx或ibus。如卸载fcitx：
 
@@ -67,41 +90,9 @@ tags: [ubuntu, Linux]
 
 6.CTRL+Space切换输入法,大功告成!
 
-`Done!`
+***
 
-##禁用笔记本电脑触摸板
-
-方法1：命令行方式，得每次用终端输入命令行设置，不方便。
-
-        $ sudo rmmod psmouse //用来禁用触摸板
-        $ sudo modprobe psmouse  //用来启用触摸板
-
-想要永久禁用触摸板可以这样：
-
-        $ sudo gedit /etc/modprobe.d/blacklist.conf
-        加入一行
-        blacklist psmouse
-
-重启电脑，就可禁用触控板了，以后如果想启用就删除该行。
-
-
-方法2：利用管理软件
-
-touchpad-indicator管理。（真的不错）
-
-首先更新源：
-
-        $ sudo add-apt-repository ppa:atareao/atareao
-
-更新，然后安装 touchpad-indicator：
-
-        $ sudo apt-get update && sudo apt-get install touchpad-indicator 
-
-安装成功后，进入Dash，搜索touchpad-indicator，点击你会发现好像没有反应，以为坑爹了，其实没有。。。你会发现你的系统托盘多了一个触摸板的小图标。。。具体操作就不说了.非常easy的.由于我自己不怎么用触控板,所以直接选择永久禁用触摸板,可以根据自己的习惯来选择禁用方式.
-
-`Done!`
-
-##安装Vim
+###<span id="Vim">Vim</span>
 
 1.使用apt-get安装
 
@@ -116,9 +107,9 @@ touchpad-indicator管理。（真的不错）
 
 由于我的Vim配置中加入了YCM插件,而该插件需要Vim编译时+python标志,并且需要Vim的版本在7.3.584以上,方法1安装的Vim版本貌似不满足要求(可能可以总过更改源来安装Vim7.4?),所以我选择从源码编译安装Vim
 
-`Done!`
+***
 
-##源码安装git
+###<span id="Git">Git</span>
 
 这段直接copy过来了,就不翻译了.应该都能看懂-_-
 
@@ -154,52 +145,9 @@ Add:添加Git指令补全功能,进入git源码目录下:
 
         $ sudo cp contrib/completion/git-completion.bash /etc/bash_completion.d
 
-`Done!`
+***
 
-##从Github恢复Vim,Git以及bashrc的配置
-
-###Vim配置
-
-我的Vim配置可查看[Ubuntu12.04下Vim配置之不折腾版](/2013/12/12/vim-config.html):
-
-1.下载我的vim配置文件
-
-        $ git clone --recursive git@github.com:Junevimer/vim.cfg.git ~/.vim
-        $ ln -fs ~/.vim/vimrc ~/.vimrc
-
-2.打开Vim,命令行模式下输入:BundleInstall安装vimrc中配置的插件
-
-安装完以后发现vim-powerline不能正常显示符号，解决方法如下：
-
-        $ mkdir ~/.fonts && cd ~/.fonts
-        $ git clone git@github.com:eugeneching/consolas-powerline-vim.git
-
-YouCompleteMe插件通过vundle下载好以后还需要手动编译才能使用,具体操作步骤查看[Vim自动补全神器–YouCompleteMe](/2013/12/11/youcompleteme.html)
-
-3.git以及bashrc配置(即dotfiles配置)
-
-        $ git clone git@github.com:JuneWater/dotfiles.git ~/dotfiles && cd ~/dotfiles
-        $ ./bootstrap.sh
-
-bashrc配置:添加如下代码,可在Shell命令提示符显示当前分支
-
-        function parse_git_dirty {          
-            [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
-          }
-          function parse_git_branch {
-            git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
-        }
-        export PS1='\u@\h:\w\[\e[33m\]$(parse_git_branch)\[\e[0m\]$ '
-
-效果图:
-
-![](/images/ubuntu-start2.png)
-
-git配置:[配置文件](https://github.com/Junevimer/dotfiles/blob/master/gitconfig)
-
-`Done!`
-
-##安装Dorpbox
+###<span id="Dropbox">Dropbox</span>
 
 1.下载dropbox deb包
 
@@ -212,9 +160,9 @@ UBuntu 32位：https://www.dropbox.com/download?dl=packages/ubuntu/dropbox\_1.6.
         $ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -
         $ ~/.dropbox-dist/dropboxd
 
-`Done!`
+***
 
-##安装Retext(UBuntu下Markdown编辑软件,支持实时预览)
+###<span id="Retext">Retext</span>
 
         $ sudo add-apt-repository ppa:mitya57
         $ sudo apt-get update
@@ -222,15 +170,15 @@ UBuntu 32位：https://www.dropbox.com/download?dl=packages/ubuntu/dropbox\_1.6.
 
 Retext配置可以查看[retext wiki configuration](http://sourceforge.net/p/retext/wiki/Configuration%20file/)
 
-`Done!`
+***
 
-##Goagent安装
+###<span id="Goagent">Goagent</span>
 
 参考:[Ubuntu/Linux下安装配置Goagent](/2013/11/30/goagent.html)
 
-`Done!`
+***
 
-##安装翻译词典(星际译王)
+###<span id="翻译词典">翻译词典</span>
 
 1.在Ubuntu软件中心搜索stardict安装辞典(也可以搜索星际译王)或直接在终端中安装：
 
@@ -248,9 +196,9 @@ Retext配置可以查看[retext wiki configuration](http://sourceforge.net/p/ret
 
 5.在stardict中的辞典管理可以看到增加的词库
 
-`Done!`
+***
 
-##安装pywebqq
+###<span id="pywebqq">pywebqq</span>
 
 说明：安装webQQ3.0应用，用于解决ubuntu系统环境下面的QQ聊天解决方法
 
@@ -303,8 +251,73 @@ Retext配置可以查看[retext wiki configuration](http://sourceforge.net/p/ret
 
 pywebqq将webqq脱离浏览器，并在系统托盘提示消息。用户体验不错！
 
-`Done!`
+***
 
-##结语
+## <span id="Configuration">三. 配置</span>
 
-这篇博文主要做一个备忘,为以后重装系统时能方便些。由于重装好系统没多久,以前的好多工具都还没装上,以后安装好了再从Evernote上的更新到博客里来吧!
+***
+
+### <span id="禁用笔记本电脑触摸板">禁用笔记本电脑触摸板</span>
+
+方法1：命令行方式，得每次用终端输入命令行设置，不方便。
+
+        $ sudo rmmod psmouse //用来禁用触摸板
+        $ sudo modprobe psmouse  //用来启用触摸板
+
+想要永久禁用触摸板可以这样：
+
+        $ sudo gedit /etc/modprobe.d/blacklist.conf
+        加入一行
+        blacklist psmouse
+
+重启电脑，就可禁用触控板了，以后如果想启用就删除该行。
+
+
+方法2：利用管理软件
+
+touchpad-indicator管理。（真的不错）
+
+首先更新源：
+
+        $ sudo add-apt-repository ppa:atareao/atareao
+
+更新，然后安装 touchpad-indicator：
+
+        $ sudo apt-get update && sudo apt-get install touchpad-indicator 
+
+安装成功后，进入Dash，搜索touchpad-indicator，点击你会发现好像没有反应，以为坑爹了，其实没有。。。你会发现你的系统托盘多了一个触摸板的小图标。。。具体操作就不说了.非常easy的.由于我自己不怎么用触控板,所以直接选择永久禁用触摸板,可以根据自己的习惯来选择禁用方式.
+
+***
+
+###<span id="Dotfiles配置">Dotfiles配置</span>
+
+从Github上恢复Dotfiles配置
+
+        $ git clone git@github.com:JuneWater/dotfiles.git ~/dotfiles && cd ~/dotfiles
+        $ ./bootstrap.sh
+
+###<span id="Vim配置">Vim配置</span>
+
+我的Vim配置可查看[Ubuntu12.04下Vim配置之不折腾版](/2013/12/12/vim-config.html):
+
+1.下载我的vim配置文件
+
+        $ git clone --recursive git@github.com:Junevimer/vim.cfg.git ~/.vim
+        $ ln -fs ~/.vim/vimrc ~/.vimrc
+
+2.打开Vim,命令行模式下输入:BundleInstall安装vimrc中配置的插件
+
+安装完以后发现vim-powerline不能正常显示符号，解决方法如下：
+
+        $ mkdir ~/.fonts && cd ~/.fonts
+        $ git clone git@github.com:eugeneching/consolas-powerline-vim.git
+
+YouCompleteMe插件通过vundle下载好以后还需要手动编译才能使用,具体操作步骤查看[Vim下自动补全插件YouCompleteMe安装与配置](/2013/12/11/youcompleteme.html)
+
+***
+
+##<span id="结语">四. 结语</span>
+
+这篇博文主要做一个备忘,为以后重装系统时能方便些。部分应用可以选用其他版本代替,如搜狗输入法.官方已推出Linux版本,试用还不错!pywebqq没有收发文件和图片的功能,可以选择pidgin来代替.本文就不再做说明了.等以后有比较多的应用或配置需要更新了再写一篇新的吧.
+
+Updated 2014.5.5 23:16

@@ -169,3 +169,12 @@ bundle分为三类：
 * 功能：加强美化的vim状态栏
 * 安装：Bundle 'Lokaltog/vim-powerline'
 * 说明：如果powerline状态栏显示乱码,则git clone https://github.com/eugeneching/consolas-powerline-vim 到~/.fonts目录下,目录不存在就创建一个
+
+###vim-easymotion
+* 功能：在vim中快速移动
+* 安装：Bundle 'Lokaltog/vim-powerline'
+
+###vim-easymotion
+* 功能:多光标操作(效率利器)
+*安装:Bundle 'terryma/vim-multiple-cursors'
+
