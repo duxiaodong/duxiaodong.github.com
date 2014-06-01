@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 算法导论笔记(1)--分治策略和主方法
+title: 算法导论笔记(1)--分治策略和递归式求解
 description: ""
 category: "alogorithms"
 tags: [master method,alogorithms]
