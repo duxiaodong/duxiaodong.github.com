@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 算法导论笔记(3)--基本数据结构1
+title: 算法导论笔记(3)--数据结构--堆、队列、链表
 description: ""
 category: "alogorithms"
 tags: [data structures，alogorithms]
@@ -14,7 +14,6 @@ tags: [data structures，alogorithms]
     * [栈(stack)](#stack)
     * [队列(queue)](#queue)
 * [链表(linked list)](#linked list)
-* [二叉树(Binary trees)](#Binary trees)
 
 ## <span id="binary heap">二叉堆(binary heap)</span>
 
