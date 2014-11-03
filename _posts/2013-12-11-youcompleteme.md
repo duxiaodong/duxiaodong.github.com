@@ -7,6 +7,8 @@ tags: [vim, YCM]
 ---
 {% include JB/setup %}
 
+(2014年11月3日更新)
+
 使用Vim编写程序少不了使用自动补全插件，在Linux下有没有类似VS中的Visual Assist X这么方便快捷的补全插件呢？以前用的是omnicppcomplete,但效果还是不是很好,并且在项目比较大时,会出现卡顿的现象.在使用了YCM实现自动补全之后,完全抛弃了之前的插件.
 
 ###YCM整合实现了多种插件:
@@ -38,7 +40,7 @@ tags: [vim, YCM]
 * cmake(mac可以通过[homebrew](http://brew.sh/)安装,brew install cmake,ubuntu可以通过sudo apt-get install cmake)
 * 安装[vundle](https://github.com/gmarik/Vundle.vim#about)插件,用于安装管理vim的插件,不会安装和使用vundle的可以查看[Ubuntu12.04下Vim配置之不折腾版](/2013/12/12/vim-config.html)
 
-###Ubuntu12.04下快速安装
+###MAC OS X下快速安装
 
 在.vimrc中添加下列代码
 
@@ -64,181 +66,123 @@ tags: [vim, YCM]
 
 Ps:安装的脚本并不是什么时候都好用,可能会出现情况,具体可以参考github上的完整安装说明.
 
+###Ubuntu 12.04下安装
+
+参考
+
+- [Vim自动补全插件----YouCompleteMe安装与配置](http://www.cnblogs.com/zhongcq/p/3630047.html)
+- [YouCompleteMe](http://valloric.github.io/YouCompleteMe/)
+
+####1、编译安装llvm-clang
+
+下载最新的LLVM、clang 及辅助库源码可用:
+
+	cd ~/llvm-clang
+	svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
+	cd llvm/tools
+	svn co http://llvm.org/svn/llvm-project/cfe/trunk clang
+	cd ../..
+	cd llvm/tools/clang/tools
+	svn co http://llvm.org/svn/llvm-project/clang-tools-extra/trunk extra
+	cd ../../../..
+	cd llvm/projects
+	svn co http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt
+	cd ..
+
+返回~/llvm-clang目录，并新建一个目录llvm-build专门用于编译llvm-clang，使得不污染源码。
+
+	mkdir llvm-build
+	cd llvm-build/
+	../llvm/configure --enable-optimized --enable-targets=host-only --prefix=/usr/clang
+		
+建立编译环境
+
+此种配置后，其中--prefix指定llvm-clang安装目录
+
+输入 	
+	
+	make -j4 //	开始编译
+
+	sudo make install //进行安装
+
+如要卸载则在该目录下输入
+
+	sudo make uninstall
+
+安装好后，输入 
+
+	clang -v //查看版本信息：
+
+####2、安装clang标准库
+
+clang 的标准库————libc++(接口层)和 libc++abi(实现层)需要安装头文件和动态链接库(*.so)。
+
+安装libc++
+
+	cd ~/llvm-clang
+	svn co http://llvm.org/svn/llvm-project/libcxx/trunk libcxx
+	cd libcxx/lib
+	./buildit
+	
+头文件已经生成到 ~/llvm-clang/libcxx/include/,要让 clang 找到必须复制到 /usr/include/c++/v1/
+
+	sudo cp -r ~/llvm-clang/libcxx/include/ /usr/include/c++/v1/
+
+*.so 文件已生成 ~/llvm-clang/libcxx/lib/libc++.so.1.0,要让 clang 访问必须复 制到 /usr/lib/,并创建软链接
+
+    ln -s ~/llvm-clang/libcxx/lib/libc++.so.1.0 ~/llvm-clang/libcxx/lib/libc++.so.1
+    ln -s ~/llvm-clang/libcxx/lib/libc++.so.1.0 ~/llvm-clang/libcxx/lib/libc++.so
+    sudo cp ~/llvm-clang/libcxx/lib/libc++.so* /usr/lib/
+    
+类似,源码安装 libc++abi 的头文件和动态链接库:
+
+    cd  ~/llvm-clang/
+    svn co http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi
+    cd libcxxabi/lib
+    ./buildit
+  
+头文件已经生成到 ~/llvm-clang/libcxxabi/include/,要让 clang 找到必须复制到 /usr/include/c++/v1/
+
+	cp -r ~/llvm-clang/libcxxabi/include/ /usr/include/c++/v1/
+
+*.so 文件已生成 ~/llvm-clang/libcxx/lib/libc++abi.so.1.0,要让 clang 访问必 须复制到 /usr/lib/,并创建软链接
+
+	ln -s ~/llvm-clang/libcxxabi/lib/libc++abi.so.1.0 ~/llvm-clang/libcxxabi/lib/libc++abi.so.1
+	ln -s ~/llvm-clang/libcxxabi/lib/libc++abi.so.1.0 ~/llvm-clang/libcxxabi/lib/libc++abi.so
+	sudo cp ~/llvm-clang/libcxxabi/lib/libc++abi.so* /usr/lib/
+
+####3、安装YouCompleteMe
+
+下载源码。使用vundle搞定，在vimrc文件中加入 
+
+> Bundle 'Valloric/YouCompleteMe'
+
+执行命令：
+
+    $ cd ~
+    $ mkdir ~/ycm_build
+    $ cd ~/ycm_build
+    $ cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+　
+注意：这里的DPATH_TO_LLVM_ROOT要替换成你自己clang安装的目录，例如我的是 /usr/clang（即：上面步骤的编译所指定的路径）
+
+执行 
+
+	make ycm_core
+
+这样将在~/.vim/bundle/YouCompleteMe/python/目录下自动生成两个文件(libclang.so和ycm_core.so)
+
+这还是不够的，还必须执行命令：
+
+	make ycm_support_libs
+	
+这条命令才会生成第三个文件ycm_client_support.so。因为，YouCompleteMe是C/S架构的，所以存在服务器和服务端的说法。
+	
 ##配置
 
 不同于很多vim插件,YCM首先需要编译,另外还需要有配置.在vim启动后,YCM会找寻当前路径以及上层路径的.ycm\_extra\_conf.py.在~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm\_extra\_conf.py中提供了默认的模板.也可以参考我的(就在模板上改改而已).不过这个解决了标准库提示找不到的问题.
 
 一般来说,我会在~目录下放一个默认的模板,而后再根据不同的项目在当前目录下再拷贝个.ycm\_extra\_conf.py.
-
-    # This file is NOT licensed under the GPLv3, which is the license for the rest
-    # of YouCompleteMe.
-    #
-    # Here's the license text for this file:
-    #
-    # This is free and unencumbered software released into the public domain.
-    #
-    # Anyone is free to copy, modify, publish, use, compile, sell, or
-    # distribute this software, either in source code form or as a compiled
-    # binary, for any purpose, commercial or non-commercial, and by any
-    # means.
-    #
-    # In jurisdictions that recognize copyright laws, the author or authors
-    # of this software dedicate any and all copyright interest in the
-    # software to the public domain. We make this dedication for the benefit
-    # of the public at large and to the detriment of our heirs and
-    # successors. We intend this dedication to be an overt act of
-    # relinquishment in perpetuity of all present and future rights to this
-    # software under copyright law.
-    #
-    # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-    # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-    # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-    # IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-    # OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-    # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-    # OTHER DEALINGS IN THE SOFTWARE.
-    #
-    # For more information, please refer to <http://unlicense.org/>
-    
-    import os
-    import ycm_core
-    
-    # These are the compilation flags that will be used in case there's no
-    # compilation database set (by default, one is not set).
-    # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
-    flags = [
-    '-Wall',
-    '-Wextra',
-    #'-Werror',
-    #'-Wc++98-compat',
-    '-Wno-long-long',
-    '-Wno-variadic-macros',
-    '-fexceptions',
-    '-stdlib=libc++',
-    # THIS IS IMPORTANT! Without a "-std=<something>" flag, clang won't know which
-    # language to use when compiling headers. So it will guess. Badly. So C++
-    # headers will be compiled as C headers. You don't want that so ALWAYS specify
-    # a "-std=<something>".
-    # For a C project, you would set this to something like 'c99' instead of
-    # 'c++11'.
-    '-std=c++11',
-    # ...and the same thing goes for the magic -x option which specifies the
-    # language that the files to be compiled are written in. This is mostly
-    # relevant for c++ headers.
-    # For a C project, you would set this to 'c' instead of 'c++'.
-    '-x',
-    'c++',
-    '-I',
-    '.',
-    '-isystem',
-    '/usr/include',
-    '-isystem',
-    '/usr/local/include',
-    '-isystem',
-    '/Library/Developer/CommandLineTools/usr/include',
-    '-isystem',
-    '/Library/Developer/CommandLineTools/usr/bin/../lib/c++/v1',
-    ]
-    
-    
-    # Set this to the absolute path to the folder (NOT the file!) containing the
-    # compile_commands.json file to use that instead of 'flags'. See here for
-    # more details: http://clang.llvm.org/docs/JSONCompilationDatabase.html
-    #
-    # Most projects will NOT need to set this to anything; you can just change the
-    # 'flags' list of compilation flags. Notice that YCM itself uses that approach.
-    compilation_database_folder = ''
-    
-    if os.path.exists( compilation_database_folder ):
-      database = ycm_core.CompilationDatabase( compilation_database_folder )
-    else:
-      database = None
-    
-    SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
-    
-    def DirectoryOfThisScript():
-      return os.path.dirname( os.path.abspath( __file__ ) )
-    
-    
-    def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
-      if not working_directory:
-        return list( flags )
-      new_flags = []
-      make_next_absolute = False
-      path_flags = [ '-isystem', '-I', '-iquote', '--sysroot=' ]
-      for flag in flags:
-        new_flag = flag
-    
-        if make_next_absolute:
-          make_next_absolute = False
-          if not flag.startswith( '/' ):
-            new_flag = os.path.join( working_directory, flag )
-    
-        for path_flag in path_flags:
-          if flag == path_flag:
-            make_next_absolute = True
-            break
-    
-          if flag.startswith( path_flag ):
-            path = flag[ len( path_flag ): ]
-            new_flag = path_flag + os.path.join( working_directory, path )
-            break
-    
-        if new_flag:
-          new_flags.append( new_flag )
-      return new_flags
-    
-    
-    def IsHeaderFile( filename ):
-      extension = os.path.splitext( filename )[ 1 ]
-      return extension in [ '.h', '.hxx', '.hpp', '.hh' ]
-    
-    
-    def GetCompilationInfoForFile( filename ):
-      # The compilation_commands.json file generated by CMake does not have entries
-      # for header files. So we do our best by asking the db for flags for a
-      # corresponding source file, if any. If one exists, the flags for that file
-      # should be good enough.
-      if IsHeaderFile( filename ):
-        basename = os.path.splitext( filename )[ 0 ]
-        for extension in SOURCE_EXTENSIONS:
-          replacement_file = basename + extension
-          if os.path.exists( replacement_file ):
-            compilation_info = database.GetCompilationInfoForFile(
-              replacement_file )
-            if compilation_info.compiler_flags_:
-              return compilation_info
-        return None
-      return database.GetCompilationInfoForFile( filename )
-    
-    
-    def FlagsForFile( filename, **kwargs ):
-      if database:
-        # Bear in mind that compilation_info.compiler_flags_ does NOT return a
-        # python list, but a "list-like" StringVec object
-        compilation_info = GetCompilationInfoForFile( filename )
-        if not compilation_info:
-          return None
-    
-        final_flags = MakeRelativePathsInFlagsAbsolute(
-          compilation_info.compiler_flags_,
-          compilation_info.compiler_working_dir_ )
-    
-        # NOTE: This is just for YouCompleteMe; it's highly likely that your project
-        # does NOT need to remove the stdlib flag. DO NOT USE THIS IN YOUR
-        # ycm_extra_conf IF YOU'RE NOT 100% SURE YOU NEED IT.
-        #try:
-        #  final_flags.remove( '-stdlib=libc++' )
-        #except ValueError:
-        #  pass
-      else:
-        relative_to = DirectoryOfThisScript()
-        final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
-    
-      return {
-        'flags': final_flags,
-        'do_cache': True
-      }
 
 ##集成Syntastic
 
@@ -262,31 +206,46 @@ YCM除了提供了基本的补全功能,自动提示错误的功能外,还提供
 
 另外,YCM也提供了丰富的配置选项,同样在.vimrc中配置.同时,YCM可以打开location-list来显示警告和错误的信息:YcmDiags.个人关于ycm的配置如下:
 
-        """"""""""YouCompleteMe""""""""
-        nmap <leader>gd :YcmDiags<CR>
-        nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
-        nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
-        nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-        let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-        let g:ycm_error_symbol = '>>'                                   " 编译错误标识符
-        let g:ycm_warning_symbol = '>*'                                 " 编译警告标识符
-        let g:ycm_confirm_extra_conf=0                                  " 关闭加载.ycm_extra_conf.py提示
-        let g:ycm_collect_identifiers_from_tags_files=1                 " 开启 YCM 基于标签引擎
-        let g:ycm_min_num_of_chars_for_completion=2                     " 从第2个键入字符就开始罗列匹配项
-        let g:ycm_cache_omnifunc=0                                      " 禁止缓存匹配项,每次都重新生成匹配项
-        let g:ycm_seed_identifiers_with_syntax=1                        " 语法关键字补全
-        let g:ycm_complete_in_comments = 1                              " 在注释输入中也能补全
-        let g:ycm_complete_in_strings = 1                               " 在字符串输入中也能补全
-        let g:ycm_collect_identifiers_from_comments_and_strings = 0     " 注释和字符串中的文字也会被收入补全
-        " let g:ycm_semantic_triggers = {}
-        " let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
-        set completeopt=longest,menu                                    " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-        autocmd InsertLeave * if pumvisible() == 0|pclose|endif         " 离开插入模式后自动关闭预览窗口
-        inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    " 回车即选中当前项
-        
-        " YCM 补全菜单配色
-        " highlight Pmenu ctermfg=2 ctermbg=3 guifg=SeaGreen guibg=darkgreen    " 菜单
-        " highlight PmenuSel ctermfg=2 ctermbg=3 guifg=SeaGreen guibg=darkgreen " Select
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => YouCompleteMe  代码自动补全
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Bundle 'Valloric/YouCompleteMe'
+    " youcompleteme  默认tab  s-tab 和自动补全冲突
+    " let g:ycm_key_list_select_completion=['<c-n>']
+    " let g:ycm_key_list_select_completion = ['<Down>']
+    " let g:ycm_key_list_previous_completion=['<c-p>']
+    " let g:ycm_key_list_previous_completion = ['<Up>']
+    let g:ycm_confirm_extra_conf=0      " 关闭加载.ycm_extra_conf.py提示
+    let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+    let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+    let g:ycm_collect_identifiers_from_tags_files=1                 " 开启 YCM 基于标签引擎
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+    let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_min_num_of_chars_for_completion=2                     " 从第2个键入字符就开始罗列匹配项
+    " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
+    " old version
+    if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
+        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+    endif
+    " new version
+    if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    endif
+    
+    "mapping
+    nmap <leader>gd :YcmDiags<CR>
+    nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
+    nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
+    nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    
+    " 直接触发自动补全
+    let g:ycm_key_invoke_completion = '<C-Space>'
+    " 黑名单,不启用
+    let g:ycm_filetype_blacklist = {
+          \ 'tagbar' : 1,
+          \ 'gitcommit' : 1,
+          \}
         
 YCM提供的跳跃功能采用了vim的jumplist,往前跳和往后跳的快捷键为Ctrl+O以及Ctrl+I.
 
