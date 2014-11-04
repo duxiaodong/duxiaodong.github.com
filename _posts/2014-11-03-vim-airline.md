@@ -59,11 +59,24 @@ Macvim下设置字体：
 
 ##FAQ
 
-###1. 不显示git分支
+### 显示git分支
 
 安装vim-fugitive git外包插件即可
 
     Bundle 'tpope/vim-fugitive'
+
+### 设置airline主题
+
+    let g:airline_theme="solarized"
+
+### airline状态栏不实现
+
+    set laststatus=2
+
+### airline没有颜色显示
+
+    set t_Co=256       " Explicitly tell Vim that the terminal supports 256 colors
+
 
 ##参考
 - [vim安装airline插件](http://chinacheng.iteye.com/blog/1935564)
