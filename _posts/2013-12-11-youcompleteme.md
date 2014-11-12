@@ -164,7 +164,7 @@ clang 的标准库————libc++(接口层)和 libc++abi(实现层)需要安
     $ cd ~/ycm_build
     $ cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 　
-注意：这里的DPATH_TO_LLVM_ROOT要替换成你自己clang安装的目录，例如我的是 /usr/clang（即：上面步骤的编译所指定的路径）
+注意：这里的DPATH\_TO\_LLVM\_ROOT要替换成你自己clang安装的目录，例如我的是 /usr/clang（即：上面步骤的编译所指定的路径）
 
 执行 
 
@@ -182,7 +182,10 @@ clang 的标准库————libc++(接口层)和 libc++abi(实现层)需要安
 
 不同于很多vim插件,YCM首先需要编译,另外还需要有配置.在vim启动后,YCM会找寻当前路径以及上层路径的.ycm\_extra\_conf.py.在~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm\_extra\_conf.py中提供了默认的模板.也可以参考我的(就在模板上改改而已).不过这个解决了标准库提示找不到的问题.
 
-一般来说,我会在~目录下放一个默认的模板,而后再根据不同的项目在当前目录下再拷贝个.ycm\_extra\_conf.py.
+- [C](https://github.com/Junevimer/dotfiles/blob/master/ycm_c_conf.py) 
+- [C++](https://github.com/Junevimer/dotfiles/blob/master/ycm_cpp_conf.py) 
+
+一般来说,在~目录下放一个默认的模板,而后再根据不同的项目在当前目录下再拷贝个.ycm\_extra\_conf.py.
 
 ##集成Syntastic
 
@@ -248,6 +251,8 @@ YCM除了提供了基本的补全功能,自动提示错误的功能外,还提供
           \}
         
 YCM提供的跳跃功能采用了vim的jumplist,往前跳和往后跳的快捷键为Ctrl+O以及Ctrl+I.
+
+PS:C语言标准库函数不提供自动显示补全列表,需要`<C-Space>`(由vimrc配置文件配置)触发自动补全
 
 ##总结
 
