@@ -86,7 +86,7 @@ tags: [ubuntu, Linux]
 
 在Dash中搜索fctix,打开fctix设置,点击`+`添加搜狗输入法
 
-![](/images/ubuntu-start1.png)
+![](/images/2014/1/ubuntu-start1.png)
 
 6.CTRL+Space切换输入法,大功告成!
 
@@ -247,7 +247,7 @@ Retext配置可以查看[retext wiki configuration](http://sourceforge.net/p/ret
 
 5.运行效果
 
-![](/images/ubuntu-start3.png)
+![](/images/2014/1/ubuntu-start3.png)
 
 pywebqq将webqq脱离浏览器，并在系统托盘提示消息。用户体验不错！
 

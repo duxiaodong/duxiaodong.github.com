@@ -21,7 +21,7 @@ tags: [vim, YCM]
 
 ###YCM使用效果图
 
-![](/images/ycm.gif)
+![](/images/2013/12/ycm.gif)
 
 ###YCM使用感受
 
@@ -176,7 +176,7 @@ clang 的标准库————libc++(接口层)和 libc++abi(实现层)需要安
 
 	make ycm_support_libs
 	
-这条命令才会生成第三个文件ycm_client_support.so。因为，YouCompleteMe是C/S架构的，所以存在服务器和服务端的说法。
+这条命令才会生成第三个文件ycm\_client\_support.so。因为，YouCompleteMe是C/S架构的，所以存在服务器和服务端的说法。
 	
 ##配置
 
@@ -191,7 +191,7 @@ clang 的标准库————libc++(接口层)和 libc++abi(实现层)需要安
 
 YCM很早就支持集成[Syntastic](https://github.com/scrooloose/syntastic)了.刚开始用YCM的时候，更看重其代码补全功能，Syntastic没放在心上，结果发现越用越离不开了。当编写C++代码的时候，每次光标悬停2秒钟以上的时候，YCM都会在后台扫描你当前的文件，你刚刚输入的代码有什么编译错误，马上就能显示出来，及时的改掉，不再积累到最后编译的时候。当然这是现代IDE的标配功能，vim中也有插件可以实现，但是有了YCM后，再用vundle安装Syntastic，甚至不用任何配置就实现了这些功能，实在是太方便了
 
-![](/images/syntastic.png)
+![](/images/2013/12/syntastic.png)
 
 ##YouCompleteMe提供的其他功能
 

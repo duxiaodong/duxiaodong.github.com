@@ -99,7 +99,7 @@ tags: [jekyll, github]
 
 2.在域名解析管理中.如图所示解析:
 
-![](/images/jekyll-blog.png)
+![](/images/2014/2/jekyll-blog.png)
 
 3.过一段(大概上图中TTL)时间后访问www.junevimer.com ,看看是否生成自己的Blog
 
