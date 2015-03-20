@@ -1,4 +1,4 @@
-#Junevimer的个人博客
+#TramiDu的个人博客
 
 这是一个使用Jekyll Bootstrap自带的Twitter主题搭建的个人博客,在Twitter Theme基础上添加多说评论系统,Jiathis,Google search,Google Analystics,Font-awesome等.
 
@@ -8,7 +8,7 @@
 
 ###1.获取源码
 
-        $git clone git@github.com:Junevimer/junevimer.github.com.git
+     
 
 ###2.修改_config.yml
 
@@ -32,4 +32,4 @@
 
 ##Author
 
-@Junevimer:<junevimer@gmail.com>
+
