@@ -5,20 +5,20 @@ markdown: redcarpet
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 auto: true
-pygments: true
-
+#highlighter: highlighter
+highlighter: pygments
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : TrimDu's Blog 
+title : TramiDu's Blog
 tagline: Under Linux
 favicon: /images/june.png
 author :
-  name : TrimDu
-  email : duxiaodong0219.com
+  name : TramiDu
+  email : duxiaodong0219@126.com
   github : duxiaodong
   twitter : 
-  weibo : 
+  weibo : TramiDu
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -83,7 +83,7 @@ JB :
   comments :
     provider : duoshuo
     duoshuo :
-      short_name : junevimer
+      short_name : TramiDu
     disqus :
       short_name : jekyllbootstrap
     livefyre :
@@ -127,4 +127,3 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-  
