@@ -45,7 +45,7 @@ tags: [ubuntu, Linux]
 32位：https://dl.google.com/linux/direct/google-chrome-stable\_current\_i386.deb
 
 2.使用终端安装：
-
+        
         $ cd ~/Downloads
         $ sudo dpkg -i google-chrome-stable_current_i386.deb
 
