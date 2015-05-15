@@ -1,10 +1,8 @@
 # This is the default format. 
-# For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink: /:year/:month/:day/:title.html
 markdown: redcarpet
 redcarpet: 
-    extensions: ["tables"] 
-
+    extensions: [ "fenced_code_blocks", "hard_wrap","autolink", "tables", "strikethrough", "superscript", "with_toc_data", "highlight", "prettify","no_intra_emphasis"]
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 auto: true
 #highlighter: highlighter
@@ -128,4 +126,3 @@ JB :
   # Setting any helper's provider to 'custom' will bypass the helper code
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
-  # where [HELPER] is the name of the helper you are overriding.
