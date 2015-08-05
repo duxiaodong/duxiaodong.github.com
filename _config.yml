@@ -11,14 +11,14 @@ highlighter: pygments
 # so be sure to set them if your theme uses them.
 #
 title : TramiDu's Blog
-tagline: Under Linux
+#tagline: Under Linux
 favicon: /images/june.png
 author :
-  name : TramiDu
-  email : duxiaodong0219@126.com
-  github : duxiaodong
-  twitter : 
-  weibo : TramiDu
+name : TramiDu
+email : duxiaodong0219@126.com
+github : duxiaodong
+#twitter : 
+weibo : TramiDu
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
