@@ -28,7 +28,7 @@ tags: [ubuntu, Linux]
 
 ## <span id="前言">一. 前言</span>
 
-前天回到了温州老家,家里的破房子是老爸老妈结婚的时候盖的,装修完以后房间没有网口,路由器所在房间和我的房间还隔了一个楼层,无奈只能准备用无线上网,结果小Y的wifi开关在Ubuntu下打不开.网上google了下,结果被告知在Windows下关闭的wifi需要在Windows下打开,Linux下开启不了.真是坑爹啊!既然要装回下windows打开wifi开关,并且UBuntu也被自己折腾得不知道装了多少乱七八糟的东西,那就重装系统呗!也顺便整理下UBuntu下的一些软件和配置.
+整理下UBuntu下的一些软件和配置,只是做一下备忘
 
 安装的Ubuntu系统版本为[ubuntu-12.04.4-desktop-i386.iso](http://releases.ubuntu.com/precise/ubuntu-12.04.4-desktop-i386.iso),语言选择为简体中文,主要是懒得装英文版然后再去下载中文字库.要使用英文版,只要进系统后设置系统语言为English就好了,也不需要再下载中文字库(安装系统过程中会下载的).
 
